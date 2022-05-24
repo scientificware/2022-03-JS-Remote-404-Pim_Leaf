@@ -9,6 +9,8 @@ export default function Home() {
 
       <Counter />
 
+      <h1 className="text-5xl font-bold underline">tailwind test</h1>
+
       <p>
         Edit <code>App.jsx</code> and save to test HMR updates.
       </p>
