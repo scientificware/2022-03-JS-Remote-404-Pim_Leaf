@@ -7,24 +7,27 @@ import Suppliers from "@pages/Suppliers";
 import Clients from "@pages/Clients";
 import Company from "@pages/Company";
 import Profil from "@pages/Profil";
+import ContextProvider from "./contexts/UserContext";
 
 import "./App.css";
 import "./index.css";
 
 function App() {
   return (
-    <div className="App">
+    <ContextProvider>
       <BrowserRouter>
-        <Routes>
-          <Route path="./pages/login" element={<Login />} />
-          <Route path="./pages/products" element={<Products />} />
-          <Route path="./pages/suppliers" element={<Suppliers />} />
-          <Route path="./pages/clients" element={<Clients />} />
-          <Route path="./pages/company" element={<Company />} />
-          <Route path="./pages/profil" element={<Profil />} />
-        </Routes>
+        <div className="App">
+          <Routes>
+            <Route path="/" element={<Login />} />
+            <Route path="/products" element={<Products />} />
+            <Route path="/suppliers" element={<Suppliers />} />
+            <Route path="/clients" element={<Clients />} />
+            <Route path="/company" element={<Company />} />
+            <Route path="/profil" element={<Profil />} />
+          </Routes>
+        </div>
       </BrowserRouter>
-    </div>
+    </ContextProvider>
   );
 }
 
