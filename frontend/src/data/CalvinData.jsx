@@ -1,4 +1,4 @@
-const productData = [
+const dataProducts = [
   {
     product: "Farine T65",
     fabricant: "Moulin d'ici",
@@ -19,4 +19,4 @@ const productData = [
   },
 ];
 
-export default productData;
+export default dataProducts;
