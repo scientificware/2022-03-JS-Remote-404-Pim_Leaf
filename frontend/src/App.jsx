@@ -10,7 +10,6 @@ import Profil from "@pages/Profil";
 import ContextProvider from "./contexts/UserContext";
 
 import "./App.css";
-import "./index.css";
 
 function App() {
   return (
