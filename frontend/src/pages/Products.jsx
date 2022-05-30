@@ -1,7 +1,9 @@
+import HeaderProducts from "@components/HeaderProducts";
+
 function Products() {
   return (
     <main>
-      <h1>Products</h1>
+      <HeaderProducts />
     </main>
   );
 }
