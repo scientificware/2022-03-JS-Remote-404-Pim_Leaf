@@ -12,6 +12,6 @@ function ContextProvider({ children }) {
   );
 }
 
-const userExport = { UserContext, ContextProvider };
+const UserExport = { UserContext, ContextProvider };
 
-export default userExport;
+export default UserExport;
