@@ -1,7 +1,9 @@
+import TitleProducts from "@components/TitleProducts";
+
 function Products() {
   return (
     <main>
-      <h1>Products</h1>
+      <TitleProducts />
     </main>
   );
 }
