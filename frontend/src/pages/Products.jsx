@@ -1,9 +1,9 @@
-import HeaderProducts from "@components/HeaderProducts";
+import TitleProducts from "@components/TitleProducts";
 
 function Products() {
   return (
     <main>
-      <HeaderProducts />
+      <TitleProducts />
     </main>
   );
 }
