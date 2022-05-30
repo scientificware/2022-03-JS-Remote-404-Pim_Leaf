@@ -7,13 +7,13 @@ import Suppliers from "@pages/Suppliers";
 import Clients from "@pages/Clients";
 import Company from "@pages/Company";
 import Profil from "@pages/Profil";
-import ContextProvider from "./contexts/UserContext";
+import UserExport from "./contexts/UserContext";
 
 import "./App.css";
 
 function App() {
   return (
-    <ContextProvider>
+    <UserExport.ContextProvider>
       <BrowserRouter>
         <div className="App">
           <Routes>
@@ -26,7 +26,7 @@ function App() {
           </Routes>
         </div>
       </BrowserRouter>
-    </ContextProvider>
+    </UserExport.ContextProvider>
   );
 }
 
