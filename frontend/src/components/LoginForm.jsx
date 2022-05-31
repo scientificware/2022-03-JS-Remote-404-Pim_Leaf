@@ -10,15 +10,15 @@ function LoginForm() {
   console.warn(email);
   console.warn(password);
   return (
-    <div className="w-2/3">
-      <form className="flex flex-col items-center">
-        <label htmlFor="login" className="flex flex-col">
+    <div>
+      <form>
+        <label htmlFor="login">
           <div className="flex flex-row items-center">
             <div className="w-9">
               <img src={Avatar} alt="avatar" />
             </div>
             <input
-              className="m-5"
+              className="bg-white bg-opacity-0 border-b border-b-white mt-8 mb-8"
               id="email"
               type="text"
               name="email"
@@ -34,7 +34,7 @@ function LoginForm() {
               <img src={Padlock} alt="padlock" />
             </div>
             <input
-              className="m-5"
+              className="bg-white bg-opacity-0  border-b border-b-white mt-8 mb-8"
               id="password"
               type="text"
               name="password"
@@ -49,11 +49,7 @@ function LoginForm() {
         <input
           type="submit"
           value="login"
-          className="py-2 w-28
-          text-center text-white text-base
-          bg-darkBlue
-          hover:bg-opacity-90
-          rounded-full"
+          className="py-2 w-28 text-center text-white text-base bg-darkBlue hover:bg-opacity-90 rounded-full mt-12"
         />
       </form>
     </div>
