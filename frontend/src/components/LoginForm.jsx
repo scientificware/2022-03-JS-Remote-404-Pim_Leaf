@@ -1,4 +1,8 @@
+/* eslint-disable import/no-unresolved */
 import { useState } from "react";
+
+import Avatar from "@assets/avatar-login.png";
+import Padlock from "@assets/padlock-login.png";
 
 function LoginForm() {
   const [email, setEmail] = useState("");
@@ -6,31 +10,53 @@ function LoginForm() {
   console.warn(email);
   console.warn(password);
   return (
-    <form className="flex flex-col">
-      <label htmlFor="login" className="flex flex-col">
+    <div className="w-2/3">
+      <form className="flex flex-col items-center">
+        <label htmlFor="login" className="flex flex-col">
+          <div className="flex flex-row items-center">
+            <div className="w-9">
+              <img src={Avatar} alt="avatar" />
+            </div>
+            <input
+              className="m-5"
+              id="email"
+              type="text"
+              name="email"
+              placeholder=""
+              onChange={(event) => {
+                const input = event.target;
+                setEmail(input.value);
+              }}
+            />
+          </div>
+          <div className="flex flex-row items-center">
+            <div className="w-9">
+              <img src={Padlock} alt="padlock" />
+            </div>
+            <input
+              className="m-5"
+              id="password"
+              type="text"
+              name="password"
+              placeholder=""
+              onChange={(event) => {
+                const input = event.target;
+                setPassword(input.value);
+              }}
+            />
+          </div>
+        </label>
         <input
-          id="email"
-          type="text"
-          name="email"
-          placeholder=""
-          onChange={(event) => {
-            const input = event.target;
-            setEmail(input.value);
-          }}
+          type="submit"
+          value="login"
+          className="py-2 w-28
+          text-center text-white text-base
+          bg-darkBlue
+          hover:bg-opacity-90
+          rounded-full"
         />
-        <input
-          id="password"
-          type="text"
-          name="password"
-          placeholder=""
-          onChange={(event) => {
-            const input = event.target;
-            setPassword(input.value);
-          }}
-        />
-      </label>
-      <input type="submit" value="login" />
-    </form>
+      </form>
+    </div>
   );
 }
 
