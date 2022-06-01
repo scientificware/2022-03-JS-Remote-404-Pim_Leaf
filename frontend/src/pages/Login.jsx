@@ -1,38 +1,20 @@
-import Counter from "@components/Counter";
-import logo from "@assets/logo.svg";
+/* eslint-disable import/no-unresolved */
+import LoginForm from "@components/LoginForm";
+
+import Logo from "@assets/feuille.png";
 
 export default function Login() {
   return (
-    <header className="App-header">
-      <img src={logo} className="App-logo" alt="logo" />
-      <p>Hello Vite + React !</p>
-
-      <Counter />
-
-      <h1 className="text-5xl font-bold underline">tailwind test</h1>
-
-      <p>
-        Edit <code>App.jsx</code> and save to test HMR updates.
-      </p>
-      <p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-        {" | "}
-        <a
-          className="App-link"
-          href="https://vitejs.dev/guide/features.html"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Vite Docs
-        </a>
-      </p>
-    </header>
+    <main className="h-screen flex items-center justify-center">
+      <div className="bg-loginGradient bg-center bg-fixed bg-no-repeat h-fit pt-5 pb-14 w-96 rounded-sm flex items-center justify-center">
+        <div className="flex flex-col items-center">
+          <img src={Logo} alt="logo" className="w-28" />
+          <h1 className="text-white text-5xl mb-12 mt-5">PimLeaf</h1>
+          <div>
+            <LoginForm />
+          </div>
+        </div>
+      </div>
+    </main>
   );
 }

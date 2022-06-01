@@ -2,12 +2,24 @@ module.exports = {
   content: ["./src/**/*.{js,jsx,ts,tsx}"],
   theme: {
     colors: {
-      red: "red",
+      darkGrey: "#969393",
+      lightGrey: "#ECECEC",
+      darkBlue: "#14252F",
+      middleBlue: "#4A9CCD",
+      lightBlue: "#5AB8EF",
+      middleGreen: "#299740",
+      lightGreen: "#3AD800",
+      white: "#FFFFFF",
     },
     fontFamily: {
       sans: ["sans-serif"],
     },
-    extend: {},
+    extend: {
+      backgroundImage: {
+        loginGradient: "url('./assets/background_login.png')",
+        heroBg: "url('./src/assets/background_hero.png')",
+      },
+    },
   },
   plugins: [],
 };
