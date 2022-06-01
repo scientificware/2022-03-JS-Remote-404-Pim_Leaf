@@ -11,14 +11,14 @@ function LoginForm() {
   console.warn(password);
   return (
     <div>
-      <form>
+      <form className="flex flex-col items-center">
         <label htmlFor="login">
           <div className="flex flex-row items-center">
-            <div className="w-9">
+            <div className="w-9 mb-8">
               <img src={Avatar} alt="avatar" />
             </div>
             <input
-              className="bg-white bg-opacity-0 border-b border-b-white mt-8 mb-8"
+              className="bg-white bg-opacity-0 border-b border-b-white mb-8 text-white"
               id="email"
               type="text"
               name="email"
@@ -34,7 +34,7 @@ function LoginForm() {
               <img src={Padlock} alt="padlock" />
             </div>
             <input
-              className="bg-white bg-opacity-0  border-b border-b-white mt-8 mb-8"
+              className="bg-white bg-opacity-0  border-b border-b-white mt-8 mb-8 text-white"
               id="password"
               type="text"
               name="password"
