@@ -1,8 +1,8 @@
 /* eslint-disable import/no-unresolved */
 import { useState } from "react";
 
-import Avatar from "@assets/avatar-login.png";
-import Padlock from "@assets/padlock-login.png";
+import Avatar from "@assets/avatar_login.png";
+import Padlock from "@assets/padlock_login.png";
 
 function LoginForm() {
   const [email, setEmail] = useState("");
