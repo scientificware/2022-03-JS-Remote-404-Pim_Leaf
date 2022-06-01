@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 function Nav() {
   return (
     <nav className="flex px-4 justify-between items-center w-full pt-5">
-      <Link to="/" className="nav_logo_mt">
+      <Link to="/products" className="nav_logo_mt">
         <img
           className="object-logo h-28 ml-9 mb-5 "
           src="./src/assets/logo1.png"
