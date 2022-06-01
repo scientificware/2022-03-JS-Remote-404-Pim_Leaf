@@ -8,6 +8,7 @@ import Clients from "@pages/Clients";
 import Company from "@pages/Company";
 import Profil from "@pages/Profil";
 import UserExport from "./contexts/UserContext";
+import Nav from "./components/Nav";
 
 import "./App.css";
 
@@ -16,6 +17,9 @@ function App() {
     <UserExport.ContextProvider>
       <BrowserRouter>
         <div className="App">
+          <section className="bg-heroBg h-screen bg-center bg-cover">
+            <Nav />
+          </section>
           <Routes>
             <Route path="/" element={<Login />} />
             <Route path="/products" element={<Products />} />
