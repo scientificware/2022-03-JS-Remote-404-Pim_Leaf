@@ -17,9 +17,12 @@ function App() {
     <UserExport.ContextProvider>
       <BrowserRouter>
         <div className="bg-heroBg h-screen bg-center bg-cover">
-          {window.location.pathname === "/login" ? null : <Nav />}
+          {window.location.pathname === "/" ||
+          window.location.pathname === "" ? null : (
+            <Nav />
+          )}
           <Routes>
-            <Route path="/login" element={<Login />} />
+            <Route path="/" element={<Login />} />
             <Route path="/products" element={<Products />} />
             <Route path="/suppliers" element={<Suppliers />} />
             <Route path="/clients" element={<Clients />} />
