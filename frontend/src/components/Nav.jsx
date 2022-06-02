@@ -22,7 +22,7 @@ function Nav() {
           </Link>
         </li>
         <li className="self-center p-7">
-          <Link to="/supliers" className="text-#14252F ">
+          <Link to="/suppliers" className="text-#14252F ">
             Mes Fourniseurs
           </Link>
         </li>
