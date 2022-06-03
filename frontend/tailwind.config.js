@@ -17,7 +17,6 @@ module.exports = {
     extend: {
       backgroundImage: {
         loginGradient: "url('./assets/background_login.png')",
-        heroBg: "url('./src/assets/background_hero.png')",
       },
     },
   },

@@ -3,46 +3,60 @@ import { Link } from "react-router-dom";
 
 function Nav() {
   return (
-    <nav className="flex px-4 justify-between items-center w-full pt-5">
-      <Link to="/products" className="nav_logo_mt">
-        <img
-          className="object-logo h-28 ml-9 mb-5 "
-          src="./src/assets/logo1.png"
-          alt="logo"
-        />
-      </Link>
-      <ul
-        className="flex item-center
-                  py-5
-                  px-6"
-      >
-        <li className="self-center p-7">
-          <Link to="/products" className="text-#14252F ">
-            Mes Produits
+    <nav className="flex items-center justify-between pt-5">
+      <img
+        src="./src/assets/logo1.png"
+        alt="logo"
+        className="h-28 ml-9 mb-5 item-center"
+      />
+      <ul className="">
+        <li className="md:inline-block  md:ml-10 ml-5 md:my-0 my-6 border-b-2 border-transparent hover:border-white duration-300">
+          <Link
+            to="/products"
+            className="text-#14252F cursor-pointer font-Barlow font-normal text-sm inline-block md:py-5 py-3"
+          >
+            <span className="font-bold mr-1.5">01</span>
+            MES PRODUITS
           </Link>
         </li>
-        <li className="self-center p-7">
-          <Link to="/suppliers" className="text-#14252F ">
-            Mes Fourniseurs
+        <li className="md:inline-block  md:ml-10 ml-5 md:my-0 my-6 border-b-2 border-transparent hover:border-white duration-300">
+          <Link
+            to="/suppliers"
+            className="text-#14252F cursor-pointer font-Barlow font-normal text-sm inline-block md:py-5 py-3"
+          >
+            <span className="font-bold mr-1.5">02</span>
+            MES FOURNISSEURS
           </Link>
         </li>
-        <li className="self-center p-7">
-          <Link to="/company" className="text-#14252F ">
-            Mon Entreprise
+        <li className="md:inline-block  md:ml-10 ml-5 md:my-0 my-6 border-b-2 border-transparent hover:border-white duration-300">
+          <Link
+            to="/company"
+            className="text-#14252F cursor-pointer font-Barlow font-normal text-sm inline-block md:py-5 py-3"
+          >
+            <span className="font-bold mr-1.5">03</span>
+            MON ENTREPRISE
           </Link>
         </li>
-        <li className="self-center p-7">
-          <Link to="/profil" className="text-#14252F ">
-            Mon Profil
+        <li className="md:inline-block  md:ml-10 ml-5 md:my-0 my-6 border-b-2 border-transparent hover:border-white duration-300">
+          <Link
+            to="/profil"
+            className="text-#14252F cursor-pointer font-Barlow font-normal text-sm inline-block md:py-5 py-3"
+          >
+            <span className="font-bold mr-1.5">04</span>
+            MON PROFIL
           </Link>
         </li>
+        <button
+          type="button"
+          className="md:inline-block  md:ml-10 ml-5 md:my-0 my-6 hover:border-white duration-300"
+        >
+          <img
+            src="./src/assets/logout_icon.png"
+            alt=""
+            className="h-12 mr-14 inline-block py-3"
+          />
+        </button>
       </ul>
-      <button
-        type="button"
-        className="text-gray-900 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 font-medium rounded-lg text-sm px-5 py-2.5 mb-2 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700 mr-7"
-      >
-        Deconnexion
-      </button>
     </nav>
   );
 }
