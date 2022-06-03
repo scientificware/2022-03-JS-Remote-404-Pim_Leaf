@@ -8,18 +8,18 @@ function TableProducts({ product }) {
   };
   return (
     <tr className="odd:bg-lightBlue even:bg-white">
-      <td className="text-left border-l-2">
+      <td className="text-left">
         <input
-          className="w-5 h-10 ml-5"
+          className="w-5 h-10 ml-5 accent-lightGreen"
           type="checkbox"
           checked={checked}
           onChange={handleChange}
         />
       </td>
-      <td className="text-left text-l border-l-2">{product.product}</td>
-      <td className="text-left text-l border-l-2">{product.fabricant}</td>
-      <td className="text-left text-l  border-l-2">{product.category}</td>
-      <td className="items-center border-l-2 border-r-2">
+      <td className="text-left text-l">{product.product}</td>
+      <td className="text-left text-l">{product.fabricant}</td>
+      <td className="text-left text-l">{product.category}</td>
+      <td className="items-center">
         {product.disponiblity}
         <SwitchButtonProducts />
       </td>
