@@ -5,25 +5,22 @@ function ListProducts({ products }) {
   return (
     <div className="flex flex-col">
       <div className="min-w-full sm:px-6 lg:px-8">
-        <table className="min-w-full mt-40 border-2">
+        <table className=" min-w-full mt-40">
           <thead>
-            <tr className="text-left">
+            <tr className="text-left h-12">
               <th scope="col" className="bg-middleBlue text-middleBlue text-xl">
                 a
               </th>
-              <th scope="col" className="bg-middleBlue text-xl border-l-2">
+              <th scope="col" className="bg-middleBlue text-xl ">
                 Produit
               </th>
-              <th scope="col" className="bg-middleBlue text-xl border-l-2">
+              <th scope="col" className="bg-middleBlue text-xl">
                 Fabricant
               </th>
-              <th scope="col" className="bg-middleBlue text-xl border-l-2">
+              <th scope="col" className="bg-middleBlue text-xl">
                 Catégorie
               </th>
-              <th
-                scope="col"
-                className="bg-middleBlue text-xl border-l-2 border-r-2"
-              >
+              <th scope="col" className="bg-middleBlue text-xl">
                 Disponibilité
               </th>
             </tr>
