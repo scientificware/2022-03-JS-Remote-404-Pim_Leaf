@@ -1,7 +1,10 @@
+import TableProfil from "../components/TableProfil";
+
 function Profil() {
   return (
     <main>
-      <h1>Profil</h1>
+      <h1 className="flex justify-center">Mon Profil</h1>
+      <TableProfil />
     </main>
   );
 }
