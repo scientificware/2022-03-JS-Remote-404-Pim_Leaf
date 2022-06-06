@@ -11,6 +11,14 @@ function Profil() {
         </button>
       </div>
       <TableProfil />
+      <div className="flex justify-center">
+        <button
+          type="button"
+          className="py-2 w-28 text-center text-white text-base bg-darkBlue hover:bg-opacity-90 rounded-full mt-12"
+        >
+          Enregistrer
+        </button>
+      </div>
     </main>
   );
 }

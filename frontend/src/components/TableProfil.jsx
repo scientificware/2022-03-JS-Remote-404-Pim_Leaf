@@ -1,6 +1,13 @@
 import userProfil from "../data/ClementData";
 
 function TableProfil() {
+  const hidePassword = userProfil[0].password.split("");
+
+  // eslint-disable-next-line no-plusplus
+  for (let i = 0; i < hidePassword.length; i++) {
+    hidePassword.splice(i, 1, "*").join("");
+  }
+
   return (
     <div className="ml-20 mr-20">
       {userProfil.map((user) => (
@@ -19,7 +26,7 @@ function TableProfil() {
           </p>
           Ancien mot de passe :
           <p className="bg-middleBlue bg-opacity-50 text-darkBlue p-2">
-            {user.password}
+            {hidePassword}
           </p>
         </div>
       ))}
