@@ -5,7 +5,7 @@ function FieldsProfil() {
 
   // eslint-disable-next-line no-plusplus
   for (let i = 0; i < hidePassword.length; i++) {
-    hidePassword.splice(i, 1, "*").join("");
+    hidePassword.splice(i, 1, "•").join("");
   }
 
   return (

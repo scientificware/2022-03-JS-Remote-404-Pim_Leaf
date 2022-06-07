@@ -5,7 +5,7 @@ import EditButton from "../components/EditButton";
 function Profil() {
   return (
     <main>
-      <h1 className="flex justify-center">Mon Profil</h1>
+      <h1 className="flex justify-center text-2xl mt-5">Mon Profil</h1>
       <div className="flex justify-end">
         <EditButton />
       </div>

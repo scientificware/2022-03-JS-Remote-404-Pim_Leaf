@@ -7,25 +7,25 @@ function FieldsEdit() {
   return (
     <div>
       <form className="flex flex-col items-center">
-        <label htmlFor="password" className="flex flex-col">
-          Nouveau mot de passe :
+        <label htmlFor="password" className="flex flex-col w-screen">
+          <p className="ml-20">Nouveau mot de passe :</p>
           <input
-            className="text-darkBlue bg-middleBlue p-2 mb-4"
+            className="text-darkBlue bg-middleBlue bg-opacity-50 p-2 mb-4 ml-20 mr-20"
             id="email"
             type="text"
-            name="email"
+            name="password"
             placeholder=""
             onChange={(event) => {
               const input = event.target;
               setPassword(input.value);
             }}
           />
-          Confirmer le nouveau mot de passe :
+          <p className="ml-20">Confirmer le nouveau mot de passe :</p>
           <input
-            className="text-darkBlue bg-middleBlue p-2 mb-4"
+            className="text-darkBlue bg-middleBlue bg-opacity-50 p-2 mb-4 ml-20 mr-20"
             id="email"
             type="text"
-            name="email"
+            name="password"
             placeholder=""
             onChange={(event) => {
               const input = event.target;
