@@ -31,6 +31,7 @@ function Nav() {
           <Link
             to="/products"
             className="text-#14252F cursor-pointer font-Barlow font-normal text-sm inline-block lg:py-5 py-3"
+            onClick={() => setNavOpen(!navOpen)}
           >
             <span className="font-bold mr-1.5">01</span>
             MES PRODUITS
@@ -40,6 +41,7 @@ function Nav() {
           <Link
             to="/suppliers"
             className="text-#14252F cursor-pointer font-Barlow font-normal text-sm inline-block lg:py-5 py-3"
+            onClick={() => setNavOpen(!navOpen)}
           >
             <span className="font-bold mr-1.5">02</span>
             MES FOURNISSEURS
@@ -49,6 +51,7 @@ function Nav() {
           <Link
             to="/company"
             className="text-#14252F cursor-pointer font-Barlow font-normal text-sm inline-block lg:py-5 py-3"
+            onClick={() => setNavOpen(!navOpen)}
           >
             <span className="font-bold mr-1.5">03</span>
             MON ENTREPRISE
@@ -58,6 +61,7 @@ function Nav() {
           <Link
             to="/profil"
             className="text-#14252F cursor-pointer font-Barlow font-normal text-sm inline-block lg:py-5 py-3"
+            onClick={() => setNavOpen(!navOpen)}
           >
             <span className="font-bold mr-1.5">04</span>
             MON PROFIL
