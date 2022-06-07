@@ -1,6 +1,6 @@
 import userProfil from "../data/ClementData";
 
-function TableProfil() {
+function FieldsProfil() {
   const hidePassword = userProfil[0].password.split("");
 
   // eslint-disable-next-line no-plusplus
@@ -11,21 +11,18 @@ function TableProfil() {
   return (
     <div className="ml-20 mr-20">
       {userProfil.map((user) => (
-        <div>
+        <div key={user.id}>
           Mon nom :
-          <p
-            key={user.id}
-            className="bg-middleBlue bg-opacity-50 text-darkBlue p-2"
-          >
+          <p className="bg-middleBlue bg-opacity-50 text-darkBlue p-2 mt-1 mb-3">
             {user.name}
           </p>
-          <p>{user.company}</p>
+          <p className="mt-5 mb-16">{user.company}</p>
           Adresse email :
-          <p className="bg-middleBlue bg-opacity-50 text-darkBlue p-2">
+          <p className="bg-middleBlue bg-opacity-50 text-darkBlue p-2 mt-1 mb-3">
             {user.mail}
           </p>
           Ancien mot de passe :
-          <p className="bg-middleBlue bg-opacity-50 text-darkBlue p-2">
+          <p className="bg-middleBlue bg-opacity-50 text-darkBlue p-2 mt-1 mb-3">
             {hidePassword}
           </p>
         </div>
@@ -34,4 +31,4 @@ function TableProfil() {
   );
 }
 
-export default TableProfil;
+export default FieldsProfil;
