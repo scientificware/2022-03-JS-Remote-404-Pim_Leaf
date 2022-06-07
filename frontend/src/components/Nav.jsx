@@ -9,7 +9,7 @@ function Nav() {
         alt="logo"
         className="h-28 ml-9 mb-5 item-center"
       />
-      <ul className="">
+      <ul className="bg-white md:text-right w-screen h-screen md:pl-10 md:static fixed duration-500 ease-linear top-0 md:h-auto z-10">
         <li className="md:inline-block  md:ml-10 ml-5 md:my-0 my-6 border-b-2 border-transparent hover:border-white duration-300">
           <Link
             to="/products"
