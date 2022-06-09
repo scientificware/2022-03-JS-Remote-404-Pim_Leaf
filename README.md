@@ -1,10 +1,10 @@
-# PROJECT ACHIEVEMENT :octocat:
+# PROJECT ACHIEVEMENT :trophy:
 
-[x] Sprint 1 :heavy_check_mark:
-[] Sprint 2
-[] Sprint 3
-[] Sprint 4
-[] Sprint 5
+1. [x] Sprint 1 :heavy_check_mark:
+2. [ ] Sprint 2
+3. [ ] Sprint 3
+4. [ ] Sprint 4
+5. [ ] Sprint 5
 
 ![Logo Pimleaf](https://www.pimleaf.fr/survey/tmp/assets/181c5803/Logo%20Pimleaf-1-.png)
 
@@ -14,16 +14,16 @@
 
 # 5DEV CONVENTION :chart_with_upwards_trend:
 
-## CSS :balloon:
+## :balloon: CSS
 
-class => each term separated by an hyphen (eg "class-test")
-id => each term separated by an underscore (eg "id_test")
+-   class => each term separated by an hyphen (eg "class-test")
+-   id => each term separated by an underscore (eg "id_test")
 
-## IMAGES :framed_picture:
+## :framed_picture: IMAGES
 
 Labels images should be 96x96 pixels wide.
 
-## JS :shipit:
+## :shipit: JS
 
 minimal page code :
 
@@ -53,6 +53,6 @@ function "ComponentName"() {
 export default "ComponentName";
 ```
 
-## DataBase Columns
+## :floppy_disk: DataBase Columns
 
 lowercase, singular, underscore separation
