@@ -19,6 +19,10 @@
 class => each term separated by an hyphen (eg "class-test")
 id => each term separated by an underscore (eg "id_test")
 
+## IMAGES :framed_picture:
+
+Labels images should be 96x96 pixels wide.
+
 ## JS :shipit:
 
 minimal page code :
