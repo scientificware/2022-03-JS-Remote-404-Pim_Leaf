@@ -1,10 +1,10 @@
 # PROJECT ACHIEVEMENT :octocat:
 
-[x] Sprint 1 :heavy_check_mark:
-[] Sprint 2
-[] Sprint 3
-[] Sprint 4
-[] Sprint 5
+- [x] Sprint 1 :heavy_check_mark:
+- [] Sprint 2
+- [] Sprint 3
+- [] Sprint 4
+- [] Sprint 5
 
 ![Logo Pimleaf](https://www.pimleaf.fr/survey/tmp/assets/181c5803/Logo%20Pimleaf-1-.png)
 
