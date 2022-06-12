@@ -7,6 +7,7 @@ const CompanyProfil = [
     mail: "moulinici@email.com",
     phone: "0245236598",
     domaine: "Farine",
+    description: "hkjglmekglmjklgmjdklmgjkdrlmùgjkelmrùjgkelùjgklùg",
   },
 ];
 export default CompanyProfil;
