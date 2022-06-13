@@ -13,52 +13,52 @@ function Company() {
         Mon entreprise
       </h1>
       <form
-        className="flex flex-col items-center"
+        className="flex flex-col items-center min-w-max ml-20 mr-20"
         onSubmit={handleSubmit(handleSubmit)}
       >
-        <div className="flex flex-col items-start">
+        <div className="flex flex-col items-start w-full">
           <label className="font-barlow text-xl">Domaine</label>
           <input
-            className="bg-middleBlue bg-opacity-50 text-darkBlue font-redHat pl-4 p-3"
+            className="bg-middleBlue bg-opacity-50 text-darkBlue font-redHat p-2 w-full  mt-1 mb-3"
             name="name"
             value={CompanyProfil[0].domaine}
             {...register("name")}
           />
         </div>
-        <div className="flex flex-col items-start">
+        <div className="flex flex-col items-start w-full">
           <label className="font-barlow text-xl">Description</label>
           <input
-            className="bg-middleBlue bg-opacity-50 text-darkBlue font-redHat pl-4 p-3"
+            className="bg-middleBlue bg-opacity-50 text-darkBlue font-redHat p-2 w-full  mt-1 mb-3"
             type="description"
             name="description"
             value={CompanyProfil[0].description}
             {...register("description")}
           />
         </div>
-        <div className="flex flex-col items-start">
+        <div className="flex flex-col items-start w-full">
           <label className="font-barlow text-xl">Email de contact</label>
           <input
-            className="bg-middleBlue bg-opacity-50 text-darkBlue font-redHat pl-4 p-3"
+            className="bg-middleBlue bg-opacity-50 text-darkBlue font-redHat p-2 w-full  mt-1 mb-3"
             type="email"
             name="email"
             value={CompanyProfil[0].mail}
             {...register("email")}
           />
         </div>
-        <div className="flex flex-col items-start">
+        <div className="flex flex-col items-start w-full">
           <label className="font-barlow text-xl">Adresse</label>
           <input
-            className="bg-middleBlue bg-opacity-50 text-darkBlue font-redHat pl-4 p-3"
+            className="bg-middleBlue bg-opacity-50 text-darkBlue font-redHat p-2 w-full  mt-1 mb-3"
             type="adress"
             name="address"
             value={CompanyProfil[0].address}
             {...register("address")}
           />
         </div>
-        <div className="flex flex-col items-start">
+        <div className="flex flex-col items-start w-full">
           <label className="font-barlow text-xl">Téléphone</label>
           <input
-            className="bg-middleBlue bg-opacity-50 text-darkBlue font-redHat pl-4 p-3"
+            className="bg-middleBlue bg-opacity-50 text-darkBlue font-redHat p-2 w-full  mt-1 mb-3"
             type="phone"
             name="phone"
             value={CompanyProfil[0].phone}
