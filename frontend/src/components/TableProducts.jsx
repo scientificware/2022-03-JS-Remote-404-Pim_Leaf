@@ -24,7 +24,7 @@ function TableProducts({ product }) {
         {product.company_name}
       </td>
       <td className="text-left text-l border-y-8 border-white">
-        {product.product_name}
+        {product.name}
       </td>
       <td className="border-y-8 border-white">
         <td className="flex items-center ">
