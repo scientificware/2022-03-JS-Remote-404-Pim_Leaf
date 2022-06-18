@@ -20,6 +20,9 @@ function ListProducts() {
 
   return (
     <div className="flex flex-col">
+      <p className="ml-12">
+        Connecté en tant que : <b>{products[0].company_name}</b>
+      </p>
       <div className="flex flex-row justify-end">
         <PlusButton />
         <MinusButton />
