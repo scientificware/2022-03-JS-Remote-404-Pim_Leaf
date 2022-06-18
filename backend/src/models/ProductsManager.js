@@ -5,16 +5,24 @@ class ProductsManager extends AbstractManager {
 
   findAll(query) {
     let sqlQuery = `
-    SELECT p.id, c.company_name, p.product_name, cat.name category_name, s.quantity, g.name group_name, s.retailer_id, s.supplier_id
+    SELECT
+    p.id product_ID,
+    product_name,
+    c.company_name,
+    s.product_id,
+    s.company_id,
+    s.quantity,
+    cat.name category
     FROM ${ProductsManager.table} AS p
     LEFT JOIN stock AS s
     ON s.product_id = p.id
     LEFT JOIN company AS c
-    ON s.retailer_id = c.id
+    ON s.company_id = c.id
     LEFT JOIN category AS cat
     ON p.category_id = cat.id
     LEFT JOIN company_group AS g
     ON c.group_id = g.id
+    WHERE s.company_id = 4 OR s.company_id = 5
     `;
 
     const sqlValue = [];
