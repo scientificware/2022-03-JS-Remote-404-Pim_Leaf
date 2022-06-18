@@ -5,7 +5,7 @@ class ProductsManager extends AbstractManager {
 
   findAll(query) {
     let sqlQuery = `
-    SELECT p.id, c.company_name retailer, p.product_name, cat.name category_name, s.quantity, g.name group_name
+    SELECT p.id, c.company_name, p.product_name, cat.name category_name, s.quantity, g.name group_name, s.retailer_id, s.supplier_id
     FROM ${ProductsManager.table} AS p
     LEFT JOIN stock AS s
     ON s.product_id = p.id
