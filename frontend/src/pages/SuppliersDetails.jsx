@@ -1,6 +1,6 @@
 import { useParams } from "react-router-dom";
 
-import ListSuppliers from "../components/ListSuppliers";
+import DetailsSuppliers from "../components/DetailsSuppliers";
 import SearchBarSuppliersDetails from "../components/SearchBarSupppliersDetails";
 import ButtonSuppliersDetails from "../components/ButtonSuppliersDetails";
 import dataSuppliers from "../data/MaxData";
@@ -52,7 +52,7 @@ function SuppliersDetails() {
       </div>
       <SearchBarSuppliersDetails />
       <ButtonSuppliersDetails />
-      <ListSuppliers products={dataProducts} />
+      <DetailsSuppliers products={dataProducts} />
     </main>
   );
 }
