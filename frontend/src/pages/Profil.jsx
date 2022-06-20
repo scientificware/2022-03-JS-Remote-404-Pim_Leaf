@@ -1,16 +1,12 @@
-import FieldsProfil from "../components/FieldsProfil";
-import FieldsEdit from "../components/FieldsEdit";
-import EditButton from "../components/EditButton";
+import Fields from "../components/Fields";
 
 function Profil() {
   return (
     <main>
-      <h1 className="flex justify-center text-2xl mt-5">Mon Profil</h1>
-      <div className="flex justify-end">
-        <EditButton />
-      </div>
-      <FieldsProfil />
-      <FieldsEdit />
+      <h1 className="flex justify-center text-3xl font-bold font-barlow text-darkBlue mb-14 mt-14">
+        Mon Profil
+      </h1>
+      <Fields />
     </main>
   );
 }

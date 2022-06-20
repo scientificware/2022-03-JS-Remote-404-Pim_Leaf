@@ -1,20 +1,39 @@
-import React from "react";
+import { useState, useEffect } from "react";
+import axios from "axios";
 import DownloadButton from "./DownloadButton";
 import MinusButton from "./MinusButton";
 import PlusButton from "./PlusButton";
 import TableProducts from "./TableProducts";
 
-function ListProducts({ products }) {
+function ListProducts() {
+  const [products, setProducts] = useState([]);
+  useEffect(() => {
+    axios
+      .get(`${import.meta.env.VITE_BACKEND_URL}/products`)
+      .then((res) => {
+        setProducts(res.data);
+      })
+      .catch((error) => {
+        console.warn(error.response.data);
+      });
+  }, []);
+
   return (
     <div className="flex flex-col">
+      <p className="ml-12">
+        Connecté en tant que : <b>Eco Vrac</b>
+        <p>
+          Produits de : <b>Nat-ali</b> et <b>Epice Scop</b>
+        </p>
+      </p>
       <div className="flex flex-row justify-end">
         <PlusButton />
         <MinusButton />
         <DownloadButton />
       </div>
-      <div className="min-w-full sm:px-6 lg:px-20 font-redHat">
-        <table className=" min-w-full">
-          <thead>
+      <div className="font-redHat w-4/5 m-auto">
+        <table className="w-full">
+          <thead className="">
             <tr className="text-left h-12">
               <th
                 scope="col"

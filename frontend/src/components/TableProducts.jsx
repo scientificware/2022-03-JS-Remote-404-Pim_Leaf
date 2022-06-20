@@ -7,6 +7,7 @@ function TableProducts({ product }) {
   const handleChange = () => {
     setChecked(!checked);
   };
+
   return (
     <tr className="odd:bg-lightBlue/10 even:bg-middleBlue/30">
       <td className="text-left border-y-8 border-white">
@@ -18,18 +19,21 @@ function TableProducts({ product }) {
         />
       </td>
       <td className="text-left text-l border-y-8 border-white">
-        <Link to={`/products/${product.id}`}>{product.name}</Link>
+        <Link to={`/products/${product.id}`}>{product.product_name}</Link>
       </td>
       <td className="text-left text-l border-y-8 border-white">
-        {product.fabricant}
+        {product.company_name}
       </td>
       <td className="text-left text-l border-y-8 border-white">
         {product.category}
       </td>
       <td className="border-y-8 border-white">
         <td className="flex items-center ">
-          {product.disponibility}
-          <SwitchButtonProducts />
+          {product.quantity > 0 ? (
+            <SwitchButtonProducts disponibility />
+          ) : (
+            <SwitchButtonProducts disponibility={false} />
+          )}
         </td>
       </td>
     </tr>
