@@ -1,8 +1,10 @@
 import { useParams } from "react-router-dom";
 
+import ListSuppliers from "../components/ListSuppliers";
 import SearchBarSuppliersDetails from "../components/SearchBarSupppliersDetails";
 import ButtonSuppliersDetails from "../components/ButtonSuppliersDetails";
 import dataSuppliers from "../data/MaxData";
+import dataProducts from "../data/DataProducts";
 
 function SuppliersDetails() {
   const { id } = useParams();
@@ -50,6 +52,7 @@ function SuppliersDetails() {
       </div>
       <SearchBarSuppliersDetails />
       <ButtonSuppliersDetails />
+      <ListSuppliers products={dataProducts} />
     </main>
   );
 }
