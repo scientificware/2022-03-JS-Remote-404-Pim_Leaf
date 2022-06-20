@@ -24,7 +24,7 @@ function DetailsSuppliers({ products }) {
             </th>
           </tr>
         </thead>
-        <tbody className="">
+        <tbody>
           {/* //   map the dataProducts for each product */}
           {products.map((product) => (
             <InventorySuppliers key={product.id} product={product} />

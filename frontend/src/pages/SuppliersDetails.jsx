@@ -8,7 +8,6 @@ import dataProducts from "../data/DataProducts";
 
 function SuppliersDetails() {
   const { id } = useParams();
-
   return (
     <main>
       <p className="text-5xl flex justify-center pt-10">

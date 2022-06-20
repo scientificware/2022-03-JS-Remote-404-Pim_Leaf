@@ -7,6 +7,7 @@ function InventorySuppliers({ product }) {
   const handleChange = () => {
     setChecked(!checked);
   };
+
   return (
     <tr className="odd:bg-lightBlue/10 even:bg-middleBlue/30">
       <td className="text-left border-y-8 border-white">
