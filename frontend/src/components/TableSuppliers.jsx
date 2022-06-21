@@ -2,12 +2,11 @@ import React from "react";
 import { Link } from "react-router-dom";
 import SwitchButtonProducts from "./SwitchButtonProducts";
 
-function TableProducts({ product }) {
+function TableSuppliers({ product }) {
   const [checked, setChecked] = React.useState(false);
   const handleChange = () => {
     setChecked(!checked);
   };
-
   return (
     <tr className="odd:bg-lightBlue/10 even:bg-middleBlue/30">
       <td className="text-left border-y-8 border-white">
@@ -19,25 +18,19 @@ function TableProducts({ product }) {
         />
       </td>
       <td className="text-left text-l border-y-8 border-white">
-        <Link to={`/products/${product.id}`}>{product.product_name}</Link>
+        <Link to={`/products/${product.id}`}>{product.name}</Link>
       </td>
       <td className="text-left text-l border-y-8 border-white">
-        {product.company_name}
-      </td>
-      <td className="text-left text-l border-y-8 border-white">
-        {product.category}
+        {product.fabricant}
       </td>
       <td className="border-y-8 border-white">
         <td className="flex items-center ">
-          {product.quantity > 0 ? (
-            <SwitchButtonProducts disponibility />
-          ) : (
-            <SwitchButtonProducts disponibility={false} />
-          )}
+          {product.disponibility}
+          <SwitchButtonProducts />
         </td>
       </td>
     </tr>
   );
 }
 
-export default TableProducts;
+export default TableSuppliers;
