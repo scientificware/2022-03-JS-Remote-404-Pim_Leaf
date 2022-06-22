@@ -12,8 +12,8 @@ import SuppliersDetails from "@pages/SuppliersDetails";
 import CompanyDetails from "@pages/CompanyDetails";
 import ProductsDetails from "@pages/ProductsDetails";
 import ClientsDetails from "@pages/ClientsDetails";
-import ProductsSuppliers from "@pages/ProductsSuppliers";
-import ProductsSuppliersDetails from "@pages/ProductsSuppliersDetails";
+import SuppliersProducts from "@pages/suppliers/SupProducts";
+import SuppliersProductsDetails from "@pages/suppliers/SupProductsDetails";
 
 import UserExport from "./contexts/UserContext";
 
@@ -43,10 +43,10 @@ function App() {
             <Route path="/company" element={<Company />} />
             <Route path="/company/:id" element={<CompanyDetails />} />
             <Route path="/profil" element={<Profil />} />
-            <Route path="/products/supplier" element={<ProductsSuppliers />} />
+            <Route path="/products/supplier" element={<SuppliersProducts />} />
             <Route
               path="/products/supplier/:id"
-              element={<ProductsSuppliersDetails />}
+              element={<SuppliersProductsDetails />}
             />
           </Routes>
         </div>
