@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import { useState } from "react";
 
 import Logo from "@assets/logo_text.png";
+import Logout from "@assets/icon_logout.svg";
 
 function Nav() {
   const [navOpen, setNavOpen] = useState(false);
@@ -72,11 +73,7 @@ function Nav() {
           type="button"
           className="lg:inline-block  lg:ml-10 ml-5 lg:my-0 my-6 hover:border-white duration-300"
         >
-          <img
-            src="./src/assets/logout_icon.png"
-            alt=""
-            className="h-12 mr-14 inline-block py-3"
-          />
+          <img src={Logout} alt="" className="h-12 mr-14 inline-block py-3" />
         </button>
       </ul>
     </nav>
