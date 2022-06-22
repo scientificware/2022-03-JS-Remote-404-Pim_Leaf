@@ -1,3 +1,4 @@
+/* eslint-disable import/no-unresolved */
 import CompanyLogo from "@assets/logo_leaf.png";
 
 export default function SuppliersList({ id, name, domaine, ville, status }) {

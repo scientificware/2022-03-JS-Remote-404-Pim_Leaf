@@ -1,3 +1,4 @@
+/* eslint-disable import/no-unresolved */
 import CompanyLogo from "@assets/logo_leaf.png";
 
 function ToBeConfirmedList({ id, name, domaine, ville, status }) {
