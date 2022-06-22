@@ -7,6 +7,8 @@ import ProductsDetailsSupplier from "@components/ProductsDetailsSupplier";
 
 import EditButton from "@components/EditButton";
 import DownloadButton from "@components/DownloadButton";
+import RetourButton from "@assets/retour_button.svg";
+import { Link } from "react-router-dom";
 import dataProducts from "../data/DataProducts";
 
 function ProductsDetails() {
@@ -19,12 +21,22 @@ function ProductsDetails() {
           {product[0].product_name}
         </h1>
       </article>
-      <div className="flex flex-row justify-end items-center lg:mr-60 md:mr-20">
-        <div className="w-16 transition duration-120 ease-out hover:scale-110">
-          <EditButton />
-        </div>
-        <div className="w-16 transition duration-120 ease-out hover:scale-110">
-          <DownloadButton />
+      <div className="flex justify-between">
+        <Link to="/products">
+          <img
+            src={RetourButton}
+            alt="bouton retour"
+            className="w-36 transition duration-120 ease-out hover:scale-110 ml-36"
+          />
+        </Link>
+        <div className="flex flex-row justify-end items-center lg:mr-36 md:mr-20">
+          <div />
+          <div className="w-16 transition duration-120 ease-out hover:scale-110">
+            <EditButton />
+          </div>
+          <div className="w-16 transition duration-120 ease-out hover:scale-110">
+            <DownloadButton />
+          </div>
         </div>
       </div>
       <section>
