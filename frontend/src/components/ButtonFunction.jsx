@@ -5,7 +5,10 @@ function ButtonFunction() {
   return (
     <Popup
       trigger={
-        <button className="button" type="submit">
+        <button
+          className="button m-10 mt-5 py-2 text-center text-white text-base bg-lightBlue hover:bg-opacity-90 rounded-full"
+          type="submit"
+        >
           TEST MODAL
         </button>
       }
@@ -13,7 +16,7 @@ function ButtonFunction() {
       nested
     >
       {(close) => (
-        <div className="modal">
+        <div className="modal bg-darkBlue text-white">
           <button className="close" onClick={close} type="submit">
             &times;
           </button>
