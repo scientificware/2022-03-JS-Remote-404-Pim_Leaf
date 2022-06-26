@@ -1,6 +1,8 @@
 function SearchBarProducts({ searchInput, setSearchInput }) {
   const handleChange = (e) => {
-    setSearchInput(e.target.value);
+    const input = e.target.value;
+    const inputUp = input.charAt(0).toUpperCase() + input.slice(1);
+    setSearchInput(inputUp);
   };
 
   return (
