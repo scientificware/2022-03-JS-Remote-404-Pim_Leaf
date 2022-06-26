@@ -12,6 +12,7 @@ function SearchBarProducts({ searchInput, setSearchInput }) {
           className="bg-lightGrey h-10 w-1/3 pl-5 rounded-tl-full rounded-bl-full text-m focus:outline-none"
           type="search"
           name="search"
+          placeholder="Rechercher"
           onChange={handleChange}
           value={searchInput}
         />
