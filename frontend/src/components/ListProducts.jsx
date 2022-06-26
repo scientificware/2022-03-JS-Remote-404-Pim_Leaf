@@ -65,7 +65,12 @@ function ListProducts() {
           </thead>
           <tbody className="">
             {products
-              .filter((product) => product.product_name.includes(searchInput))
+              .filter(
+                (product) =>
+                  product.product_name.includes(searchInput) ||
+                  product.supplier.includes(searchInput) ||
+                  product.category.includes(searchInput)
+              )
               .map((product) => (
                 <TableProducts key={product.id} product={product} />
               ))}
