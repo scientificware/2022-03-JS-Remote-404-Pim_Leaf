@@ -53,7 +53,7 @@ function ListProducts() {
                 Produit
               </th>
               <th scope="col" className="bg-middleBlue/70 text-l uppercase">
-                Fabricant
+                Fournisseur
               </th>
               <th scope="col" className="bg-middleBlue/70 text-l uppercase">
                 Catégorie
