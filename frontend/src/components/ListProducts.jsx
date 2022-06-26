@@ -2,9 +2,11 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import ButtonIcons from "./ButtonIcons";
 import TableProducts from "./TableProducts";
+import SearchBarProducts from "./SearchBarProducts";
 
 function ListProducts() {
   const [products, setProducts] = useState([]);
+  const [searchInput, setSearchInput] = useState("");
   const icon = ["plus", "minus"];
 
   useEffect(() => {
@@ -27,6 +29,10 @@ function ListProducts() {
         <p>
           Produits de : <b>Nat-ali</b> et <b>Epice Scop</b>
         </p>
+        <SearchBarProducts
+          searchInput={searchInput}
+          setSearchInput={setSearchInput}
+        />
       </div>
       <div className="flex flex-row justify-end">
         {icon.map((i) => (
@@ -58,9 +64,11 @@ function ListProducts() {
             </tr>
           </thead>
           <tbody className="">
-            {products.map((product) => (
-              <TableProducts key={product.id} product={product} />
-            ))}
+            {products
+              .filter((product) => product.product_name.includes(searchInput))
+              .map((product) => (
+                <TableProducts key={product.id} product={product} />
+              ))}
           </tbody>
         </table>
       </div>
