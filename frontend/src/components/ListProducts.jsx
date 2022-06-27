@@ -5,9 +5,11 @@ import { MdDone } from "react-icons/md";
 import axios from "axios";
 import ButtonIcons from "./ButtonIcons";
 import TableProducts from "./TableProducts";
+import SearchBarProducts from "./SearchBarProducts";
 
 function ListProducts() {
   const [products, setProducts] = useState([]);
+  const [searchInput, setSearchInput] = useState("");
   const icon = ["plus", "minus"];
 
   const handleCheckProducts = (prod) => {
@@ -49,6 +51,10 @@ function ListProducts() {
         <p>
           Produits de : <b>Nat-ali</b> et <b>Epice Scop</b>
         </p>
+        <SearchBarProducts
+          searchInput={searchInput}
+          setSearchInput={setSearchInput}
+        />
       </div>
       <div className="font-redHat w-4/5 m-auto">
         <div className="flex flex-row justify-end">
@@ -73,7 +79,7 @@ function ListProducts() {
                 Produit
               </th>
               <th scope="col" className="bg-middleBlue/70 text-l uppercase">
-                Fabricant
+                Fournisseur
               </th>
               <th scope="col" className="bg-middleBlue/70 text-l uppercase">
                 Catégorie
@@ -84,14 +90,21 @@ function ListProducts() {
             </tr>
           </thead>
           <tbody>
-            {products.map((product) => (
+            {products
+              .filter(
+                (product) =>
+                  product.product_name.includes(searchInput) ||
+                  product.supplier.includes(searchInput) ||
+                  product.category.includes(searchInput)
+              )
+              .map((product) => (
               <TableProducts
                 key={product.id}
                 product={product}
                 MdDone={MdDone}
                 handleCheckProducts={handleCheckProducts}
               />
-            ))}
+              ))}
           </tbody>
         </table>
       </div>
