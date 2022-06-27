@@ -1,7 +1,7 @@
 /* eslint-disable no-plusplus */
 /* eslint-disable no-unused-expressions */
 import { useState, useEffect } from "react";
-import { MdDone } from "react-icons/md";
+// import { MdDone } from "react-icons/md";
 import axios from "axios";
 import ButtonIcons from "./ButtonIcons";
 import TableProducts from "./TableProducts";
@@ -98,12 +98,12 @@ function ListProducts() {
                   product.category.includes(searchInput)
               )
               .map((product) => (
-              <TableProducts
-                key={product.id}
-                product={product}
-                MdDone={MdDone}
-                handleCheckProducts={handleCheckProducts}
-              />
+                <TableProducts
+                  key={product.id}
+                  product={product}
+                  // MdDone={MdDone}
+                  handleCheckProducts={handleCheckProducts}
+                />
               ))}
           </tbody>
         </table>

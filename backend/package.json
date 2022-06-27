@@ -21,7 +21,8 @@
     "joi": "^17.6.0",
     "jsonwebtoken": "^8.5.1",
     "mysql2": "^2.3.3",
-    "template-fullstack": "file:.."
+    "template-fullstack": "file:..",
+    "uuid": "^8.3.2"
   },
   "rules": {
     "no-console": [

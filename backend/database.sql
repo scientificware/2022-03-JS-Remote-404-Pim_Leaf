@@ -42,8 +42,8 @@ DROP TABLE IF EXISTS `user`;
 CREATE TABLE `user` (
   `id` INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
   `name` VARCHAR(100) NULL,
-  `password` VARCHAR(255) NOT NULL,
-  `mail` VARCHAR(255) NOT NULL UNIQUE, 
+  `hashed_password` VARCHAR(255) NOT NULL,
+  `email` VARCHAR(255) NOT NULL UNIQUE, 
   `phone` VARCHAR(20) NULL
 ) ENGINE=InnoDB;
 
@@ -52,7 +52,7 @@ CREATE TABLE `user` (
 --
 
 LOCK TABLES `user` WRITE;
-INSERT INTO `user` (`name`, `password`, `mail`, `phone`) VALUES
+INSERT INTO `user` (`name`, `hashed_password`, `email`, `phone`) VALUES
 ("JohnA", "$argon2id$v=19$m=65536,t=5,p=1$FkjcCc0+F15P0N5TLh3ndQ$FkttWmV6YpXwaqtjrKfALtaYkwyHv2ongXDP/C6bvY4", "JohnA@company.com", "+33111111111"),
 ("JohnB", "$argon2id$v=19$m=65536,t=5,p=1$FkjcCc0+F15P0N5TLh3ndQ$FkttWmV6YpXwaqtjrKfALtaYkwyHv2ongXDP/C6bvY4", "JohnB@company.com", "+33222222222"),
 ("JohnC", "$argon2id$v=19$m=65536,t=5,p=1$FkjcCc0+F15P0N5TLh3ndQ$FkttWmV6YpXwaqtjrKfALtaYkwyHv2ongXDP/C6bvY4", "JohnC@company.com", "+33333333333"),
