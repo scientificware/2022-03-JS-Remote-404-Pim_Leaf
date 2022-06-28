@@ -39,7 +39,7 @@ function Suppliers() {
       >
         <div className=" bg-darkBlue opacity-95 text-white rounded-md">
           {" "}
-          <h1 className="flex justify-center p-4 text-lg">
+          <h1 className="flex justify-center p-4 text-2xl">
             Rechercher mon fournisseur
           </h1>
           <div className=" mb-10 mt-5">

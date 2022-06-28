@@ -6,7 +6,7 @@ function SuppliersListModal({ name, domaine }) {
       <td className="p-1 pr-10 border-y-8 border-darkBlue/95">
         <button
           type="button"
-          className="bg-white text-darkBlue p-1 rounded-2xl flex hover:bg-middleBlue"
+          className="bg-white text-darkBlue p-1 rounded-2xl flex transition duration-120 ease-out hover:bg-middleBlue"
         >
           Se Connecter
         </button>
