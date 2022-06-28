@@ -98,12 +98,12 @@ function ListProducts() {
                   product.category.includes(searchInput)
               )
               .map((product) => (
-              <TableProducts
-                key={product.id}
-                product={product}
-                MdDone={MdDone}
-                handleCheckProducts={handleCheckProducts}
-              />
+                <TableProducts
+                  key={product.id}
+                  product={product}
+                  MdDone={MdDone}
+                  handleCheckProducts={handleCheckProducts}
+                />
               ))}
           </tbody>
         </table>
