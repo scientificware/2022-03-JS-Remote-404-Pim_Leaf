@@ -13,7 +13,7 @@ import RetourButtonWhite from "../assets/retour_button_white.svg";
 function Suppliers() {
   const [searchInput, setSearchInput] = useState("");
   const contentStyle = {
-    overlfow: "scroll", // <-- This tells the modal to scrol
+    overlfow: "scroll", // <-- This tells the modal to scroll
   };
 
   return (
@@ -39,32 +39,36 @@ function Suppliers() {
           modal
           contentStyle={contentStyle}
         >
-          <div className=" bg-darkBlue opacity-95 text-white">
-            {" "}
-            <div className="flex pl-5 pr-5">
-              <img
-                src={RetourButtonWhite}
-                alt="Bouton Retour"
-                className="w-25 transition duration-120 ease-out hover:scale-105"
-              />
-              <h1 className="flex justify-center items-end p-4 text-2xl">
-                Rechercher mon fournisseur
-              </h1>
+          {(close) => (
+            <div className=" bg-darkBlue opacity-95 text-white">
+              {" "}
+              <div className="flex pl-5 pr-5">
+                <button type="button" onClick={close}>
+                  <img
+                    src={RetourButtonWhite}
+                    alt="Bouton Retour"
+                    className="w-25 transition duration-120 ease-out hover:scale-105"
+                  />
+                </button>
+                <h1 className="flex justify-center items-end p-4 text-2xl">
+                  Rechercher mon fournisseur
+                </h1>
+              </div>
+              <div className=" mb-10 mt-5">
+                <SearchBarProducts
+                  searchInput={searchInput}
+                  setSearchInput={setSearchInput}
+                />
+              </div>
+              <div className="flex justify-center">
+                <ModalAddSuppliers
+                  suppliers={suppliersData}
+                  searchInput={searchInput}
+                  setSearchInput={setSearchInput}
+                />
+              </div>
             </div>
-            <div className=" mb-10 mt-5">
-              <SearchBarProducts
-                searchInput={searchInput}
-                setSearchInput={setSearchInput}
-              />
-            </div>
-            <div className="flex justify-center">
-              <ModalAddSuppliers
-                suppliers={suppliersData}
-                searchInput={searchInput}
-                setSearchInput={setSearchInput}
-              />
-            </div>
-          </div>
+          )}
         </Popup>
       </div>
       <SuppliersTable
