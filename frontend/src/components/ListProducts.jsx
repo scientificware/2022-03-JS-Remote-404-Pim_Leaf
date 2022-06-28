@@ -51,10 +51,12 @@ function ListProducts() {
         <p>
           Produits de : <b>Nat-ali</b> et <b>Epice Scop</b>
         </p>
-        <SearchBarProducts
-          searchInput={searchInput}
-          setSearchInput={setSearchInput}
-        />
+        <div className=" mb-10 mt-20">
+          <SearchBarProducts
+            searchInput={searchInput}
+            setSearchInput={setSearchInput}
+          />
+        </div>
       </div>
       <div className="font-redHat w-4/5 m-auto">
         <div className="flex flex-row justify-end">
