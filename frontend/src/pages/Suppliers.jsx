@@ -12,7 +12,9 @@ import RetourButtonWhite from "../assets/retour_button_white.svg";
 
 function Suppliers() {
   const [searchInput, setSearchInput] = useState("");
+
   const contentStyle = {
+    height: "auto",
     overlfow: "scroll", // <-- This tells the modal to scroll
   };
 
@@ -28,7 +30,7 @@ function Suppliers() {
       <div className="flex justify-end pr-20">
         <Popup
           trigger={
-            <button>
+            <button type="button">
               <img
                 src={plusButton}
                 alt="plus button"
@@ -60,7 +62,7 @@ function Suppliers() {
                   setSearchInput={setSearchInput}
                 />
               </div>
-              <div className="flex justify-center">
+              <div className="flex justify-center overflow-y-scroll h-5/6">
                 <ModalAddSuppliers
                   suppliers={suppliersData}
                   searchInput={searchInput}
