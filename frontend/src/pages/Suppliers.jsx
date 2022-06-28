@@ -1,6 +1,5 @@
 /* eslint-disable react/button-has-type */
 import { useState } from "react";
-import { Link } from "react-router-dom";
 import Popup from "reactjs-popup";
 import ModalAddSuppliers from "../components/ModalAddSuppliers";
 import SearchBarProducts from "../components/SearchBarProducts";
