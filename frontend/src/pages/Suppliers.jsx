@@ -18,7 +18,10 @@ function Suppliers() {
   return (
     <main>
       <div className=" mb-10 mt-20">
-        <SearchBarProducts />
+        <SearchBarProducts
+          searchInput={searchInput}
+          setSearchInput={setSearchInput}
+        />
       </div>
       <ToBeConfirmed confirmed={suppliersData2} />
       <Popup
@@ -54,7 +57,11 @@ function Suppliers() {
           </div>
         </div>
       </Popup>
-      <SuppliersTable suppliers={suppliersData} />
+      <SuppliersTable
+        suppliers={suppliersData}
+        searchInput={searchInput}
+        setSearchInput={setSearchInput}
+      />
     </main>
   );
 }
