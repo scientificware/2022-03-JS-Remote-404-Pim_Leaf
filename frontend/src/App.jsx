@@ -15,6 +15,7 @@ import ClientsDetails from "@pages/ClientsDetails";
 import SuppliersProducts from "@pages/suppliers/SupProducts";
 import SuppliersProductsDetails from "@pages/suppliers/SupProductsDetails";
 import DashboardLayout from "@components/layout/DashBoardLayout";
+import ProtectedRoute from "@components/layout/ProtectRoute";
 
 import UserExport from "./contexts/UserContext";
 
@@ -26,9 +27,16 @@ function App() {
   return (
     <BrowserRouter>
       <div className="h-screen bg-center bg-cover">
-        <Routes user={user}>
+        <Routes>
           <Route path="/" element={<Login />} />
-          <Route path="/" element={<DashboardLayout />}>
+          <Route
+            path="/"
+            element={
+              <ProtectedRoute user={user}>
+                <DashboardLayout />
+              </ProtectedRoute>
+            }
+          >
             <Route path="products" element={<Products />} />
             <Route path="products/:id" element={<ProductsDetails />} />
             <Route path="suppliers" element={<Suppliers />} />
