@@ -13,7 +13,7 @@ function LoginForm() {
   const [msg, setMsg] = useState("");
 
   const navigate = useNavigate();
-  const { setUser, user } = useContext(UserExport.UserContext);
+  const { setUser } = useContext(UserExport.UserContext);
 
   const handleClick = () => {
     if (!email || !password) {
@@ -24,9 +24,9 @@ function LoginForm() {
       .post(`${import.meta.env.VITE_BACKEND_URL}login`, { email, password })
       .then((res) => {
         setUser(res.data);
-        if (user.company_group_id === 1) {
+        if (res.data.company_group_id === 1) {
           navigate("/retailer/products");
-        } else if (user.company_group_id === 2) {
+        } else if (res.data.company_group_id === 2) {
           navigate("/supplier/products");
         }
       })
