@@ -2,18 +2,22 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { useContext } from "react";
 
+import ProtectedRoute from "@components/layout/ProtectRoute";
+import DashboardLayout from "@components/layout/DashBoardLayout";
 import Login from "@pages/Login";
+import Company from "@pages/Company";
+import CompanyDetails from "@pages/CompanyDetails";
+import Profil from "@pages/Profil";
+
 import Products from "@retailers/Products";
 import Suppliers from "@retailers/Suppliers";
-import Company from "@pages/Company";
-import Profil from "@pages/Profil";
 import SuppliersDetails from "@retailers/SuppliersDetails";
-import CompanyDetails from "@pages/CompanyDetails";
 import ProductsDetails from "@retailers/ProductsDetails";
+
 import SuppliersProducts from "@suppliers/SupProducts";
 import SuppliersProductsDetails from "@suppliers/SupProductsDetails";
-import DashboardLayout from "@components/layout/DashBoardLayout";
-import ProtectedRoute from "@components/layout/ProtectRoute";
+import SuppliersClients from "@suppliers/SuppliersClients";
+import SuppliersClientsDetails from "@suppliers/SuppliersClientsDetails";
 
 import UserExport from "@contexts/UserContext";
 
@@ -35,18 +39,31 @@ function App() {
               </ProtectedRoute>
             }
           >
-            <Route path="products" element={<Products />} />
-            <Route path="products/:id" element={<ProductsDetails />} />
-            <Route path="suppliers" element={<Suppliers />} />
-            <Route path="suppliers/:id" element={<SuppliersDetails />} />
+            {/* RETAILERS */}
+            <Route path="retailer/products" element={<Products />} />
+            <Route path="retailer/products/:id" element={<ProductsDetails />} />
+            <Route path="retailer/suppliers" element={<Suppliers />} />
+            <Route
+              path="retailer/suppliers/:id"
+              element={<SuppliersDetails />}
+            />
+
+            {/* SUPPLIERS */}
+            <Route path="supplier/products" element={<SuppliersProducts />} />
+            <Route
+              path="supplier/products/:id"
+              element={<SuppliersProductsDetails />}
+            />
+            <Route path="supplier/client" element={<SuppliersClients />} />
+            <Route
+              path="supplier/client/:id"
+              element={<SuppliersClientsDetails />}
+            />
+
+            {/* COMMON */}
             <Route path="company" element={<Company />} />
             <Route path="company/:id" element={<CompanyDetails />} />
             <Route path="profil" element={<Profil />} />
-            <Route path="products/supplier" element={<SuppliersProducts />} />
-            <Route
-              path="products/supplier/:id"
-              element={<SuppliersProductsDetails />}
-            />
           </Route>
         </Routes>
       </div>
