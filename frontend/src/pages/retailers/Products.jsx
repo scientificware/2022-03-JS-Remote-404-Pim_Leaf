@@ -1,11 +1,12 @@
 /* eslint-disable import/no-unresolved */
-import ListProducts from "@components/ListProducts";
-import TitleProducts from "@components/TitleProducts";
+import ListProducts from "@retailersC/ListProducts";
 
 function Products() {
   return (
     <main>
-      <TitleProducts />
+      <div className="flex justify-center text-3xl font-bold font-barlow mt-20">
+        <h1>Mes fiches produits</h1>
+      </div>
       <ListProducts />
     </main>
   );

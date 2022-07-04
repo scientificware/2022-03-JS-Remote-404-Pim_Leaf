@@ -9,15 +9,15 @@ import Company from "@pages/Company";
 import CompanyDetails from "@pages/CompanyDetails";
 import Profil from "@pages/Profil";
 
-import Products from "@retailers/Products";
-import Suppliers from "@retailers/Suppliers";
-import SuppliersDetails from "@retailers/SuppliersDetails";
-import ProductsDetails from "@retailers/ProductsDetails";
+import Products from "@retailersP/Products";
+import Suppliers from "@retailersP/Suppliers";
+import SuppliersDetails from "@retailersP/SuppliersDetails";
+import ProductsDetails from "@retailersP/ProductsDetails";
 
-import SuppliersProducts from "@suppliers/SupProducts";
-import SuppliersProductsDetails from "@suppliers/SupProductsDetails";
-import SuppliersClients from "@suppliers/SuppliersClients";
-import SuppliersClientsDetails from "@suppliers/SuppliersClientsDetails";
+import SuppliersProducts from "@suppliersP/SupProducts";
+import SuppliersProductsDetails from "@suppliersP/SupProductsDetails";
+import SuppliersClients from "@suppliersP/SuppliersClients";
+import SuppliersClientsDetails from "@suppliersP/SuppliersClientsDetails";
 
 import UserExport from "@contexts/UserContext";
 

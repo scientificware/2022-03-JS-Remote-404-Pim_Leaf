@@ -1,7 +1,7 @@
 /* eslint-disable import/no-unresolved */
 import { useParams } from "react-router-dom";
 
-import DetailsSuppliers from "@components/DetailsSuppliers";
+import DetailsSuppliers from "@retailersC/DetailsSuppliers";
 import SearchBarSuppliersDetails from "@components/SearchBarSupppliersDetails";
 import ButtonFunction from "@components/ButtonFunction";
 import dataSuppliers from "@data/MaxData";
