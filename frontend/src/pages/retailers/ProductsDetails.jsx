@@ -8,7 +8,7 @@ import ProductsDetailsSupplier from "@components/ProductsDetailsSupplier";
 import ButtonIcons from "@components/ButtonIcons";
 import RetourButton from "@assets/retour_button.svg";
 import { Link } from "react-router-dom";
-import dataProducts from "../data/DataProducts";
+import dataProducts from "@data/DataProducts";
 
 function ProductsDetails() {
   const [product] = useState(dataProducts);

@@ -5,7 +5,7 @@ import axios from "axios";
 
 import Avatar from "@assets/icon_login_avatar.svg";
 import Padlock from "@assets/padlock_login.png";
-import UserExport from "../contexts/UserContext";
+import UserExport from "@contexts/UserContext";
 
 function LoginForm() {
   const [email, setEmail] = useState("");
