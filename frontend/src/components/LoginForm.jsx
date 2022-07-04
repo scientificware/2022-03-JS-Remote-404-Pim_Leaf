@@ -21,7 +21,7 @@ function LoginForm() {
       return;
     }
     axios
-      .post(`${import.meta.env.VITE_BACKEND_URL}/login`, { email, password })
+      .post(`${import.meta.env.VITE_BACKEND_URL}login`, { email, password })
       .then((res) => {
         setUser(res.data);
         navigate("/products");
