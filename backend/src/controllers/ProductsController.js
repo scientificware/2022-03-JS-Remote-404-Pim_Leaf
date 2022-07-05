@@ -1,7 +1,7 @@
 const models = require("../models");
 
 class ProductsController {
-  static browse = (req, res) => {
+  static BAKbrowse = (req, res) => {
     models.products
       .findAll(req.query)
       .then(([rows]) => {
@@ -29,21 +29,9 @@ class ProductsController {
       });
   };
 
-  static browseRetailer = (req, res) => {
+  static browse = (req, res) => {
     models.products
-      .getProductsRetailer(req.query)
-      .then(([rows]) => {
-        res.status(200).json(rows);
-      })
-      .catch((err) => {
-        console.error(err);
-        res.sendStatus(500);
-      });
-  };
-
-  static browseSupplier = (req, res) => {
-    models.products
-      .getProductsSupplier()
+      .getProducts(req.params.id)
       .then(([rows]) => {
         res.status(200).json(rows);
       })

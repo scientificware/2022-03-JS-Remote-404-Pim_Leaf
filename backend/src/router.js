@@ -12,10 +12,8 @@ const router = express.Router();
 
 router.post("/login", checkData, AuthController.login);
 
-router.get("/products", ProductsController.browse);
-router.get("/products/retailer", ProductsController.browseRetailer);
-router.get("/products/supplier", ProductsController.browseSupplier);
-router.get("/products/:id", ProductsController.read);
+router.get("/products/:id", ProductsController.browse);
+router.get("/products/details/:id", ProductsController.read);
 
 router.get("/retailer/suppliers", CompanyController.browse);
 router.get("/supplier/clients", CompanyController.browse);

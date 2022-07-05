@@ -26,12 +26,23 @@ class ProductsManager extends AbstractManager {
     return this.connection.query(sqlQuery, sqlValue);
   }
 
-  getProductsRetailer() {
-    return this.connection.query(`select * from ${ProductsManager.table}`);
-  }
-
-  getProductsSupplier() {
-    return this.connection.query(`select * from ${ProductsManager.table}`);
+  getProducts(id) {
+    return this.connection.query(
+      `SELECT
+      p.id,
+      p.product_name,
+      c.company_name AS supplier,
+      cat.name,
+      s.disponibility
+      FROM ${ProductsManager.table} AS p
+      LEFT JOIN stock AS s ON s.product_id = p.id
+      LEFT JOIN company AS c ON s.owner_id = c.id
+      LEFT JOIN category AS cat ON cat.id = p.category_id
+      LEFT JOIN user AS u ON c.user_id = u.id
+      WHERE u.id=?
+      `,
+      [id]
+    );
   }
 }
 
