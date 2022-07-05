@@ -9,7 +9,7 @@ const {
   RetailerController,
   SupplierController,
   ClientsController,
-  ProfilController,
+  UserController,
 } = require("./controllers");
 
 const router = express.Router();
@@ -26,7 +26,7 @@ router.get("/company/:id", CompanyController.read);
 router.get("/retailer", RetailerController.browse);
 router.get("/supplier", SupplierController.browse);
 router.get("/clients", ClientsController.browse);
-router.get("/profil", ProfilController.browse);
+router.get("/profil", UserController.browse);
 
 router.post("/login", checkData, AuthController.login);
 
