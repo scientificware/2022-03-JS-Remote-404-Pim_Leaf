@@ -1,27 +1,43 @@
 /* eslint-disable import/no-unresolved */
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
-import Avatar from "@assets/avatar_login.png";
+import Avatar from "@assets/icon_login_avatar.svg";
 import Padlock from "@assets/padlock_login.png";
+import UserExport from "@contexts/UserContext";
 
 function LoginForm() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  console.warn(email);
-  console.warn(password);
+  const [msg, setMsg] = useState("");
 
   const navigate = useNavigate();
+  const { setUser } = useContext(UserExport.UserContext);
 
   const handleClick = () => {
-    navigate("/products");
+    if (!email || !password) {
+      setMsg("Veuillez renseigner vos identifiants");
+      return;
+    }
+    axios
+      .post(`${import.meta.env.VITE_BACKEND_URL}login`, { email, password })
+      .then((res) => {
+        setUser(res.data);
+        if (res.data.company_group_id === 1) {
+          navigate("/retailer/products");
+        } else if (res.data.company_group_id === 2) {
+          navigate("/supplier/products");
+        }
+      })
+      .catch((err) => console.error(err));
   };
   return (
     <div>
       <form className="flex flex-col items-center">
         <label htmlFor="login">
-          <div className="flex flex-row items-center">
-            <div className="w-9 mb-8">
+          <div className="flex flex-row items-center justify-end">
+            <div className="w-5 mb-8 mr-2">
               <img src={Avatar} alt="avatar" />
             </div>
             <input
@@ -54,11 +70,12 @@ function LoginForm() {
           </div>
         </label>
         <input
-          type="submit"
+          type="button"
           value="login"
           className="py-2 w-28 text-center text-white text-base bg-darkBlue hover:bg-opacity-90 rounded-full mt-12"
           onClick={handleClick}
         />
+        {msg && <p>{msg}</p>}
       </form>
     </div>
   );
