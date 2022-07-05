@@ -3,6 +3,7 @@ const AbstractManager = require("./AbstractManager");
 class UsersManager extends AbstractManager {
   static table = "user";
 
+  // AuthController
   findOneByEmail(mail) {
     return this.connection
       .query(`SELECT * FROM ${UsersManager.table} WHERE mail = ?`, [mail])
@@ -21,15 +22,28 @@ class UsersManager extends AbstractManager {
       .then((res) => res[0]);
   }
 
-  getProfil(email) {
+  // getProfil(email) {
+  //   return this.connection
+  //     .query(
+  //       `SELECT u.name, u.mail, c.company_name FROM ${UsersManager.table} AS u
+  //     INNER JOIN company AS c
+  //     ON u.id = c.user_id
+  //     WHERE u.mail = ?`,
+  //       [email]
+  //     )
+  //     .then((res) => res[0]);
+  // }
+
+  // UserController
+  getCompanyInfos(mail) {
     return this.connection
-      .query(
-        `SELECT u.name, u.mail, c.company_name FROM ${UsersManager.table} AS u
-      INNER JOIN company AS c
-      ON u.id = c.user_id
-      WHERE u.mail = ?`,
-        [email]
-      )
+      .query(`SELECT * FROM ${UsersManager.table} WHERE mail = ?`, [mail])
+      .then((res) => res[0]);
+  }
+
+  getUserInfos(id) {
+    return this.connection
+      .query(`SELECT * FROM ${UsersManager.table} WHERE id = ?`, [id])
       .then((res) => res[0]);
   }
 }
