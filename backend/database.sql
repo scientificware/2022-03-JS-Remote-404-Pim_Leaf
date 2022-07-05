@@ -141,7 +141,7 @@ CREATE TABLE `company` (
   `id` INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
   `company_name` VARCHAR(100) NULL,
   `address` VARCHAR(255) NULL,
-  `postcode` TINYINT NULL,
+  `postcode` INT NULL,
   `city` VARCHAR(255) NULL,
   `mail` VARCHAR(255) NOT NULL,
   `phone` VARCHAR(20) NULL,
