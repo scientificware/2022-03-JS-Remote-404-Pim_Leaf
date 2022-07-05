@@ -3,10 +3,17 @@
 1. [x] Sprint 1 :heavy_check_mark:
 2. [x] Sprint 2 :heavy_check_mark:
 3. [x] Sprint 3 :heavy_check_mark:
-4. [ ] Sprint 4
+4. [x] Sprint 4 :heavy_check_mark:
 5. [ ] Sprint 5
 
 ![Logo Pimleaf](https://www.pimleaf.fr/survey/tmp/assets/181c5803/Logo%20Pimleaf-1-.png)
+
+# HWOTO launch :star:
+
+install :
+
+- vscode + git + node + mysql
+-
 
 # RESOURCES LINKS :rocket:
 
@@ -67,3 +74,4 @@ export default "ComponentName";
 ## :floppy_disk: DataBase Columns
 
 should be lowercase, singular, underscore separation
+
