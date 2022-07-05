@@ -10,10 +10,20 @@
 
 # HWOTO launch :star:
 
-install :
+install on computer :
 
 - vscode + git + node + mysql
--
+
+clone the project :
+
+- git clone this repo on a local folder.
+- head to the main folder in a shell then launch "npm i" to install node dependencies.
+- repeat the "npm i" command in the "/frontend" and "/backend" subfolders.
+- in the "/backend" folder, launch the "npm run migrate" command to populate DB.
+
+deploy :
+
+- back to the main folder, run "npm run dev" to see the site deployed on http://localhost:3000.
 
 # RESOURCES LINKS :rocket:
 
@@ -74,4 +84,3 @@ export default "ComponentName";
 ## :floppy_disk: DataBase Columns
 
 should be lowercase, singular, underscore separation
-
