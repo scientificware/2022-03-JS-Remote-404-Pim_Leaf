@@ -13,12 +13,9 @@ class ProductsManager extends AbstractManager {
     s.quantity,
     cat.name category
     FROM ${ProductsManager.table} AS p
-    LEFT JOIN stock AS s
-    ON s.product_id = p.id
-    LEFT JOIN company AS c
-    ON s.supplier_id = c.id
-    LEFT JOIN category AS cat
-    ON p.category_id = cat.id
+    LEFT JOIN stock AS s ON s.product_id = p.id
+    LEFT JOIN company AS c ON s.supplier_id = c.id
+    LEFT JOIN category AS cat ON p.category_id = cat.id
     `;
 
     const sqlValue = [];
@@ -29,18 +26,12 @@ class ProductsManager extends AbstractManager {
     return this.connection.query(sqlQuery, sqlValue);
   }
 
-  insert(item) {
-    return this.connection.query(
-      `insert into ${ProductsManager.table} (title) values (?)`,
-      [item.title]
-    );
+  getProductsRetailer() {
+    return this.connection.query(`select * from ${ProductsManager.table}`);
   }
 
-  update(item) {
-    return this.connection.query(
-      `update ${ProductsManager.table} set title = ? where id = ?`,
-      [item.title, item.id]
-    );
+  getProductsSupplier() {
+    return this.connection.query(`select * from ${ProductsManager.table}`);
   }
 }
 

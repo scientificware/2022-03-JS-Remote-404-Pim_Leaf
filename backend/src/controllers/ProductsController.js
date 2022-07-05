@@ -5,7 +5,7 @@ class ProductsController {
     models.products
       .findAll(req.query)
       .then(([rows]) => {
-        res.send(rows);
+        res.status(200).json(rows);
       })
       .catch((err) => {
         console.error(err);
@@ -20,7 +20,7 @@ class ProductsController {
         if (rows[0] == null) {
           res.sendStatus(404);
         } else {
-          res.send(rows[0]);
+          res.status(200).json(rows[0]);
         }
       })
       .catch((err) => {
@@ -29,21 +29,11 @@ class ProductsController {
       });
   };
 
-  static edit = (req, res) => {
-    const item = req.body;
-
-    // TODO validations (length, format...)
-
-    item.id = parseInt(req.params.id, 10);
-
+  static browseRetailer = (req, res) => {
     models.products
-      .update(item)
-      .then(([result]) => {
-        if (result.affectedRows === 0) {
-          res.sendStatus(404);
-        } else {
-          res.sendStatus(204);
-        }
+      .getProductsRetailer(req.query)
+      .then(([rows]) => {
+        res.status(200).json(rows);
       })
       .catch((err) => {
         console.error(err);
@@ -51,27 +41,11 @@ class ProductsController {
       });
   };
 
-  static add = (req, res) => {
-    const item = req.body;
-
-    // TODO validations (length, format...)
-
+  static browseSupplier = (req, res) => {
     models.products
-      .insert(item)
-      .then(([result]) => {
-        res.status(201).send({ ...item, id: result.insertId });
-      })
-      .catch((err) => {
-        console.error(err);
-        res.sendStatus(500);
-      });
-  };
-
-  static delete = (req, res) => {
-    models.products
-      .delete(req.params.id)
-      .then(() => {
-        res.sendStatus(204);
+      .getProductsSupplier()
+      .then(([rows]) => {
+        res.status(200).json(rows);
       })
       .catch((err) => {
         console.error(err);

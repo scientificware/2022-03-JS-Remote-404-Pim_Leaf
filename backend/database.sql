@@ -384,13 +384,13 @@ UNLOCK TABLES;
 CREATE TABLE `stock` (
   `id` INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
   `product_id` INT NOT NULL,
-  `company_id` INT NOT NULL,
+  `owner_id` INT NOT NULL,
   `supplier_id` INT NOT NULL,
   `quantity` INT NOT NULL,
   `price_ttc` INT NULL,
   `price_ht` INT NULL,
   FOREIGN KEY (product_id) REFERENCES products(id),
-  FOREIGN KEY (company_id) REFERENCES company(id),
+  FOREIGN KEY (owner_id) REFERENCES company(id),
   FOREIGN KEY (supplier_id) REFERENCES company(id)
 ) ENGINE=InnoDB;
 
@@ -399,7 +399,7 @@ CREATE TABLE `stock` (
 --
 
 LOCK TABLES `stock` WRITE;
-INSERT INTO `stock` (`product_id`, `company_id`,`supplier_id`, `quantity`, `price_ttc`, `price_ht`) VALUES
+INSERT INTO `stock` (`product_id`, `owner_id`,`supplier_id`, `quantity`, `price_ttc`, `price_ht`) VALUES
 (1, 2, 3, 50, 20, 19),
 (2, 1, 4, 0, 40, 38),
 (3, 2, 3, 64, 20, 19),
