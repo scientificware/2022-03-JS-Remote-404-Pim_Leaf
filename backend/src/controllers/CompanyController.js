@@ -17,7 +17,7 @@ class CompanyController {
     models.company
       .findAllSupplier()
       .then(([rows]) => {
-        res.send(rows);
+        res.status(200).json(rows);
       })
       .catch((err) => {
         console.error(err);
@@ -25,11 +25,11 @@ class CompanyController {
       });
   };
 
-  static browseTrader = (req, res) => {
+  static browseRetailer = (req, res) => {
     models.company
-      .findAllTrader()
+      .findAllRetailer(req.params.id)
       .then(([rows]) => {
-        res.send(rows);
+        res.status(200).json(rows);
       })
       .catch((err) => {
         console.error(err);

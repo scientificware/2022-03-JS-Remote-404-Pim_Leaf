@@ -9,30 +9,30 @@ class CompanyManager extends AbstractManager {
   }
 
   findAllSupplier() {
-    const sqlQuery = `SELECT * FROM ${CompanyManager.table} 
-    INNER JOIN company_group AS g ON ${CompanyManager.table}.group_id=g.id 
-    WHERE g.id=2`;
-    return this.connection.query(sqlQuery);
-  }
-
-  findAllTrader() {
-    const sqlQuery = `SELECT * FROM ${CompanyManager.table} 
-    INNER JOIN company_group AS g ON ${CompanyManager.table}.group_id=g.id 
-    WHERE g.id=1`;
-    return this.connection.query(sqlQuery);
-  }
-
-  insert(item) {
     return this.connection.query(
-      `insert into ${CompanyManager.table} (title) values (?)`,
-      [item.title]
+      `SELECT 
+      c.company_name,
+      a.name,
+      c.city,
+      con.status 
+      FROM ${CompanyManager.table} AS c
+    INNER JOIN activity_field AS a ON c.activity_field_id=a.id
+    LEFT JOIN connection AS con ON c.id=con.supplier_id
+    WHERE c.company_group_id=2`
     );
   }
 
-  update(item) {
+  findAllRetailer() {
     return this.connection.query(
-      `update ${CompanyManager.table} set title = ? where id = ?`,
-      [item.title, item.id]
+      `SELECT 
+      c.company_name,
+      a.name,
+      c.city,
+      con.status 
+      FROM ${CompanyManager.table} AS c
+    LEFT JOIN activity_field AS a ON c.activity_field_id=a.id
+    LEFT JOIN connection AS con ON c.id=con.supplier_id
+    WHERE c.company_group_id=1`
     );
   }
 }
