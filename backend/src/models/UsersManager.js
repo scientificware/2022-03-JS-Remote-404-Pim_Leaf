@@ -38,7 +38,7 @@ class UsersManager extends AbstractManager {
   getCompanyInfos(email) {
     return this.connection
       .query(
-        `SELECT u.id, a.name AS domain, c.description, c.mail AS company_mail, c.address, c.postcode, c.city, c.phone FROM ${UsersManager.table} AS u
+        `SELECT u.id AS user_id, a.name AS domain, c.description, c.mail AS company_mail, c.address, c.postcode, c.city, c.phone FROM ${UsersManager.table} AS u
     INNER JOIN company AS c ON c.user_id = u.id
     INNER JOIN activity_field AS a ON a.id = c.activity_field_id
     WHERE u.mail = ?`,
@@ -49,7 +49,12 @@ class UsersManager extends AbstractManager {
 
   getUserInfos(email) {
     return this.connection
-      .query(`SELECT * FROM ${UsersManager.table} WHERE mail = ?`, [email])
+      .query(
+        `SELECT u.id AS user_id, c.company_name, u.name, u.mail FROM ${UsersManager.table} AS u
+    INNER JOIN company AS c ON u.id=c.user_id
+    WHERE u.mail = ?`,
+        [email]
+      )
       .then((res) => res[0]);
   }
 }
