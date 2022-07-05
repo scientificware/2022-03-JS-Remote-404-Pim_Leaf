@@ -22,7 +22,7 @@ router.get("/supplier/clients", CompanyController.browse);
 router.get("/retailer/suppliers/:id", CompanyController.browse);
 router.get("/supplier/clients/:id", CompanyController.browse);
 
-router.get("/company", UserController.readCompany);
-router.get("/user", UserController.readUser);
+router.get("/company/:id", UserController.readCompany);
+router.get("/user/:id", UserController.readUser);
 
 module.exports = router;

@@ -3,7 +3,7 @@ const models = require("../models");
 class UserController {
   static readCompany = (req, res) => {
     models.user
-      .getCompanyInfos(req.body.email)
+      .getCompanyInfos(req.params.id)
       .then(([rows]) => {
         res.status(200).json(rows);
       })
@@ -15,7 +15,7 @@ class UserController {
 
   static readUser = (req, res) => {
     models.user
-      .getUserInfos(req.body.email)
+      .getUserInfos(req.params.id)
       .then(([rows]) => {
         res.status(200).json(rows);
       })
