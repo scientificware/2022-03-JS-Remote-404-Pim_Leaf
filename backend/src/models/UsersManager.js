@@ -35,15 +35,15 @@ class UsersManager extends AbstractManager {
   // }
 
   // UserController
-  getCompanyInfos(mail) {
+  getCompanyInfos(email) {
     return this.connection
-      .query(`SELECT * FROM ${UsersManager.table} WHERE mail = ?`, [mail])
+      .query(`SELECT * FROM ${UsersManager.table} WHERE mail = ?`, [email])
       .then((res) => res[0]);
   }
 
-  getUserInfos(id) {
+  getUserInfos(email) {
     return this.connection
-      .query(`SELECT * FROM ${UsersManager.table} WHERE id = ?`, [id])
+      .query(`SELECT * FROM ${UsersManager.table} WHERE mail = ?`, [email])
       .then((res) => res[0]);
   }
 }

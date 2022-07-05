@@ -15,7 +15,7 @@ class UserController {
 
   static readUser = (req, res) => {
     models.user
-      .getUserInfos(req.params.id)
+      .getUserInfos(req.body.email)
       .then(([rows]) => {
         res.status(200).json(rows);
       })
