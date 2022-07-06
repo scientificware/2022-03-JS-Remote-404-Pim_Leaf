@@ -8,7 +8,16 @@ class CompanyManager extends AbstractManager {
     return this.connection.query(sqlQuery);
   }
 
-  findAllSupplier() {
+  findUserCompany(id) {
+    return this.connection.query(
+      `SELECT id FROM ${CompanyManager.table}
+      WHERE user_id = ?
+        `,
+      [id]
+    );
+  }
+
+  findAllSupplier(id) {
     return this.connection.query(
       `SELECT 
       c.id,
@@ -19,8 +28,11 @@ class CompanyManager extends AbstractManager {
       con.retailer_id,
       con.supplier_id
       FROM ${CompanyManager.table} AS c
-    LEFT JOIN activity_field AS a ON c.activity_field_id=a.id
-    LEFT JOIN connection AS con ON c.id=con.retailer_id`
+      LEFT JOIN connection AS con ON c.id=con.supplier_id
+      LEFT JOIN activity_field AS a ON c.activity_field_id=a.id
+      WHERE con.retailer_id = ? OR (con.supplier_id IS NULL OR con.status IS NULL)
+      `,
+      [id]
     );
   }
 

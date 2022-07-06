@@ -15,9 +15,17 @@ class CompanyController {
 
   static browseSupplier = (req, res) => {
     models.company
-      .findAllSupplier()
+      .findUserCompany(parseInt(req.params.id, 10))
       .then(([rows]) => {
-        res.status(200).json(rows);
+        models.company
+          .findAllSupplier(rows[0].id)
+          .then(([data]) => {
+            res.status(200).json(data);
+          })
+          .catch((err) => {
+            console.error(err);
+            res.sendStatus(500);
+          });
       })
       .catch((err) => {
         console.error(err);
