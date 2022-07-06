@@ -1,7 +1,7 @@
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
 
--- 
+--
 -- Database name : `pimleaf`
 
 -- Database tables :
@@ -43,7 +43,7 @@ CREATE TABLE `user` (
   `id` INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
   `name` VARCHAR(100) NULL,
   `password` VARCHAR(255) NOT NULL,
-  `mail` VARCHAR(255) NOT NULL UNIQUE, 
+  `mail` VARCHAR(255) NOT NULL UNIQUE,
   `phone` VARCHAR(20) NULL
 ) ENGINE=InnoDB;
 
@@ -58,7 +58,6 @@ INSERT INTO `user` (`name`, `password`, `mail`, `phone`) VALUES
 ("JohnC", "$argon2id$v=19$m=65536,t=5,p=1$FkjcCc0+F15P0N5TLh3ndQ$FkttWmV6YpXwaqtjrKfALtaYkwyHv2ongXDP/C6bvY4", "JohnC@company.com", "+33333333333"),
 ("JohnD", "$argon2id$v=19$m=65536,t=5,p=1$FkjcCc0+F15P0N5TLh3ndQ$FkttWmV6YpXwaqtjrKfALtaYkwyHv2ongXDP/C6bvY4", "JohnD@company.com", "+33444444444"),
 ("JohnE", "$argon2id$v=19$m=65536,t=5,p=1$FkjcCc0+F15P0N5TLh3ndQ$FkttWmV6YpXwaqtjrKfALtaYkwyHv2ongXDP/C6bvY4", "JohnE@company.com", "+33555555555"),
-("Faker", "$argon2id$v=19$m=65536,t=5,p=1$FkjcCc0+F15P0N5TLh3ndQ$FkttWmV6YpXwaqtjrKfALtaYkwyHv2ongXDP/C6bvY4", "Faker", "+33666666666");
 
 UNLOCK TABLES;
 
@@ -149,7 +148,7 @@ CREATE TABLE `company` (
   `file_id` INT NULL,
   `company_group_id` TINYINT NULL,
   `activity_field_id` TINYINT NULL,
-  `user_id` INT NOT NULL,
+  `user_id` INT,
   FOREIGN KEY (file_id) REFERENCES files(id),
   FOREIGN KEY (company_group_id) REFERENCES company_group(id),
   FOREIGN KEY (activity_field_id) REFERENCES activity_field(id),
@@ -164,11 +163,11 @@ LOCK TABLES `company` WRITE;
 INSERT INTO `company` (`company_name`, `address`, `postcode`, `city`, `mail`, `phone`, `description`, `file_id`, `company_group_id`, `activity_field_id`, `user_id`) VALUES
 ("Eco Vrac", "13, avenue du Maréchal Foch", 68100, "Mulhouse", "ecovrac@email.com", "+33-655-535-768", "desc test", NULL, 1, 1, 1),
 ("Valfleuri", "5, rue de la Charente", 68270, "Wittenheim", "valfleuri@email.com", "+33-755-552-764", "desc test", NULL, 1, 5, 2),
-("DAO", "1664, avenue Saint-Maurice", 4100, "Manosque", "dao@email.com", "+33-655-527-008", "desc test", NULL, 1, 4, 3),
-("Nat-ali", "ZAC de la Brosse, 3 Rue Nicolas Appert", 44400, "Reze", "nat-alie@email.com", "+33-655-536-223", "desc test", NULL, 2, 4, 4),
-("Le petit épicier","6 rue des timoniers",29470,"Plougastel-Daoulas","le-petit-epicier@email.com","+33-655-586-499", "desc test", NULL, 2, 2, 5),
-("Tagopia","48877 Buhler Circle",15963,"Longxing","qrisborough5@cisco.com","+86-726-641-0692", "desc test", NULL, 3, 3, 6),
-("Plambee","386 Haas Crossing",45963,"Xiaozhi","bdobbison8@cbsnews.com","+86-732-798-6831", "desc test", NULL, 3, 4, 6);
+("Le petit épicier","6 rue des timoniers",29470,"Plougastel-Daoulas","le-petit-epicier@email.com","+33-655-586-499", "desc test", NULL, 1, 2, 3),
+("DAO", "1664, avenue Saint-Maurice", 4100, "Manosque", "dao@email.com", "+33-655-527-008", "desc test", NULL, 2, 4, 4),
+("Nat-ali", "ZAC de la Brosse, 3 Rue Nicolas Appert", 44400, "Reze", "nat-alie@email.com", "+33-655-536-223", "desc test", NULL, 2, 4, 5),
+("Tagopia","48877 Buhler Circle",15963,"Longxing","qrisborough5@cisco.com","+86-726-641-0692", "desc test", NULL, 3, 3, NULL),
+("Plambee","386 Haas Crossing",45963,"Xiaozhi","bdobbison8@cbsnews.com","+86-732-798-6831", "desc test", NULL, 3, 4, NULL);
 UNLOCK TABLES;
 
 
@@ -384,7 +383,7 @@ UNLOCK TABLES;
 CREATE TABLE `stock` (
   `id` INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
   `product_id` INT NOT NULL,
-  `owner_id` INT NOT NULL,
+  `owner_id` INT,
   `supplier_id` INT NOT NULL,
   `disponibility` TINYINT NOT NULL,
   `price_ttc` INT NULL,
@@ -400,26 +399,57 @@ CREATE TABLE `stock` (
 
 LOCK TABLES `stock` WRITE;
 INSERT INTO `stock` (`product_id`, `owner_id`,`supplier_id`, `disponibility`, `price_ttc`, `price_ht`) VALUES
-(1, 1, 3, 0, 20, 19),
-(2, 2, 4, 1, 40, 38),
-(3, 3, 3, 0, 20, 19),
-(4, 4, 4, 0, 20, 19),
-(5, 5, 5, 1, 20, 19),
-(6, 1, 3, 0, 20, 19),
-(7, 2, 4, 1, 10, 9.5),
-(8, 1, 5, 0, 20, 19),
+(1, null, 4, 0, 20, 19),
+(2, null, 4, 0, 40, 38),
+(3, null, 4, 0, 20, 19),
+(4, null, 4, 0, 20, 19),
+(5, null, 4, 0, 20, 19),
+(6, 6, 4, 0, 20, 19),
+(7, 6, 4, 1, 10, 9.5),
+(8, null, 4, 0, 20, 19),
+(9, null, 4, 0, 20, 19),
+(10, 7, 4, 1, 20, 19),
+(11, 7, 5, 0, 20, 19),
+(12, null, 5, 0, 20, 19),
+(13, null, 5, 0, 20, 19),
+(14, null, 5, 0, 20, 19),
+(15, 7, 5, 0, 20, 19),
+(16, null, 5, 0, 20, 19),
+(17, null, 5, 0, 20, 19),
+(18, null, 5, 1, 20, 19),
+(19, null, 5, 0, 20, 19),
+(20, null, 5, 0, 20, 19),
+(1, 1, 4, 0, 20, 19),
+(1, 2, 4, 0, 20, 19),
+(1, 3, 4, 0, 20, 19),
+(2, 2, 4, 0, 40, 38),
+(3, 1, 4, 0, 20, 19),
+(3, 2, 4, 0, 20, 19),
+(4, 2, 4, 0, 20, 19),
+(4, 3, 4, 0, 20, 19),
+(5, 1, 4, 0, 20, 19),
+(5, 3, 4, 0, 20, 19),
+(6, 3, 4, 0, 20, 19),
+(7, 1, 4, 1, 10, 9.5),
+(7, 3, 4, 1, 10, 9.5),
+(9, 1, 4, 0, 20, 19),
 (9, 2, 4, 0, 20, 19),
-(10, 1, 5, 1, 20, 19),
-(11, 2, 4, 1, 20, 19),
+(11, 2, 5, 0, 20, 19),
+(11, 3, 5, 0, 20, 19),
 (12, 3, 5, 0, 20, 19),
-(13, 4, 3, 1, 20, 19),
-(14, 5, 4, 0, 20, 19),
-(15, 1, 5, 1, 20, 19),
-(16, 2, 3, 1, 20, 19),
+(13, 3, 5, 0, 20, 19),
+(14, 2, 5, 0, 20, 19),
+(15, 1, 5, 0, 20, 19),
+(15, 3, 5, 0, 20, 19),
+(16, 1, 5, 0, 20, 19),
+(16, 2, 5, 0, 20, 19),
+(16, 3, 5, 0, 20, 19),
 (17, 1, 5, 0, 20, 19),
 (18, 2, 5, 1, 20, 19),
-(19, 2, 3, 0, 20, 19),
-(20, 1, 5, 0, 20, 19);
+(18, 3, 5, 1, 20, 19),
+(19, 1, 5, 0, 20, 19),
+(19, 2, 5, 0, 20, 19),
+(19, 3, 5, 0, 20, 19);
 UNLOCK TABLES;
 
 -- ----------------------------------------------------------------------------
