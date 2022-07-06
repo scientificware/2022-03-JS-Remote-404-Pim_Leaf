@@ -43,7 +43,7 @@ function App() {
               </ProtectedRoute>
             }
           >
-            <Route path="enntreprise" element={<Company />} />
+            <Route path="entreprise" element={<Company />} />
             <Route path="entreprise/:id" element={<CompanyDetails />} />
             <Route path="profil" element={<Profil />} />
           </Route>
