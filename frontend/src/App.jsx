@@ -77,7 +77,7 @@ function App() {
               path="produit/:id/details"
               element={<SuppliersProductsDetails />}
             />
-            <Route path="client" element={<SuppliersClients />} />
+            <Route path="clients" element={<SuppliersClients />} />
             <Route path="client/:id" element={<SuppliersClientsDetails />} />
           </Route>
         </Routes>
