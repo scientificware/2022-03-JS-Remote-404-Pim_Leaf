@@ -1,5 +1,5 @@
 /* eslint-disable import/no-unresolved */
-import ListProducts from "@retailersC/ListProducts";
+import ProductsTable from "@components/common/ProductsTable";
 
 function Products() {
   return (
@@ -7,7 +7,8 @@ function Products() {
       <div className="flex justify-center text-3xl font-bold font-barlow mt-20">
         <h1>Mes fiches produits</h1>
       </div>
-      <ListProducts />
+
+      <ProductsTable />
     </main>
   );
 }
