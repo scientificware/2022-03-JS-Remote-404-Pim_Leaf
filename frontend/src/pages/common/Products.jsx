@@ -1,5 +1,7 @@
 /* eslint-disable import/no-unresolved */
+
 import ProductsTable from "@components/common/ProductsTable";
+
 
 function Products() {
   return (
@@ -9,6 +11,7 @@ function Products() {
       </div>
 
       <ProductsTable />
+
     </main>
   );
 }
