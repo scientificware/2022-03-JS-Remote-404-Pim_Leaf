@@ -55,17 +55,9 @@ class CompanyController {
 
   static browseSuppliers = (req, res) => {
     models.company
-      .findUserCompany(parseInt(req.params.id, 10))
-      .then(([rows]) => {
-        models.company
-          .findAllSuppliers(rows[0].id)
-          .then(([data]) => {
-            res.status(200).json(data);
-          })
-          .catch((err) => {
-            console.error(err);
-            res.sendStatus(500);
-          });
+      .findAllSuppliers()
+      .then(([data]) => {
+        res.status(200).json(data);
       })
       .catch((err) => {
         console.error(err);
@@ -106,6 +98,18 @@ class CompanyController {
             console.error(err);
             res.sendStatus(500);
           });
+      })
+      .catch((err) => {
+        console.error(err);
+        res.sendStatus(500);
+      });
+  };
+
+  static browseRetailers = (req, res) => {
+    models.company
+      .findAllRetailers()
+      .then(([data]) => {
+        res.status(200).json(data);
       })
       .catch((err) => {
         console.error(err);
