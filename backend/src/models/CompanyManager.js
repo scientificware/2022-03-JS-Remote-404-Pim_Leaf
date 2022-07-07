@@ -67,6 +67,24 @@ class CompanyManager extends AbstractManager {
       [id]
     );
   }
+
+  findAllRetailerConnected(id) {
+    return this.connection.query(
+      `SELECT 
+      con.retailer_id,
+      con.supplier_id,
+      c.company_name,
+      a.name AS domain,
+      c.city,
+      con.status
+      FROM ${CompanyManager.table} AS c
+      LEFT JOIN connection AS con ON c.id=con.retailer_id
+      LEFT JOIN activity_field AS a ON c.activity_field_id=a.id
+      WHERE con.supplier_id = ? AND con.status="connecté" AND c.company_group_id=1
+      `,
+      [id]
+    );
+  }
 }
 
 module.exports = CompanyManager;

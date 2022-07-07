@@ -26,6 +26,10 @@ router.get(
 );
 router.get("/retailer/:id/suppliers", CompanyController.browseSuppliers);
 
+router.get(
+  "/supplier/:id/clients/connected",
+  CompanyController.browseRetailerConnected
+);
 router.get("/supplier/:id/clients", CompanyController.browse);
 
 router.get("/company/:id", UserController.readCompany);
