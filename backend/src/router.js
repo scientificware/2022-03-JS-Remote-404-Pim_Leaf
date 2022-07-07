@@ -24,9 +24,17 @@ router.get(
   "/retailer/:id/suppliers/pending",
   CompanyController.browseSupplierPending
 );
-router.get("/retailer/:id/suppliers", CompanyController.browseSuppliers);
+router.get("/retailer/suppliers", CompanyController.browseSuppliers);
 
-router.get("/supplier/:id/clients", CompanyController.browse);
+router.get(
+  "/supplier/:id/clients/connected",
+  CompanyController.browseRetailerConnected
+);
+router.get(
+  "/supplier/:id/clients/pending",
+  CompanyController.browseRetailerPending
+);
+router.get("/supplier/clients", CompanyController.browseRetailers);
 
 router.get("/company/:id", UserController.readCompany);
 router.get("/user/:id", UserController.readUser);

@@ -53,7 +53,7 @@ class CompanyManager extends AbstractManager {
     );
   }
 
-  findAllSuppliers(id) {
+  findAllSuppliers() {
     return this.connection.query(
       `SELECT 
       c.id AS company_id,
@@ -63,8 +63,57 @@ class CompanyManager extends AbstractManager {
       FROM ${CompanyManager.table} AS c
       LEFT JOIN activity_field AS a ON c.activity_field_id=a.id
       WHERE c.company_group_id =2
+      `
+    );
+  }
+
+  findAllRetailerConnected(id) {
+    return this.connection.query(
+      `SELECT 
+      con.retailer_id,
+      con.supplier_id,
+      c.company_name,
+      a.name AS domain,
+      c.city,
+      con.status
+      FROM ${CompanyManager.table} AS c
+      LEFT JOIN connection AS con ON c.id=con.retailer_id
+      LEFT JOIN activity_field AS a ON c.activity_field_id=a.id
+      WHERE con.supplier_id = ? AND con.status="connecté" AND c.company_group_id=1
       `,
       [id]
+    );
+  }
+
+  findAllRetailerPending(id) {
+    return this.connection.query(
+      `SELECT 
+      con.retailer_id,
+      con.supplier_id,
+      c.company_name,
+      a.name AS domain,
+      c.city,
+      con.status
+      FROM ${CompanyManager.table} AS c
+      LEFT JOIN connection AS con ON c.id=con.retailer_id
+      LEFT JOIN activity_field AS a ON c.activity_field_id=a.id
+      WHERE con.supplier_id = ? AND con.status="En attente de connexion" AND c.company_group_id=1
+      `,
+      [id]
+    );
+  }
+
+  findAllRetailers() {
+    return this.connection.query(
+      `SELECT 
+      c.id AS company_id,
+      c.company_name,
+      a.name AS domain,
+      c.city
+      FROM ${CompanyManager.table} AS c
+      LEFT JOIN activity_field AS a ON c.activity_field_id=a.id
+      WHERE c.company_group_id =1
+      `
     );
   }
 }
