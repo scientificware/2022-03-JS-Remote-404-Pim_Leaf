@@ -40,11 +40,7 @@ function ProductsTable() {
 
   useEffect(() => {
     axios
-      .get(
-        user.mail === "JohnB@company.com"
-          ? `${import.meta.env.VITE_BACKEND_URL}user/2/products`
-          : `${import.meta.env.VITE_BACKEND_URL}user/4/products`
-      )
+      .get(`${import.meta.env.VITE_BACKEND_URL}user/${user.user_id}/products`)
       .then((res) => {
         const prod = res.data.map((el) => ({ ...el, check: false }));
         setProducts(prod);
@@ -83,7 +79,7 @@ function ProductsTable() {
                   Produit
                 </th>
                 <th scope="col" className="bg-middleBlue/70 text-l uppercase">
-                  Fournisseur
+                  {user.company_group_id === 1 ? "Fournisseur" : "Fabricant"}
                 </th>
                 <th scope="col" className="bg-middleBlue/70 text-l uppercase">
                   Catégorie
