@@ -1,15 +1,16 @@
 /* eslint-disable import/no-unresolved */
-
-import FormField from "@components/common/FormField";
 import { useState, useEffect, useContext } from "react";
 import axios from "axios";
+
+import FormField from "@components/common/FormField";
 
 import UserExport from "@contexts/UserContext";
 
 function Profil() {
   const { user } = useContext(UserExport.UserContext);
 
-  const [setDatas] = useState(null);
+  const [data, setDatas] = useState();
+
   useEffect(() => {
     axios
       .get(`${import.meta.env.VITE_BACKEND_URL}user/${user.company_group_id}`)
@@ -19,12 +20,29 @@ function Profil() {
   }, []);
 
   return (
-    <main>
+    <main className="font-redHat flex flex-col w-4/5 m-auto">
       <h1 className="flex justify-center text-3xl font-bold font-barlow text-darkBlue mb-14 mt-14">
         Mon profil
       </h1>
 
-      <FormField />
+      <h2>Mon entreprise : {data.company_name}</h2>
+
+      <form>
+        <FormField name="Nom" labels="name" placeholder={data && data.name} />
+
+        <FormField
+          name="Email de contact"
+          labels="email"
+          placeholder={data && data.mail}
+        />
+      </form>
+
+      <button
+        type="button"
+        className="py-6 w-1/4 text-white text-base bg-darkBlue hover:bg-opacity-90 rounded-full  m-auto mt-12"
+      >
+        Changer mes informations
+      </button>
     </main>
   );
 }
