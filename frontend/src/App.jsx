@@ -18,7 +18,7 @@ import SuppliersDetails from "@retailersP/SuppliersDetails";
 import ProductsDetails from "@retailersP/ProductsDetails";
 
 import SuppliersProductsDetails from "@suppliersP/SupProductsDetails";
-import SuppliersClients from "@suppliersP/SuppliersClients";
+import Clients from "@suppliersP/Clients";
 import SuppliersClientsDetails from "@suppliersP/SuppliersClientsDetails";
 
 import UserExport from "@contexts/UserContext";
@@ -76,7 +76,7 @@ function App() {
               path="produit/:id/details"
               element={<SuppliersProductsDetails />}
             />
-            <Route path="clients" element={<SuppliersClients />} />
+            <Route path="clients" element={<Clients />} />
             <Route path="client/:id" element={<SuppliersClientsDetails />} />
           </Route>
         </Routes>
