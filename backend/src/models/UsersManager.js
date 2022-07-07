@@ -13,9 +13,16 @@ class UsersManager extends AbstractManager {
   findCompanyUser(id) {
     return this.connection
       .query(
-        `SELECT  company.id, company.company_group_id, company.company_name FROM ${UsersManager.table}
-      LEFT JOIN company 
-      ON company.user_id = user.id
+        `SELECT
+        u.id AS user_id,
+        u.name AS user_name,
+        u.mail,
+        c.id AS company_id,
+        c.company_name,
+        c.company_group_id
+        FROM ${UsersManager.table} u
+      LEFT JOIN company c
+      ON c.user_id = u.id
       WHERE user_id = ?`,
         [id]
       )
