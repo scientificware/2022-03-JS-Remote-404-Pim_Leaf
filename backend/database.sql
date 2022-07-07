@@ -194,7 +194,6 @@ LOCK TABLES `connection` WRITE;
 INSERT INTO `connection` (`status`, `retailer_id`, `supplier_id`) VALUES
 ("En cours de connexion", 2, 4),
 ("Connecté", 1, 4),
-("Connecté", 1, 5),
 ("Connecté", 3, 5),
 ("Annulé", 2, 5);
 UNLOCK TABLES;

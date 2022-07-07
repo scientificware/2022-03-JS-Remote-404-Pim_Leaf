@@ -13,12 +13,12 @@ class CompanyController {
       });
   };
 
-  static browseSupplier = (req, res) => {
+  static browseSupplierConnected = (req, res) => {
     models.company
       .findUserCompany(parseInt(req.params.id, 10))
       .then(([rows]) => {
         models.company
-          .findAllSupplier(rows[0].id)
+          .findAllSupplierConnected(rows[0].id)
           .then(([data]) => {
             res.status(200).json(data);
           })

@@ -17,20 +17,19 @@ class CompanyManager extends AbstractManager {
     );
   }
 
-  findAllSupplier(id) {
+  findAllSupplierConnected(id) {
     return this.connection.query(
       `SELECT 
-      c.id,
+      con.retailer_id,
+      con.supplier_id,
       c.company_name,
       a.name AS domain,
       c.city,
-      con.status,
-      con.retailer_id,
-      con.supplier_id
+      con.status
       FROM ${CompanyManager.table} AS c
       LEFT JOIN connection AS con ON c.id=con.supplier_id
       LEFT JOIN activity_field AS a ON c.activity_field_id=a.id
-      WHERE con.retailer_id = ? OR (con.supplier_id IS NULL OR con.status IS NULL)
+      WHERE con.retailer_id = ? AND con.status="connecté" AND c.company_group_id=2
       `,
       [id]
     );
