@@ -21,7 +21,11 @@ class AuthController {
 
       const token = jwt.sign(
         {
+          user_id: user.id,
+          user_name: user.name,
           email: user.mail,
+          company_id: userCompanyGroup.id,
+          company_name: userCompanyGroup.company_name,
           company_group: userCompanyGroup.id,
         },
         process.env.PRIVATETOKEN
