@@ -12,12 +12,11 @@ import Company from "@pages/common/Company";
 import CompanyDetails from "@pages/common/CompanyDetails";
 import Profil from "@pages/common/Profil";
 import Products from "@pages/common/Products";
+import ProductsDetails from "@pages/common/ProductsDetails";
 
 import Suppliers from "@retailersP/Suppliers";
 import SuppliersDetails from "@retailersP/SuppliersDetails";
-import ProductsDetails from "@retailersP/ProductsDetails";
 
-import SuppliersProductsDetails from "@suppliersP/SupProductsDetails";
 import SuppliersClients from "@suppliersP/SuppliersClients";
 import SuppliersClientsDetails from "@suppliersP/SuppliersClientsDetails";
 
@@ -72,10 +71,7 @@ function App() {
             }
           >
             <Route path="produits" element={<Products />} />
-            <Route
-              path="produit/:id/details"
-              element={<SuppliersProductsDetails />}
-            />
+            <Route path="produit/:id/details" element={<ProductsDetails />} />
             <Route path="clients" element={<SuppliersClients />} />
             <Route path="client/:id" element={<SuppliersClientsDetails />} />
           </Route>
