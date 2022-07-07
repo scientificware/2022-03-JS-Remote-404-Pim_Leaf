@@ -51,15 +51,22 @@ function Company() {
           name="Adresse"
           labels="address"
           placeholder={data && data.address}
+          size="w-1/4"
         />
 
         <FormField
           name="Code postal"
           labels="postcode"
           placeholder={data && data.postcode}
+          size="w-1/4"
         />
 
-        <FormField name="Ville" labels="city" placeholder={data && data.city} />
+        <FormField
+          name="Ville"
+          labels="city"
+          placeholder={data && data.city}
+          size="w-1/4"
+        />
 
         <FormField
           name="Email de contact"

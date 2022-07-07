@@ -1,4 +1,4 @@
-function FormField({ name, labels, placeholder }) {
+function FormField({ name, labels, placeholder, size = "w-full" }) {
   return (
     <label htmlFor={labels} className="text-xl">
       {name}
@@ -6,7 +6,7 @@ function FormField({ name, labels, placeholder }) {
         type="text"
         name={labels}
         placeholder={placeholder}
-        className="bg-middleBlue bg-opacity-50 text-darkBlue p-2 w-full  mt-1 mb-3 shadow-lg"
+        className={`bg-middleBlue bg-opacity-50 text-darkBlue p-2 ${size} mt-1 mb-3 shadow-lg`}
       />
     </label>
   );
