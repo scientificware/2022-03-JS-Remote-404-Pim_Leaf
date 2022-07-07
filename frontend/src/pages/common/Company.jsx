@@ -29,37 +29,49 @@ function Company() {
       </h1>
 
       <form className="font-redHat flex flex-col min-w-max w-4/5 m-auto">
-        <FormField name="Nom" labels="name" placeholder={data.user_id} />
+        <FormField
+          name="Nom"
+          labels="name"
+          placeholder={data && data.user_id}
+        />
 
         <FormField
           name="Domaine d'activité"
           labels="domain"
-          placeholder={data.domain}
+          placeholder={data && data.domain}
         />
 
         <FormField
           name="Description"
           labels="description"
-          placeholder={data.description}
+          placeholder={data && data.description}
         />
 
-        <FormField name="Adresse" labels="address" placeholder={data.address} />
+        <FormField
+          name="Adresse"
+          labels="address"
+          placeholder={data && data.address}
+        />
 
         <FormField
           name="Code postal"
           labels="postcode"
-          placeholder={data.postcode}
+          placeholder={data && data.postcode}
         />
 
-        <FormField name="Ville" labels="city" placeholder={data.city} />
+        <FormField name="Ville" labels="city" placeholder={data && data.city} />
 
         <FormField
           name="Email de contact"
           labels="email"
-          placeholder={data.company_mail}
+          placeholder={data && data.company_mail}
         />
 
-        <FormField name="Téléphone" labels="phone" placeholder={data.phone} />
+        <FormField
+          name="Téléphone"
+          labels="phone"
+          placeholder={data && data.phone}
+        />
       </form>
     </main>
   );

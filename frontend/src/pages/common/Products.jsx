@@ -2,7 +2,6 @@
 
 import ProductsTable from "@components/common/ProductsTable";
 
-
 function Products() {
   return (
     <main>
@@ -11,7 +10,6 @@ function Products() {
       </div>
 
       <ProductsTable />
-
     </main>
   );
 }
