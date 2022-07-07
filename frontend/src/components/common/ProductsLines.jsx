@@ -1,8 +1,17 @@
 /* eslint-disable import/no-unresolved */
+
+import { useContext } from "react";
 import { Link } from "react-router-dom";
+// import axios from "axios";
+
 import SwitchProducts from "@components/common/SwitchProducts";
+// import userProfil from "src/data/ClementData";
+
+import UserExport from "@contexts/UserContext";
 
 function ProductsLines({ product, MdDone, handleCheckProducts }) {
+  const { user } = useContext(UserExport.UserContext);
+
   return (
     <tr className="odd:bg-lightBlue/10 even:bg-middleBlue/30 transition duration-1000 ease-out hover:scale-105">
       <td className="text-left border-y-8 border-white">
@@ -17,7 +26,15 @@ function ProductsLines({ product, MdDone, handleCheckProducts }) {
         </div>
       </td>
       <td className="text-left text-l border-y-8 border-white">
-        <Link to={`/products/${product.id}`}>{product.product_name}</Link>
+        <Link
+          to={
+            user.company_group_id === 1
+              ? `/commercant/produit/${product.id}/details`
+              : `/fournisseur/produit/${product.id}/details`
+          }
+        >
+          {product.product_name}
+        </Link>
       </td>
       <td className="text-left text-l border-y-8 border-white">
         {product.supplier}
