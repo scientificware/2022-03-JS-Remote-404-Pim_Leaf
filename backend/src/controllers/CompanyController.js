@@ -53,12 +53,12 @@ class CompanyController {
       });
   };
 
-  static browseSupplierUnConnected = (req, res) => {
+  static browseSuppliers = (req, res) => {
     models.company
       .findUserCompany(parseInt(req.params.id, 10))
       .then(([rows]) => {
         models.company
-          .findAllSupplierUnConnected(rows[0].id)
+          .findAllSuppliers(rows[0].id)
           .then(([data]) => {
             res.status(200).json(data);
           })
@@ -66,18 +66,6 @@ class CompanyController {
             console.error(err);
             res.sendStatus(500);
           });
-      })
-      .catch((err) => {
-        console.error(err);
-        res.sendStatus(500);
-      });
-  };
-
-  static browseRetailer = (req, res) => {
-    models.company
-      .findAllRetailer(req.params.id)
-      .then(([rows]) => {
-        res.status(200).json(rows);
       })
       .catch((err) => {
         console.error(err);
