@@ -16,12 +16,14 @@ SET time_zone = "+00:00";
 -- `allergen_category`
 -- `category`
 -- `products`
+-- `allergens_types`
 -- `stock`
 
 -- ----------------------------------------------------------------------------
 
 
 DROP TABLE IF EXISTS `stock`;
+DROP TABLE IF EXISTS `allergens_types`;
 DROP TABLE IF EXISTS `products`;
 DROP TABLE IF EXISTS `category`;
 DROP TABLE IF EXISTS `allergen_category`;
@@ -338,12 +340,10 @@ CREATE TABLE `products` (
   `detail` VARCHAR(255) NULL,
   `advise` VARCHAR(255) NULL,
   `category_id` TINYINT NOT NULL,
-  `allergen_category_id` INT NOT NULL,
   `origin_id` INT NOT NULL,
   `label_id` INT NOT NULL,
   `recipe_idea` VARCHAR(255) NULL,
   FOREIGN KEY (category_id) REFERENCES category(id),
-  FOREIGN KEY (allergen_category_id) REFERENCES allergen_category(id),
   FOREIGN KEY (origin_id) REFERENCES origin(id),
   FOREIGN KEY (label_id) REFERENCES label(id)
 ) ENGINE=InnoDB;
@@ -353,29 +353,66 @@ CREATE TABLE `products` (
 --
 
 LOCK TABLES `products` WRITE;
-INSERT INTO `products` (`product_name`, `detail`, `advise`, `category_id`, `allergen_category_id`, `origin_id`, `label_id`, `recipe_idea`) VALUES
-("Sucre de canne non raffiné", "details test 1", "advise test 1", 2, 1, 1, 1, "recipe test 1"),
-("Sel de Guérande", "details test 2", "advise test 1", 10, 1, 1, 1, "recipe test 2"),
-("Sirop d'agave", "details test", "advise test 3", 2, 10, 1, 1, "recipe test 3"),
-("Son d'avoine", "details test 4", "advise test 4", 3, 10, 1, 4, "recipe test 4"),
-("Conserve Haricot", "details test 5", "advise test 5", 10, 1, 10, 7, "recipe test 5"),
-("Huile essentielle de citron", "details test 6", "advise test 6", 6, 1, 1, 1, "recipe test 6"),
-("Huile de sésame", "details test 7", "advise test 7", 10, 2, 10, 1, "recipe test 7"),
-("Huile essentielle de lavande", "details test 8", "advise test 8", 6, 1, 1, 1, "recipe test 8"),
-("Acide tartarique", "details test 9", "advise test 9", 6, 1, 10, 1, "recipe test 9"),
-("Fève de Cacao", "details test 10", "advise test 10", 2, 1, 7, 1, "recipe test 10"),
-("Bicarbonate de sodium", "details test 11", "advise test 11", 6, 1, 2, 1, "recipe test 11"),
-("Vinaigre blanc", "details test 12", "advise test 12", 6, 14, 1, 1, "recipe test 12"),
-("Farine de Quinoa", "details test 13", "advise test 13", 8, 1, 1, 1, "recipe test 13"),
-("Farine de blé T65", "details test 14", "advise test 14", 8, 1, 10, 1, "recipe test 14"),
-("Farine de seigle", "details test 15", "advise test 15", 8, 1, 1, 1, "recipe test 15"),
-("Gingembre", "details test 16", "advise test 16", 4, 1, 1, 10, "recipe test 16"),
-("Botte de carotte", "details test 17", "advise test 17", 4, 1, 10, 1, "recipe test 17"),
-("Poivre noir", "details test 18", "advise test 18", 10, 1, 1, 1, "recipe test 18"),
-("Menthe poivrée", "details test 19", "advise test 19", 4, 1, 1, 1, "recipe test 19"),
-("Romarin", "details test 20", "advise test 20", 4, 1, 1, 1, "recipe test 20");
+INSERT INTO `products` (`product_name`, `detail`, `advise`, `category_id`, `origin_id`, `label_id`, `recipe_idea`) VALUES
+("Sucre de canne non raffiné", "details test 1", "advise test 1", 2, 1, 1, "recipe test 1"),
+("Sel de Guérande", "details test 2", "advise test 1", 10, 1, 1, "recipe test 2"),
+("Sirop d'agave", "details test", "advise test 3", 2, 1, 1, "recipe test 3"),
+("Son d'avoine", "details test 4", "advise test 4", 3, 1, 4, "recipe test 4"),
+("Conserve Haricot", "details test 5", "advise test 5", 10, 10, 7, "recipe test 5"),
+("Huile essentielle de citron", "details test 6", "advise test 6", 6, 1, 1, "recipe test 6"),
+("Huile de sésame", "details test 7", "advise test 7", 10, 10, 1, "recipe test 7"),
+("Huile essentielle de lavande", "details test 8", "advise test 8", 6, 1, 1, "recipe test 8"),
+("Acide tartarique", "details test 9", "advise test 9", 6, 10, 1, "recipe test 9"),
+("Fève de Cacao", "details test 10", "advise test 10", 2, 7, 1, "recipe test 10"),
+("Bicarbonate de sodium", "details test 11", "advise test 11", 6, 2, 1, "recipe test 11"),
+("Vinaigre blanc", "details test 12", "advise test 12", 6, 1, 1, "recipe test 12"),
+("Farine de Quinoa", "details test 13", "advise test 13", 8, 1, 1, "recipe test 13"),
+("Farine de blé T65", "details test 14", "advise test 14", 8, 10, 1, "recipe test 14"),
+("Farine de seigle", "details test 15", "advise test 15", 8, 1, 1, "recipe test 15"),
+("Gingembre", "details test 16", "advise test 16", 4, 1, 10, "recipe test 16"),
+("Botte de carotte", "details test 17", "advise test 17", 4, 10, 1, "recipe test 17"),
+("Poivre noir", "details test 18", "advise test 18", 10, 1, 1, "recipe test 18"),
+("Menthe poivrée", "details test 19", "advise test 19", 4, 1, 1, "recipe test 19"),
+("Romarin", "details test 20", "advise test 20", 4, 1, 1, "recipe test 20");
 UNLOCK TABLES;
 
+-- ----------------------------------------------------------------------------
+--
+-- Table structure for table `allergens_types`
+--
+
+CREATE TABLE `allergens_types` (
+  `id` INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
+  `product_id` INT NOT NULL,
+  `allergen_id` INT NOT NULL,
+  FOREIGN KEY (product_id) REFERENCES products(id),
+  FOREIGN KEY (allergen_id) REFERENCES allergen_category(id)
+) ENGINE=InnoDB;
+
+--
+-- Content for table `allergens_types`
+--
+
+LOCK TABLES `allergens_types` WRITE;
+
+INSERT INTO `allergens_types` (`product_id`, `allergen_id`) VALUES
+(3, 1),
+(4, 1),
+(4, 2),
+(5, 11),
+(6, 14),
+(7, 2),
+(8, 14),
+(9, 14),
+(10, 3),
+(11, 14),
+(12, 14),
+(13, 1),
+(14, 1),
+(14, 2),
+(14, 3);
+
+UNLOCK TABLES;
 -- ----------------------------------------------------------------------------
 --
 -- Table structure for table `stock`
