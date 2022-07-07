@@ -23,7 +23,7 @@ function Profil() {
       <h1 className="flex justify-center text-3xl font-bold font-barlow text-darkBlue mb-14 mt-14">
         Mon profil
       </h1>
-      
+
       <Fields />
     </main>
   );
