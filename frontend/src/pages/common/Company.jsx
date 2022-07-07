@@ -32,7 +32,7 @@ function Company() {
         <FormField
           name="Nom"
           labels="name"
-          placeholder={data && data.user_id}
+          placeholder={user && user.company_name}
         />
 
         <FormField
@@ -80,6 +80,8 @@ function Company() {
           placeholder={data && data.phone}
         />
       </form>
+
+      <button type="button">Changer mes informations</button>
     </main>
   );
 }
