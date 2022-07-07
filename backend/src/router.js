@@ -19,8 +19,12 @@ router.get("/products/:id", ProductsController.read);
 // router.get("/products/:id/company", CompanyController.read);
 
 router.get(
-  "/retailer/:id/suppliers",
+  "/retailer/:id/connected/suppliers",
   CompanyController.browseSupplierConnected
+);
+router.get(
+  "/retailer/:id/pending/suppliers",
+  CompanyController.browseSupplierPending
 );
 router.get("/supplier/:id/clients", CompanyController.browseRetailer);
 
