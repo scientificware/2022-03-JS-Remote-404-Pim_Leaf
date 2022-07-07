@@ -1,7 +1,7 @@
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
 
--- 
+--
 -- Database name : `pimleaf`
 
 -- Database tables :
@@ -43,7 +43,7 @@ CREATE TABLE `user` (
   `id` INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
   `name` VARCHAR(100) NULL,
   `password` VARCHAR(255) NOT NULL,
-  `mail` VARCHAR(255) NOT NULL UNIQUE, 
+  `mail` VARCHAR(255) NOT NULL UNIQUE,
   `phone` VARCHAR(20) NULL
 ) ENGINE=InnoDB;
 
@@ -58,7 +58,7 @@ INSERT INTO `user` (`name`, `password`, `mail`, `phone`) VALUES
 ("JohnC", "$argon2id$v=19$m=65536,t=5,p=1$FkjcCc0+F15P0N5TLh3ndQ$FkttWmV6YpXwaqtjrKfALtaYkwyHv2ongXDP/C6bvY4", "JohnC@company.com", "+33333333333"),
 ("JohnD", "$argon2id$v=19$m=65536,t=5,p=1$FkjcCc0+F15P0N5TLh3ndQ$FkttWmV6YpXwaqtjrKfALtaYkwyHv2ongXDP/C6bvY4", "JohnD@company.com", "+33444444444"),
 ("JohnE", "$argon2id$v=19$m=65536,t=5,p=1$FkjcCc0+F15P0N5TLh3ndQ$FkttWmV6YpXwaqtjrKfALtaYkwyHv2ongXDP/C6bvY4", "JohnE@company.com", "+33555555555"),
-("Faker", "$argon2id$v=19$m=65536,t=5,p=1$FkjcCc0+F15P0N5TLh3ndQ$FkttWmV6YpXwaqtjrKfALtaYkwyHv2ongXDP/C6bvY4", "Faker", "+33666666666");
+("Fabricant", "$argon2id$v=19$m=65536,t=5,p=1$FkjcCc0+F15P0N5TLh3ndQ$FkttWmV6YpXwaqtjrKfALtaYkwyHv2ongXDP/C6bvY4", "Fabricant@company.com", NULL);
 
 UNLOCK TABLES;
 
@@ -164,9 +164,9 @@ LOCK TABLES `company` WRITE;
 INSERT INTO `company` (`company_name`, `address`, `postcode`, `city`, `mail`, `phone`, `description`, `file_id`, `company_group_id`, `activity_field_id`, `user_id`) VALUES
 ("Eco Vrac", "13, avenue du Maréchal Foch", 68100, "Mulhouse", "ecovrac@email.com", "+33-655-535-768", "desc test", NULL, 1, 1, 1),
 ("Valfleuri", "5, rue de la Charente", 68270, "Wittenheim", "valfleuri@email.com", "+33-755-552-764", "desc test", NULL, 1, 5, 2),
-("DAO", "1664, avenue Saint-Maurice", 4100, "Manosque", "dao@email.com", "+33-655-527-008", "desc test", NULL, 1, 4, 3),
-("Nat-ali", "ZAC de la Brosse, 3 Rue Nicolas Appert", 44400, "Reze", "nat-alie@email.com", "+33-655-536-223", "desc test", NULL, 2, 4, 4),
-("Le petit épicier","6 rue des timoniers",29470,"Plougastel-Daoulas","le-petit-epicier@email.com","+33-655-586-499", "desc test", NULL, 2, 2, 5),
+("Le petit épicier","6 rue des timoniers",29470,"Plougastel-Daoulas","le-petit-epicier@email.com","+33-655-586-499", "desc test", NULL, 1, 2, 3),
+("DAO", "1664, avenue Saint-Maurice", 4100, "Manosque", "dao@email.com", "+33-655-527-008", "desc test", NULL, 2, 4, 4),
+("Nat-ali", "ZAC de la Brosse, 3 Rue Nicolas Appert", 44400, "Reze", "nat-alie@email.com", "+33-655-536-223", "desc test", NULL, 2, 4, 5),
 ("Tagopia","48877 Buhler Circle",15963,"Longxing","qrisborough5@cisco.com","+86-726-641-0692", "desc test", NULL, 3, 3, 6),
 ("Plambee","386 Haas Crossing",45963,"Xiaozhi","bdobbison8@cbsnews.com","+86-732-798-6831", "desc test", NULL, 3, 4, 6);
 UNLOCK TABLES;
@@ -192,11 +192,11 @@ CREATE TABLE `connection` (
 
 LOCK TABLES `connection` WRITE;
 INSERT INTO `connection` (`status`, `retailer_id`, `supplier_id`) VALUES
-("En cours de connexion", 2, 4),
 ("Connecté", 1, 4),
-("Connecté", 1, 5),
-("Connecté", 3, 5),
-("Annulé", 2, 5);
+("En attente de connexion", 1, 5),
+("En attente de connexion", 2, 4),
+("Connecté", 2, 5),
+("En attente de connexion", 3, 5);
 UNLOCK TABLES;
 
 -- ----------------------------------------------------------------------------
@@ -337,10 +337,10 @@ CREATE TABLE `products` (
   `product_name` VARCHAR(100) NOT NULL,
   `detail` VARCHAR(255) NULL,
   `advise` VARCHAR(255) NULL,
-  `category_id` TINYINT NULL,
-  `allergen_category_id` INT NULL,
-  `origin_id` INT NULL,
-  `label_id` INT NULL,
+  `category_id` TINYINT NOT NULL,
+  `allergen_category_id` INT NOT NULL,
+  `origin_id` INT NOT NULL,
+  `label_id` INT NOT NULL,
   `recipe_idea` VARCHAR(255) NULL,
   FOREIGN KEY (category_id) REFERENCES category(id),
   FOREIGN KEY (allergen_category_id) REFERENCES allergen_category(id),
@@ -354,26 +354,26 @@ CREATE TABLE `products` (
 
 LOCK TABLES `products` WRITE;
 INSERT INTO `products` (`product_name`, `detail`, `advise`, `category_id`, `allergen_category_id`, `origin_id`, `label_id`, `recipe_idea`) VALUES
-("Sucre de canne non raffiné", "details test", "advise test", 2, 1, 1, 1, "recipe test"),
-("Sucre de canne non raffiné", "details test", "advise test", 2, 1, 1, 1, "recipe test"),
-("Sirop d'agave", "details test", "advise test", 2, 1, 1, 1, "recipe test"),
-("Son d'avoine", "details test", "advise test", 8, 1, 1, 1, "recipe test"),
-("Son d'avoine", "details test", "advise test", 8, 1, 1, 1, "recipe test"),
-("Huile essentielle de citron", "details test", "advise test", 10, 1, 1, 1, "recipe test"),
-("Huile essentielle de citron", "details test", "advise test", 10, 1, 1, 1, "recipe test"),
-("Huile essentielle de citron", "details test", "advise test", 10, 1, 1, 1, "recipe test"),
-("Acide tartarique", "details test", "advise test", 6, 1, 1, 1, "recipe test"),
-("Acide tartarique", "details test", "advise test", 6, 1, 1, 1, "recipe test"),
-("Bicarbonate de sodium", "details test", "advise test", 6, 1, 1, 1, "recipe test"),
-("Bicarbonate de sodium", "details test", "advise test", 6, 1, 1, 1, "recipe test"),
-("Farine de Quinoa", "details test", "advise test", 8, 1, 1, 1, "recipe test"),
-("Farine de Quinoa", "details test", "advise test", 8, 1, 1, 1, "recipe test"),
-("Farine de Quinoa", "details test", "advise test", 8, 1, 1, 1, "recipe test"),
-("Gingembre", "details test", "advise test", 10, 1, 1, 1, "recipe test"),
-("Gingembre", "details test", "advise test", 10, 1, 1, 1, "recipe test"),
-("Poivre noir", "details test", "advise test", 10, 1, 1, 1, "recipe test"),
-("Menthe poivrée", "details test", "advise test", 4, 1, 1, 1, "recipe test"),
-("Menthe poivrée", "details test", "advise test", 4, 1, 1, 1, "recipe test");
+("Sucre de canne non raffiné", "details test 1", "advise test 1", 2, 1, 1, 1, "recipe test 1"),
+("Sel de Guérande", "details test 2", "advise test 1", 10, 1, 1, 1, "recipe test 2"),
+("Sirop d'agave", "details test", "advise test 3", 2, 10, 1, 1, "recipe test 3"),
+("Son d'avoine", "details test 4", "advise test 4", 3, 10, 1, 4, "recipe test 4"),
+("Conserve Haricot", "details test 5", "advise test 5", 10, 1, 10, 7, "recipe test 5"),
+("Huile essentielle de citron", "details test 6", "advise test 6", 6, 1, 1, 1, "recipe test 6"),
+("Huile de sésame", "details test 7", "advise test 7", 10, 2, 10, 1, "recipe test 7"),
+("Huile essentielle de lavande", "details test 8", "advise test 8", 6, 1, 1, 1, "recipe test 8"),
+("Acide tartarique", "details test 9", "advise test 9", 6, 1, 10, 1, "recipe test 9"),
+("Fève de Cacao", "details test 10", "advise test 10", 2, 1, 7, 1, "recipe test 10"),
+("Bicarbonate de sodium", "details test 11", "advise test 11", 6, 1, 2, 1, "recipe test 11"),
+("Vinaigre blanc", "details test 12", "advise test 12", 6, 14, 1, 1, "recipe test 12"),
+("Farine de Quinoa", "details test 13", "advise test 13", 8, 1, 1, 1, "recipe test 13"),
+("Farine de blé T65", "details test 14", "advise test 14", 8, 1, 10, 1, "recipe test 14"),
+("Farine de seigle", "details test 15", "advise test 15", 8, 1, 1, 1, "recipe test 15"),
+("Gingembre", "details test 16", "advise test 16", 4, 1, 1, 10, "recipe test 16"),
+("Botte de carotte", "details test 17", "advise test 17", 4, 1, 10, 1, "recipe test 17"),
+("Poivre noir", "details test 18", "advise test 18", 10, 1, 1, 1, "recipe test 18"),
+("Menthe poivrée", "details test 19", "advise test 19", 4, 1, 1, 1, "recipe test 19"),
+("Romarin", "details test 20", "advise test 20", 4, 1, 1, 1, "recipe test 20");
 UNLOCK TABLES;
 
 -- ----------------------------------------------------------------------------
@@ -400,26 +400,57 @@ CREATE TABLE `stock` (
 
 LOCK TABLES `stock` WRITE;
 INSERT INTO `stock` (`product_id`, `owner_id`,`supplier_id`, `disponibility`, `price_ttc`, `price_ht`) VALUES
-(1, 1, 3, 0, 20, 19),
-(2, 2, 4, 1, 40, 38),
-(3, 3, 3, 0, 20, 19),
+(1, 4, 4, 0, 20, 19),
+(2, 4, 4, 0, 40, 38),
+(3, 4, 4, 0, 20, 19),
 (4, 4, 4, 0, 20, 19),
-(5, 5, 5, 1, 20, 19),
-(6, 1, 3, 0, 20, 19),
-(7, 2, 4, 1, 10, 9.5),
-(8, 1, 5, 0, 20, 19),
+(5, 4, 4, 0, 20, 19),
+(6, 4, 6, 0, 20, 19),
+(7, 4, 6, 1, 10, 9.5),
+(8, 4, 4, 0, 20, 19),
+(9, 4, 4, 0, 20, 19),
+(10, 4, 7, 1, 20, 19),
+(11, 5, 7, 0, 20, 19),
+(12, 5, 5, 0, 20, 19),
+(13, 5, 5, 0, 20, 19),
+(14, 5, 5, 0, 20, 19),
+(15, 5, 7, 0, 20, 19),
+(16, 5, 5, 0, 20, 19),
+(17, 5, 5, 0, 20, 19),
+(18, 5, 5, 1, 20, 19),
+(19, 5, 5, 0, 20, 19),
+(20, 5, 5, 0, 20, 19),
+(1, 1, 4, 0, 20, 19),
+(1, 2, 4, 0, 20, 19),
+(1, 3, 4, 0, 20, 19),
+(2, 2, 4, 0, 40, 38),
+(3, 1, 4, 0, 20, 19),
+(3, 2, 4, 0, 20, 19),
+(4, 2, 4, 0, 20, 19),
+(4, 3, 4, 0, 20, 19),
+(5, 1, 4, 0, 20, 19),
+(5, 3, 4, 0, 20, 19),
+(6, 3, 4, 0, 20, 19),
+(7, 1, 4, 1, 10, 9.5),
+(7, 3, 4, 1, 10, 9.5),
+(9, 1, 4, 0, 20, 19),
 (9, 2, 4, 0, 20, 19),
-(10, 1, 5, 1, 20, 19),
-(11, 2, 4, 1, 20, 19),
+(11, 2, 5, 0, 20, 19),
+(11, 3, 5, 0, 20, 19),
 (12, 3, 5, 0, 20, 19),
-(13, 4, 3, 1, 20, 19),
-(14, 5, 4, 0, 20, 19),
-(15, 1, 5, 1, 20, 19),
-(16, 2, 3, 1, 20, 19),
+(13, 3, 5, 0, 20, 19),
+(14, 2, 5, 0, 20, 19),
+(15, 1, 5, 0, 20, 19),
+(15, 3, 5, 0, 20, 19),
+(16, 1, 5, 0, 20, 19),
+(16, 2, 5, 0, 20, 19),
+(16, 3, 5, 0, 20, 19),
 (17, 1, 5, 0, 20, 19),
 (18, 2, 5, 1, 20, 19),
-(19, 2, 3, 0, 20, 19),
-(20, 1, 5, 0, 20, 19);
+(18, 3, 5, 1, 20, 19),
+(19, 1, 5, 0, 20, 19),
+(19, 2, 5, 0, 20, 19),
+(19, 3, 5, 0, 20, 19);
 UNLOCK TABLES;
 
 -- ----------------------------------------------------------------------------
