@@ -26,6 +26,10 @@ router.get(
   "/retailer/:id/pending/suppliers",
   CompanyController.browseSupplierPending
 );
+router.get(
+  "/retailer/:id/unconnected/suppliers",
+  CompanyController.browseSupplierUnConnected
+);
 router.get("/supplier/:id/clients", CompanyController.browseRetailer);
 
 router.get("/company/:id", UserController.readCompany);

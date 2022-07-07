@@ -35,6 +35,24 @@ class CompanyManager extends AbstractManager {
     );
   }
 
+  findAllSupplierUnConnected(id) {
+    return this.connection.query(
+      `SELECT 
+      con.retailer_id,
+      con.supplier_id,
+      c.company_name,
+      a.name AS domain,
+      c.city,
+      con.status
+      FROM ${CompanyManager.table} AS c
+      LEFT JOIN connection AS con ON c.id=con.supplier_id
+      LEFT JOIN activity_field AS a ON c.activity_field_id=a.id
+      WHERE con.retailer_id IS NULL AND c.company_group_id=2
+      `,
+      [id]
+    );
+  }
+
   findAllSupplierPending(id) {
     return this.connection.query(
       `SELECT 
