@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 /* eslint-disable import/no-unresolved */
 import { useState, useEffect, useContext } from "react";
 import axios from "axios";
@@ -23,16 +22,16 @@ function Company() {
   }, []);
 
   return (
-    <main>
+    <main className="font-redHat flex flex-col w-4/5 m-auto">
       <h1 className="flex justify-center text-3xl font-bold font-barlow text-darkBlue mb-14 mt-14">
         Mon entreprise
       </h1>
 
-      <form className="font-redHat flex flex-col min-w-max w-4/5 m-auto">
+      <form>
         <FormField
           name="Nom"
           labels="name"
-          placeholder={data && data.user_id}
+          placeholder={user && user.company_name}
         />
 
         <FormField
@@ -46,20 +45,25 @@ function Company() {
           labels="description"
           placeholder={data && data.description}
         />
+        <fieldset className="flex justify-between">
+          <FormField
+            name="Adresse"
+            labels="address"
+            placeholder={data && data.address}
+          />
 
-        <FormField
-          name="Adresse"
-          labels="address"
-          placeholder={data && data.address}
-        />
+          <FormField
+            name="Code postal"
+            labels="postcode"
+            placeholder={data && data.postcode}
+          />
 
-        <FormField
-          name="Code postal"
-          labels="postcode"
-          placeholder={data && data.postcode}
-        />
-
-        <FormField name="Ville" labels="city" placeholder={data && data.city} />
+          <FormField
+            name="Ville"
+            labels="city"
+            placeholder={data && data.city}
+          />
+        </fieldset>
 
         <FormField
           name="Email de contact"
@@ -73,6 +77,13 @@ function Company() {
           placeholder={data && data.phone}
         />
       </form>
+
+      <button
+        type="button"
+        className="py-6 w-1/4 text-white text-base bg-darkBlue hover:bg-opacity-90 rounded-full  m-auto mt-12"
+      >
+        Changer mes informations
+      </button>
     </main>
   );
 }
