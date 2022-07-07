@@ -13,9 +13,7 @@ function Company() {
 
   useEffect(() => {
     axios
-      .get(
-        `${import.meta.env.VITE_BACKEND_URL}company/${user.company_group_id}`
-      )
+      .get(`${import.meta.env.VITE_BACKEND_URL}company/${user.user_id}`)
       .then((res) => {
         setDatas(res.data);
       });
@@ -31,7 +29,7 @@ function Company() {
         <FormField
           name="Nom"
           labels="name"
-          placeholder={user && user.company_name}
+          placeholder={data && data.company_name}
         />
 
         <FormField

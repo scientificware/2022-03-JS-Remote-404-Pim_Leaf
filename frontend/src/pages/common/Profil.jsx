@@ -13,7 +13,7 @@ function Profil() {
 
   useEffect(() => {
     axios
-      .get(`${import.meta.env.VITE_BACKEND_URL}user/${user.company_group_id}`)
+      .get(`${import.meta.env.VITE_BACKEND_URL}user/${user.user_id}`)
       .then((res) => {
         setDatas(res.data);
       });
@@ -25,8 +25,7 @@ function Profil() {
         Mon profil
       </h1>
 
-      <h2>Mon entreprise : {data.company_name}</h2>
-
+      <h2>Mon entreprise : {data && data.company_name}</h2>
       <form>
         <FormField name="Nom" labels="name" placeholder={data && data.name} />
 
@@ -36,7 +35,6 @@ function Profil() {
           placeholder={data && data.mail}
         />
       </form>
-
       <button
         type="button"
         className="py-6 w-1/4 text-white text-base bg-darkBlue hover:bg-opacity-90 rounded-full  m-auto mt-12"
