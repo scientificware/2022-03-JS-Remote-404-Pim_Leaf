@@ -12,10 +12,10 @@ import Company from "@pages/common/Company";
 import CompanyDetails from "@pages/common/CompanyDetails";
 import Profil from "@pages/common/Profil";
 import Products from "@pages/common/Products";
+import ProductsDetails from "@pages/common/ProductsDetails";
 
 import Suppliers from "@retailersP/Suppliers";
 import SuppliersDetails from "@retailersP/SuppliersDetails";
-import ProductsDetails from "@retailersP/ProductsDetails";
 
 import SuppliersProductsDetails from "@suppliersP/SupProductsDetails";
 import Clients from "@suppliersP/Clients";
@@ -72,6 +72,7 @@ function App() {
             }
           >
             <Route path="produits" element={<Products />} />
+
             <Route
               path="produit/:id/details"
               element={<SuppliersProductsDetails />}
