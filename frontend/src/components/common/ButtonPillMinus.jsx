@@ -1,7 +1,7 @@
-function ButtonPillMinus({ action }) {
+function ButtonPillMinus({ action, target }) {
   return (
     <div>
-      <button type="button" onClick={action}>
+      <button type="button" onClick={() => action(target)}>
         <img
           src="http://localhost:3000/src/assets/icon_minus.svg"
           alt="minus icon for illustration"

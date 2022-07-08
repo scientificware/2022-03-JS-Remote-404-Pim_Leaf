@@ -56,7 +56,7 @@ function Products() {
 
   useEffect(() => {
     axios
-      .get(`${import.meta.env.VITE_BACKEND_URL}user/3/products`)
+      .get(`${import.meta.env.VITE_BACKEND_URL}user/${user.user_id}/products`)
       .then((res) => {
         const prod = res.data.map((el) => ({ ...el, check: false }));
         setProducts(prod);
@@ -81,10 +81,10 @@ function Products() {
       <div className="font-redHat w-4/5 m-auto">
         <div className="flex flex-row justify-end">
           <ButtonPillPlus action={handleOpen} />
-          <ButtonPillMinus action={handleClickMinus} />
+          <ButtonPillMinus action={handleClickMinus} target={products} />
         </div>
 
-        <table className="w-full shadow-md">
+        <table className="w-full">
           <thead>
             <tr className="text-left h-12 shadow-md">
               <th
