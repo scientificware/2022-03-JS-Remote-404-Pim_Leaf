@@ -6,7 +6,7 @@ function SuppliersLines({ human }) {
   return (
     <tr className="odd:bg-lightBlue/10 even:bg-middleBlue/30 transition ease-in-out hover:bg-lightBlue duration-500 text-left">
       <td className="text-left text-l border-y-8 border-white">
-        <Link to={`/commercant/fournisseur/${human.supplier_id}`}>
+        <Link to={`/commercant/fournisseur/${human.supplier_id}/details`}>
           {human.company_name}
         </Link>
       </td>
