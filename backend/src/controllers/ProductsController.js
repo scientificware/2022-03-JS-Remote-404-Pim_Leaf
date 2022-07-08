@@ -20,7 +20,7 @@ class ProductsController {
         if (rows[0] == null) {
           res.sendStatus(404);
         } else {
-          res.status(200).json(rows[0]);
+          res.status(200).json(rows);
         }
       })
       .catch((err) => {
