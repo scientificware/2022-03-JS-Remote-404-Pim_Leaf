@@ -34,6 +34,13 @@ function Profil() {
           labels="email"
           placeholder={data && data.mail}
         />
+
+        <FormField name="Nouveau mot de passe" labels="newPass" />
+
+        <FormField
+          name="Confirmer le nouveau mot de passe"
+          labels="checkNewPass"
+        />
       </form>
       <button
         type="button"

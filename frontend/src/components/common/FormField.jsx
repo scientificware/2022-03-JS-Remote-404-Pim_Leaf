@@ -1,4 +1,4 @@
-function FormField({ name, labels, placeholder }) {
+function FormField({ name, labels, placeholder = "" }) {
   return (
     <label htmlFor={labels} className="text-xl font-bold flex flex-col">
       {name}
