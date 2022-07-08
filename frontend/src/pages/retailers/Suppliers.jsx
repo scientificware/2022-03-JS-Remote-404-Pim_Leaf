@@ -6,9 +6,23 @@ import axios from "axios";
 import SearchBarHumans from "@components/common/SearchBarHumans";
 import SuppliersLines from "@components/retailers/SuppliersLines";
 
-import ButtonIcons from "@components/common/ButtonIcons";
+import { Typography, Box, Modal } from "@material-ui/core";
+
+import ButtonPillPlus from "@components/common/ButtonPillPlus";
 
 import UserExport from "@contexts/UserContext";
+
+const style = {
+  position: "absolute",
+  top: "50%",
+  left: "50%",
+  transform: "translate(-50%, -50%)",
+  width: 400,
+  bgcolor: "background.paper",
+  border: "2px solid #000",
+  boxShadow: 24,
+  p: 4,
+};
 
 function Suppliers() {
   const { user } = useContext(UserExport.UserContext);
@@ -18,7 +32,9 @@ function Suppliers() {
   const [connected, setConnected] = useState([]);
   const [pending, setPending] = useState([]);
 
-  const icon = ["plus"];
+  const [open, setOpen] = useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
 
   useEffect(() => {
     axios
@@ -61,9 +77,7 @@ function Suppliers() {
 
       <div className="font-redHat w-4/5 m-auto">
         <div className="flex flex-row justify-end">
-          {icon.map((i) => (
-            <ButtonIcons icon={i} />
-          ))}
+          <ButtonPillPlus action={handleOpen} />
         </div>
 
         <h2 className="text-2xl font-redHat mb-4">En attente de connexion</h2>
@@ -156,7 +170,22 @@ function Suppliers() {
           </tbody>
         </table>
       </div>
-      {/* </div> */}
+
+      <Modal
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+      >
+        <Box sx={style}>
+          <Typography id="modal-modal-title" variant="h6" component="h2">
+            Text in a modal
+          </Typography>
+          <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+            Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
+          </Typography>
+        </Box>
+      </Modal>
     </main>
   );
 }
