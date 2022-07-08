@@ -62,10 +62,10 @@ class ProductsManager extends AbstractManager {
     FROM ${ProductsManager.table} AS p
     INNER JOIN category AS cat ON p.category_id = cat.id
     INNER JOIN origin AS o ON p.origin_id = o.id
-    LEFT JOIN allergens_types AS at ON at.product_id=p.id
-    LEFT JOIN allergen_category AS a ON at.allergen_id=a.id
-    LEFT JOIN labels_types AS lt ON lt.label_id=p.id
-    LEFT JOIN label AS l ON lt.label_id=l.id
+    LEFT JOIN allergens_types AS aty ON aty.product_id=p.id
+    LEFT JOIN allergen_category AS a ON a.id=aty.allergen_id
+    LEFT JOIN labels_types AS lty ON lty.product_id=p.id
+    LEFT JOIN label AS l ON lty.label_id=l.id
     WHERE p.id = ?`,
       [id]
     );
