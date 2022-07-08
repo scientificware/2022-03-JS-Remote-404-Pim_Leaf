@@ -2,6 +2,8 @@
 
 import { Link } from "react-router-dom";
 
+import { FiArrowRight } from "react-icons/fi";
+
 function SuppliersLines({ human }) {
   return (
     <tr className="odd:bg-lightBlue/10 even:bg-middleBlue/30 transition ease-in-out hover:bg-lightBlue duration-500 text-left">
@@ -31,14 +33,15 @@ function SuppliersLines({ human }) {
       <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
         <button
           type="button"
-          className="inline-block text-lightGrey hover:text-darkBlue"
+          className="inline-block text-darkBlue text-xl hover:scale-150"
         >
-          <svg
+          <FiArrowRight />
+          {/* <svg
             className="inline-block h-6 w-6 fill-current"
             viewBox="0 0 24 24"
           >
             <path d="M12 6a2 2 0 110-4 2 2 0 010 4zm0 8a2 2 0 110-4 2 2 0 010 4zm-2 6a2 2 0 104 0 2 2 0 00-4 0z" />
-          </svg>
+          </svg> */}
         </button>
       </td>
     </tr>
