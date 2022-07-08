@@ -1,4 +1,4 @@
-function SuppliersClientsDetails() {
+function ClientsDetails() {
   return (
     <div>
       <h1>Hello Suppleirs Client Details</h1>
@@ -6,4 +6,4 @@ function SuppliersClientsDetails() {
   );
 }
 
-export default SuppliersClientsDetails;
+export default ClientsDetails;
