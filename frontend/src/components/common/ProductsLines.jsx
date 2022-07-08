@@ -2,10 +2,8 @@
 
 import { useContext } from "react";
 import { Link } from "react-router-dom";
-// import axios from "axios";
 
 import SwitchProducts from "@components/common/SwitchProducts";
-// import userProfil from "src/data/ClementData";
 
 import UserExport from "@contexts/UserContext";
 
@@ -13,7 +11,7 @@ function ProductsLines({ product, MdDone, handleCheckProducts }) {
   const { user } = useContext(UserExport.UserContext);
 
   return (
-    <tr className="odd:bg-lightBlue/10 even:bg-middleBlue/30 transition duration-1000 ease-out hover:scale-105">
+    <tr className="odd:bg-lightBlue/10 even:bg-middleBlue/30 transition ease-in-out hover:bg-lightBlue duration-500">
       <td className="text-left border-y-8 border-white">
         <div
           className={

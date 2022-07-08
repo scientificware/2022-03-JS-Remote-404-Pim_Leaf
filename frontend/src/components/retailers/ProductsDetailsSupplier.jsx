@@ -4,7 +4,6 @@ function ProductsDetailsSupplier({
   phone,
   mail,
   address,
-  logo,
   postcode,
 }) {
   return (
@@ -13,11 +12,11 @@ function ProductsDetailsSupplier({
       {/* SUPPLIER */}
       <article className="bg-middleBlue/50 shadow-lg mt-2">
         <div className="flex flex-row">
-          <div className="flex items-center">
+          {/* <div className="flex items-center">
             <div className="col-span-1 row-span-2 p-10 flex justify-center">
               <img src={logo.url} alt={logo.alt} className="object-contain" />
             </div>
-          </div>
+          </div> */}
           <div>
             <div className="col-span-2 p-10">
               <h2 className="text-3xl pb-2">{company}</h2>
