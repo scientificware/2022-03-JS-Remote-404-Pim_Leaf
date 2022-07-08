@@ -16,6 +16,7 @@ SET time_zone = "+00:00";
 -- `allergen_category`
 -- `category`
 -- `products`
+-- `labels_types`
 -- `allergens_types`
 -- `stock`
 
@@ -24,6 +25,7 @@ SET time_zone = "+00:00";
 
 DROP TABLE IF EXISTS `stock`;
 DROP TABLE IF EXISTS `allergens_types`;
+DROP TABLE IF EXISTS `labels_types`;
 DROP TABLE IF EXISTS `products`;
 DROP TABLE IF EXISTS `category`;
 DROP TABLE IF EXISTS `allergen_category`;
@@ -339,13 +341,11 @@ CREATE TABLE `products` (
   `product_name` VARCHAR(100) NOT NULL,
   `detail` VARCHAR(255) NULL,
   `advise` VARCHAR(255) NULL,
+  `manufacturing_method` VARCHAR(255) NULL,
   `category_id` TINYINT NOT NULL,
   `origin_id` INT NOT NULL,
-  `label_id` INT NOT NULL,
-  `recipe_idea` VARCHAR(255) NULL,
   FOREIGN KEY (category_id) REFERENCES category(id),
-  FOREIGN KEY (origin_id) REFERENCES origin(id),
-  FOREIGN KEY (label_id) REFERENCES label(id)
+  FOREIGN KEY (origin_id) REFERENCES origin(id)
 ) ENGINE=InnoDB;
 
 --
@@ -353,29 +353,77 @@ CREATE TABLE `products` (
 --
 
 LOCK TABLES `products` WRITE;
-INSERT INTO `products` (`product_name`, `detail`, `advise`, `category_id`, `origin_id`, `label_id`, `recipe_idea`) VALUES
-("Sucre de canne non raffiné", "details test 1", "advise test 1", 2, 1, 1, "recipe test 1"),
-("Sel de Guérande", "details test 2", "advise test 1", 10, 1, 1, "recipe test 2"),
-("Sirop d'agave", "details test", "advise test 3", 2, 1, 1, "recipe test 3"),
-("Son d'avoine", "details test 4", "advise test 4", 3, 1, 4, "recipe test 4"),
-("Conserve Haricot", "details test 5", "advise test 5", 10, 10, 7, "recipe test 5"),
-("Huile essentielle de citron", "details test 6", "advise test 6", 6, 1, 1, "recipe test 6"),
-("Huile de sésame", "details test 7", "advise test 7", 10, 10, 1, "recipe test 7"),
-("Huile essentielle de lavande", "details test 8", "advise test 8", 6, 1, 1, "recipe test 8"),
-("Acide tartarique", "details test 9", "advise test 9", 6, 10, 1, "recipe test 9"),
-("Fève de Cacao", "details test 10", "advise test 10", 2, 7, 1, "recipe test 10"),
-("Bicarbonate de sodium", "details test 11", "advise test 11", 6, 2, 1, "recipe test 11"),
-("Vinaigre blanc", "details test 12", "advise test 12", 6, 1, 1, "recipe test 12"),
-("Farine de Quinoa", "details test 13", "advise test 13", 8, 1, 1, "recipe test 13"),
-("Farine de blé T65", "details test 14", "advise test 14", 8, 10, 1, "recipe test 14"),
-("Farine de seigle", "details test 15", "advise test 15", 8, 1, 1, "recipe test 15"),
-("Gingembre", "details test 16", "advise test 16", 4, 1, 10, "recipe test 16"),
-("Botte de carotte", "details test 17", "advise test 17", 4, 10, 1, "recipe test 17"),
-("Poivre noir", "details test 18", "advise test 18", 10, 1, 1, "recipe test 18"),
-("Menthe poivrée", "details test 19", "advise test 19", 4, 1, 1, "recipe test 19"),
-("Romarin", "details test 20", "advise test 20", 4, 1, 1, "recipe test 20");
+INSERT INTO `products` (`product_name`, `detail`, `advise`, `manufacturing_method`, `category_id`, `origin_id`) VALUES
+("Sucre de canne non raffiné", "details test 1", "advise test 1", "manufacturing test 1", 2, 1),
+("Sel de Guérande", "details test 2", "advise test 1", "manufacturing test 2", 10, 1),
+("Sirop d'agave", "details test 3", "advise test 3", "manufacturing test 3", 2, 1),
+("Son d'avoine", "details test 4", "advise test 4", "manufacturing test 4", 3, 1),
+("Conserve Haricot", "details test 5", "advise test 5", "manufacturing test 5", 10, 10),
+("Huile essentielle de citron", "details test 6", "advise test 6", "manufacturing test 6", 6, 1),
+("Huile de sésame", "details test 7", "advise test 7", "manufacturing test 7", 10, 10),
+("Huile essentielle de lavande", "details test 8", "advise test 8", "manufacturing test 8", 6, 1),
+("Acide tartarique", "details test 9", "advise test 9", "manufacturing test 9", 6, 10),
+("Fève de Cacao", "details test 10", "advise test 10", "manufacturing test 10", 2, 7),
+("Bicarbonate de sodium", "details test 11", "advise test 11", "manufacturing test 11", 6, 2),
+("Vinaigre blanc", "details test 12", "advise test 12", "manufacturing test 12", 6, 1),
+("Farine de Quinoa", "details test 13", "advise test 13", "manufacturing test 13", 8, 1),
+("Farine de blé T65", "details test 14", "advise test 14", "manufacturing test 14", 8, 10),
+("Farine de seigle", "details test 15", "advise test 15", "manufacturing test 15", 8, 1),
+("Gingembre", "details test 16", "advise test 16", "manufacturing test 16", 4, 1),
+("Botte de carotte", "details test 17", "advise test 17", "manufacturing test 17", 4, 10),
+("Poivre noir", "details test 18", "advise test 18", "manufacturing test 18", 10, 1),
+("Menthe poivrée", "details test 19", "advise test 19", "manufacturing test 19", 4, 1),
+("Romarin", "details test 20", "advise test 20", "manufacturing test 20",4, 1);
 UNLOCK TABLES;
+-- ----------------------------------------------------------------------------
+--
+-- Table structure for table `labels_types`
+--
 
+CREATE TABLE `labels_types` (
+  `id` INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
+  `product_id` INT NOT NULL,
+  `label_id` INT NOT NULL,
+  FOREIGN KEY (product_id) REFERENCES products(id),
+  FOREIGN KEY (label_id) REFERENCES label(id)
+) ENGINE=InnoDB;
+
+--
+-- Content for table `labels_types`
+--
+
+LOCK TABLES `labels_types` WRITE;
+
+INSERT INTO `labels_types` (`product_id`, `label_id`) VALUES
+(1, 9),
+(2, 3),
+(3, 4),
+(3, 6),
+(4, 1),
+(4, 7),
+(5, 4),
+(5, 7),
+(5, 8),
+(6, 1),
+(6, 3),
+(7, 1),
+(8, 1),
+(10, 1),
+(10, 9),
+(12, 8),
+(13, 1),
+(13, 3),
+(14, 1),
+(14, 8),
+(15, 1),
+(15, 8),
+(16, 5),
+(17, 5),
+(19, 4),
+(20, 1),
+(20, 10);
+
+UNLOCK TABLES;
 -- ----------------------------------------------------------------------------
 --
 -- Table structure for table `allergens_types`
@@ -426,6 +474,8 @@ CREATE TABLE `stock` (
   `disponibility` TINYINT NOT NULL,
   `price_ttc` INT NULL,
   `price_ht` INT NULL,
+  `recipe_idea` VARCHAR(255) NULL,
+  `tips` VARCHAR(255) NULL,
   FOREIGN KEY (product_id) REFERENCES products(id),
   FOREIGN KEY (owner_id) REFERENCES company(id),
   FOREIGN KEY (supplier_id) REFERENCES company(id)
@@ -436,58 +486,58 @@ CREATE TABLE `stock` (
 --
 
 LOCK TABLES `stock` WRITE;
-INSERT INTO `stock` (`product_id`, `owner_id`,`supplier_id`, `disponibility`, `price_ttc`, `price_ht`) VALUES
-(1, 4, 4, 0, 20, 19),
-(2, 4, 4, 0, 40, 38),
-(3, 4, 4, 0, 20, 19),
-(4, 4, 4, 0, 20, 19),
-(5, 4, 4, 0, 20, 19),
-(6, 4, 6, 0, 20, 19),
-(7, 4, 6, 1, 10, 9.5),
-(8, 4, 4, 0, 20, 19),
-(9, 4, 4, 0, 20, 19),
-(10, 4, 7, 1, 20, 19),
-(11, 5, 7, 0, 20, 19),
-(12, 5, 5, 0, 20, 19),
-(13, 5, 5, 0, 20, 19),
-(14, 5, 5, 0, 20, 19),
-(15, 5, 7, 0, 20, 19),
-(16, 5, 5, 0, 20, 19),
-(17, 5, 5, 0, 20, 19),
-(18, 5, 5, 1, 20, 19),
-(19, 5, 5, 0, 20, 19),
-(20, 5, 5, 0, 20, 19),
-(1, 1, 4, 0, 20, 19),
-(1, 2, 4, 0, 20, 19),
-(1, 3, 4, 0, 20, 19),
-(2, 2, 4, 0, 40, 38),
-(3, 1, 4, 0, 20, 19),
-(3, 2, 4, 0, 20, 19),
-(4, 2, 4, 0, 20, 19),
-(4, 3, 4, 0, 20, 19),
-(5, 1, 4, 0, 20, 19),
-(5, 3, 4, 0, 20, 19),
-(6, 3, 4, 0, 20, 19),
-(7, 1, 4, 1, 10, 9.5),
-(7, 3, 4, 1, 10, 9.5),
-(9, 1, 4, 0, 20, 19),
-(9, 2, 4, 0, 20, 19),
-(11, 2, 5, 0, 20, 19),
-(11, 3, 5, 0, 20, 19),
-(12, 3, 5, 0, 20, 19),
-(13, 3, 5, 0, 20, 19),
-(14, 2, 5, 0, 20, 19),
-(15, 1, 5, 0, 20, 19),
-(15, 3, 5, 0, 20, 19),
-(16, 1, 5, 0, 20, 19),
-(16, 2, 5, 0, 20, 19),
-(16, 3, 5, 0, 20, 19),
-(17, 1, 5, 0, 20, 19),
-(18, 2, 5, 1, 20, 19),
-(18, 3, 5, 1, 20, 19),
-(19, 1, 5, 0, 20, 19),
-(19, 2, 5, 0, 20, 19),
-(19, 3, 5, 0, 20, 19);
+INSERT INTO `stock` (`product_id`, `owner_id`,`supplier_id`, `disponibility`, `price_ttc`, `price_ht`, `recipe_idea`, `tips`) VALUES
+(1, 4, 4, 0, 20, 19, "recipe test 1", "tips test 1"),
+(2, 4, 4, 0, 40, 38, "recipe test 2", "tips test 2"),
+(3, 4, 4, 0, 20, 19, "recipe test 3", "tips test 3"),
+(4, 4, 4, 0, 20, 19, "recipe test 4", "tips test 4"),
+(5, 4, 4, 0, 20, 19, "recipe test 5", "tips test 5"),
+(6, 4, 6, 0, 20, 19, "recipe test 6", "tips test 6"),
+(7, 4, 6, 1, 10, 9.5, "recipe test 7", "tips test 7"),
+(8, 4, 4, 0, 20, 19, "recipe test 8", "tips test 8"),
+(9, 4, 4, 0, 20, 19, "recipe test 9", "tips test 9"),
+(10, 4, 7, 1, 20, 19, "recipe test 10", "tips test 10"),
+(11, 5, 7, 0, 20, 19, "recipe test 11", "tips test 11"),
+(12, 5, 5, 0, 20, 19, "recipe test 12", "tips test 12"),
+(13, 5, 5, 0, 20, 19, "recipe test 13", "tips test 13"),
+(14, 5, 5, 0, 20, 19, "recipe test 14", "tips test 14"),
+(15, 5, 7, 0, 20, 19, "recipe test 15", "tips test 15"),
+(16, 5, 5, 0, 20, 19, "recipe test 16", "tips test 16"),
+(17, 5, 5, 0, 20, 19, "recipe test 17", "tips test 17"),
+(18, 5, 5, 1, 20, 19, "recipe test 18", "tips test 18"),
+(19, 5, 5, 0, 20, 19, "recipe test 19", "tips test 19"),
+(20, 5, 5, 0, 20, 19, "recipe test 20", "tips test 20"),
+(1, 1, 4, 0, 20, 19, "recipe test 21", "tips test 21"),
+(1, 2, 4, 0, 20, 19, "recipe test 22", "tips test 22"),
+(1, 3, 4, 0, 20, 19, "recipe test 23", "tips test 23"),
+(2, 2, 4, 0, 40, 38, "recipe test 24", "tips test 24"),
+(3, 1, 4, 0, 20, 19, "recipe test 25", "tips test 25"),
+(3, 2, 4, 0, 20, 19, "recipe test 26", "tips test 26"),
+(4, 2, 4, 0, 20, 19, "recipe test 27", "tips test 27"),
+(4, 3, 4, 0, 20, 19, "recipe test 28", "tips test 28"),
+(5, 1, 4, 0, 20, 19, "recipe test 29", "tips test 29"),
+(5, 3, 4, 0, 20, 19, "recipe test 30", "tips test 30"),
+(6, 3, 4, 0, 20, 19, "recipe test 31", "tips test 31"),
+(7, 1, 4, 1, 10, 9.5, "recipe test 32", "tips test 32"),
+(7, 3, 4, 1, 10, 9.5, "recipe test 33", "tips test 33"),
+(9, 1, 4, 0, 20, 19, "recipe test 34", "tips test 34"),
+(9, 2, 4, 0, 20, 19, "recipe test 35", "tips test 35"),
+(11, 2, 5, 0, 20, 19, "recipe test 36", "tips test 36"),
+(11, 3, 5, 0, 20, 19, "recipe test 37", "tips test 37"),
+(12, 3, 5, 0, 20, 19, "recipe test 38", "tips test 38"),
+(13, 3, 5, 0, 20, 19, "recipe test 39", "tips test 39"),
+(14, 2, 5, 0, 20, 19, "recipe test 40", "tips test 40"),
+(15, 1, 5, 0, 20, 19, "recipe test 41", "tips test 41"),
+(15, 3, 5, 0, 20, 19, "recipe test 42", "tips test 42"),
+(16, 1, 5, 0, 20, 19, "recipe test 43", "tips test 43"),
+(16, 2, 5, 0, 20, 19, "recipe test 44", "tips test 44"),
+(16, 3, 5, 0, 20, 19, "recipe test 45", "tips test 45"),
+(17, 1, 5, 0, 20, 19, "recipe test 46", "tips test 46"),
+(18, 2, 5, 1, 20, 19, "recipe test 47", "tips test 47"),
+(18, 3, 5, 1, 20, 19, "recipe test 48", "tips test 48"),
+(19, 1, 5, 0, 20, 19, "recipe test 49", "tips test 49"),
+(19, 2, 5, 0, 20, 19, "recipe test 50", "tips test 50"),
+(19, 3, 5, 0, 20, 19, "recipe test 51", "tips test 51");
 UNLOCK TABLES;
 
 -- ----------------------------------------------------------------------------
