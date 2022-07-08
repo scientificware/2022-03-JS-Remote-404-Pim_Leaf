@@ -1,18 +1,19 @@
+/* eslint-disable jsx-a11y/control-has-associated-label */
 /* eslint-disable import/no-unresolved */
 /* eslint-disable no-unused-expressions */
 /* eslint-disable import/no-unresolved */
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { MdDone } from "react-icons/md";
 import axios from "axios";
 
 import { Typography, Box, Modal } from "@material-ui/core";
 
+import UserExport from "@contexts/UserContext";
+
 import ButtonPillMinus from "@components/common/ButtonPillMinus";
 import ButtonPillPlus from "@components/common/ButtonPillPlus";
-import SearchBarProducts from "@components/SearchBarProducts";
-import ProductsItems from "@components/common/ProductsItems";
-
-// import ProductsTable from "@components/common/ProductsTable";
+import SearchBarProducts from "@components/common/SearchBarProducts";
+import ProductsLines from "@components/common/ProductsLines";
 
 const style = {
   position: "absolute",
@@ -29,6 +30,7 @@ const style = {
 function Products() {
   const [products, setProducts] = useState([]);
   const [searchInput, setSearchInput] = useState("");
+  const { user } = useContext(UserExport.UserContext);
 
   const handleCheckProducts = (prod) => {
     const newProduct = [...products];
@@ -66,80 +68,78 @@ function Products() {
 
   return (
     <main>
-      <div className="flex justify-center text-3xl font-bold font-barlow">
-        <h1 className="mb-8 mt-14">Mes fiches produits</h1>
-      </div>
+      <h1 className="text-3xl text-center font-bold font-barlow mt-14 mb-8">
+        Mes fiches produits
+      </h1>
 
       {/* <ProductsTable /> */}
-      <div className=" mb-10 mt-20">
-        <SearchBarProducts
-          searchInput={searchInput}
-          setSearchInput={setSearchInput}
-        />
-      </div>
+      <SearchBarProducts
+        searchInput={searchInput}
+        setSearchInput={setSearchInput}
+      />
 
       <div className="font-redHat w-4/5 m-auto">
         <div className="flex flex-row justify-end">
           <ButtonPillPlus action={handleOpen} />
           <ButtonPillMinus action={handleClickMinus} />
-          <Modal
-            open={open}
-            onClose={handleClose}
-            aria-labelledby="modal-modal-title"
-            aria-describedby="modal-modal-description"
-          >
-            <Box sx={style}>
-              <Typography id="modal-modal-title" variant="h6" component="h2">
-                Text in a modal
-              </Typography>
-              <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-                Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
-              </Typography>
-            </Box>
-          </Modal>
         </div>
-      </div>
-      <table className="w-full">
-        <thead className="">
-          <tr className="text-left h-12 shadow-md">
-            <th
-              scope="col"
-              className="bg-middleBlue/70 text-middleBlue/0 text-l uppercase"
-            >
-              a
-            </th>
-            <th scope="col" className="bg-middleBlue/70 text-l uppercase">
-              Produit
-            </th>
-            <th scope="col" className="bg-middleBlue/70 text-l uppercase">
-              Fournisseur
-            </th>
-            <th scope="col" className="bg-middleBlue/70 text-l uppercase">
-              Catégorie
-            </th>
-            <th scope="col" className="bg-middleBlue/70 text-l uppercase">
-              Disponibilité
-            </th>
-          </tr>
-        </thead>
-        <tbody>
-          {products
-            .filter(
-              (product) =>
-                product.product_name.includes(searchInput) ||
-                product.supplier.includes(searchInput) ||
-                product.category.includes(searchInput)
-            )
-            .map((product) => (
-              <ProductsItems
-                key={product.id}
-                product={product}
-                MdDone={MdDone}
-                handleCheckProducts={handleCheckProducts}
+
+        <table className="w-full shadow-md">
+          <thead>
+            <tr className="text-left h-12 shadow-md">
+              <th
+                scope="col"
+                className="bg-middleBlue/70 text-middleBlue/0 text-l uppercase"
               />
-            ))}
-        </tbody>
-      </table>
+              <th scope="col" className="bg-middleBlue/70 text-l uppercase">
+                Produit
+              </th>
+              <th scope="col" className="bg-middleBlue/70 text-l uppercase">
+                {user.company_group_id === 1 ? "Fournisseur" : "Fabricant"}
+              </th>
+              <th scope="col" className="bg-middleBlue/70 text-l uppercase">
+                Catégorie
+              </th>
+              <th scope="col" className="bg-middleBlue/70 text-l uppercase">
+                Disponibilité
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            {products
+              .filter(
+                (product) =>
+                  product.product_name.includes(searchInput) ||
+                  product.supplier.includes(searchInput) ||
+                  product.name.includes(searchInput)
+              )
+              .map((product) => (
+                <ProductsLines
+                  key={product.id}
+                  product={product}
+                  MdDone={MdDone}
+                  handleCheckProducts={handleCheckProducts}
+                />
+              ))}
+          </tbody>
+        </table>
+      </div>
+
+      <Modal
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+      >
+        <Box sx={style}>
+          <Typography id="modal-modal-title" variant="h6" component="h2">
+            Text in a modal
+          </Typography>
+          <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+            Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
+          </Typography>
+        </Box>
+      </Modal>
     </main>
   );
 }

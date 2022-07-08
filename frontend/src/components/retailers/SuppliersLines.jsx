@@ -23,25 +23,29 @@ function SuppliersLines({ human }) {
 
       <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
         <span className="relative inline-block px-3 py-1 font-semibold text-darkBlue/90 leading-tight">
-          <span
-            aria-hidden
-            className="absolute inset-0 bg-lightGreen/60 opacity-50 rounded-full"
-          />
+          {human.status === "En attente de connexion" ? (
+            <span
+              aria-hidden
+              className="absolute inset-0 bg-lightBlue/90 opacity-50
+            rounded-full"
+            />
+          ) : (
+            <span
+              aria-hidden
+              className="absolute inset-0 bg-lightGreen/60 opacity-50
+            rounded-full"
+            />
+          )}
+
           <span className="relative">{human.status}</span>
         </span>
       </td>
       <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
         <button
           type="button"
-          className="inline-block text-darkBlue text-xl hover:scale-150"
+          className="inline-block text-darkBlue text-xl transition duration-120 ease-out hover:scale-125"
         >
           <FiArrowRight />
-          {/* <svg
-            className="inline-block h-6 w-6 fill-current"
-            viewBox="0 0 24 24"
-          >
-            <path d="M12 6a2 2 0 110-4 2 2 0 010 4zm0 8a2 2 0 110-4 2 2 0 010 4zm-2 6a2 2 0 104 0 2 2 0 00-4 0z" />
-          </svg> */}
         </button>
       </td>
     </tr>

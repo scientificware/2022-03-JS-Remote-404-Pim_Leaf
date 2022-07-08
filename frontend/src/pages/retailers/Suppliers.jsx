@@ -170,6 +170,7 @@ function Suppliers() {
           </tbody>
         </table>
       </div>
+
       <Modal
         open={open}
         onClose={handleClose}
