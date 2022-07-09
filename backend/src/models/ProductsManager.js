@@ -86,7 +86,7 @@ class ProductsManager extends AbstractManager {
       l.name AS label_name
       FROM ${ProductsManager.table} AS p
       LEFT JOIN labels_types AS lty ON lty.product_id=p.id
-      LEFT JOIN label AS l ON lty.label_id=l.id
+      LEFT JOIN label AS l ON l.id=lty.label_id
       WHERE p.id = ?
       `,
       [id]
