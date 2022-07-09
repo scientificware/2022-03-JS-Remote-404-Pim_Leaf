@@ -116,6 +116,13 @@ class CompanyManager extends AbstractManager {
       `
     );
   }
+
+  updateCompanyInfo(item) {
+    return this.connection.query(
+      `update ${CompanyManager.table} set company_name = ? where id = ?`,
+      [item.company_name, item.id]
+    );
+  }
 }
 
 module.exports = CompanyManager;
