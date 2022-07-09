@@ -16,18 +16,18 @@ class ProductsController {
   static read = (req, res) => {
     models.products
       .getProductDetails(req.params.id)
-      .then(([data]) => {
+      .then(([product]) => {
         models.products
           .getProductAllergens(req.params.id)
           .then(([labelsArr]) => {
             models.products
               .getProductLabels(req.params.id)
               .then(([allergensArr]) => {
-                if (data[0] === null) {
+                if (product[0] == null) {
                   res.sendStatus(404);
                 } else {
                   const datas = {
-                    ...data,
+                    ...product,
                     allergens: allergensArr,
                     labels: labelsArr,
                   };
