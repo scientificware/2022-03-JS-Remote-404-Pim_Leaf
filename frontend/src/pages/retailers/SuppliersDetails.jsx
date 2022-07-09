@@ -22,23 +22,33 @@ function SuppliersDetails() {
   }, []);
 
   console.warn(user);
-  return (
-    <main>
-      <h1 className="flex justify-center text-3xl font-bold font-barlow">
-        {supplier && supplier.company_name}
-      </h1>
 
-      <div className="flex flex-col font-redHat w-3/4 m-auto">
-        <SuppliersDetailsDescription supplier={supplier} />
+  if (supplier) {
+    return (
+      <main>
+        <h1 className="flex justify-center text-3xl font-bold font-barlow">
+          {supplier.company_name}
+        </h1>
 
-        <ProductsDetailsSupplier />
-      </div>
+        <div className="flex flex-col font-redHat w-3/4 m-auto">
+          <SuppliersDetailsDescription description={supplier.description} />
 
-      <SearchBar />
-      {/* <ButtonFunction /> */}
-      {/* <DetailsSuppliers products={dataProducts} /> */}
-    </main>
-  );
+          <ProductsDetailsSupplier
+            company={supplier.company_name}
+            description={supplier.description}
+            phone={supplier.phone}
+            mail={supplier.mail}
+            address={supplier.address}
+            postcode={supplier.postcode}
+          />
+        </div>
+
+        <SearchBar />
+        {/* <ButtonFunction /> */}
+        {/* <DetailsSuppliers products={dataProducts} /> */}
+      </main>
+    );
+  }
 }
 
 export default SuppliersDetails;
