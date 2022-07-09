@@ -16,12 +16,15 @@ class ProductsController {
   static read = (req, res) => {
     models.products
       .getProductDetails(req.params.id)
-      .then(([rows]) => {
-        if (rows[0] == null) {
-          res.sendStatus(404);
-        } else {
-          res.status(200).json(rows);
-        }
+      .then(([data]) => {
+        models.products.getProductAllergens(req.params.id).then(([rows]) => {
+          if (rows[0] === null) {
+            res.sendStatus(404);
+          } else {
+            const datas = { ...data, allergens: rows[0], labels: rows[1] };
+            res.status(200).json(datas);
+          }
+        });
       })
       .catch((err) => {
         console.error(err);

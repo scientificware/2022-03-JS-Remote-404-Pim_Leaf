@@ -56,17 +56,39 @@ class ProductsManager extends AbstractManager {
     p.advise AS product_advise,
     cat.name AS category,
     o.country,
-    o.region,
-    a.name AS allergen,
-    l.name AS label_name
+    o.region
     FROM ${ProductsManager.table} AS p
     INNER JOIN category AS cat ON p.category_id = cat.id
     INNER JOIN origin AS o ON p.origin_id = o.id
-    LEFT JOIN allergens_types AS aty ON aty.product_id=p.id
-    LEFT JOIN allergen_category AS a ON a.id=aty.allergen_id
-    LEFT JOIN labels_types AS lty ON lty.product_id=p.id
-    LEFT JOIN label AS l ON lty.label_id=l.id
     WHERE p.id = ?`,
+      [id]
+    );
+  }
+
+  getProductAllergens(id) {
+    return this.connection.query(
+      `SELECT 
+      a.id,
+      a.name AS allergen
+      FROM ${ProductsManager.table} AS p
+      LEFT JOIN allergens_types AS aty ON aty.product_id=p.id
+      LEFT JOIN allergen_category AS a ON a.id=aty.allergen_id
+      WHERE p.id = ?
+    `,
+      [id]
+    );
+  }
+
+  getProductLabels(id) {
+    return this.connection.query(
+      `SELECT 
+      l.id,
+      l.name AS label_name
+      FROM ${ProductsManager.table} AS p
+      LEFT JOIN labels_types AS lty ON lty.product_id=p.id
+      LEFT JOIN label AS l ON lty.label_id=l.id
+      WHERE p.id = ?
+      `,
       [id]
     );
   }
