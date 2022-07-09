@@ -119,8 +119,25 @@ class CompanyManager extends AbstractManager {
 
   updateCompanyInfo(item) {
     return this.connection.query(
-      `update ${CompanyManager.table} set company_name = ? where id = ?`,
-      [item.company_name, item.id]
+      `update ${CompanyManager.table} 
+      set company_name = ?, 
+      description = ?, 
+      address = ?, 
+      postcode = ?, 
+      city = ?, 
+      mail = ?, 
+      phone = ? 
+      where id = ?`,
+      [
+        item.company_name,
+        item.description,
+        item.address,
+        item.postcode,
+        item.city,
+        item.mail,
+        item.phone,
+        item.id,
+      ]
     );
   }
 }
