@@ -77,7 +77,7 @@ function ProductsDetails() {
         </div>
       </article>
 
-      <section>
+      <section className="flex flex-col mt-20 font-redHat w-3/4 m-auto">
         <ProductsDetailsProduct
           detail={productInfo.product_details}
           country={productInfo.country}

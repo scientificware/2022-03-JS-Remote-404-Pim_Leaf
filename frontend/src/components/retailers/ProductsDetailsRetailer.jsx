@@ -1,6 +1,6 @@
 function ProductsDetailsRetailer({ advise, recipeIdea }) {
   return (
-    <div className="flex flex-col mt-20 font-redHat w-3/4 m-auto ">
+    <div className="mt-2">
       <h2 className="text-2xl">Mon commerce</h2>
       {/* COMPANY */}
       <article className="bg-middleBlue/50 mb-10 flex justify-around shadow-lg mt-2">

@@ -2,7 +2,7 @@ function ProductsDetailsProduct({ detail, country, region, advise, label }) {
   return (
     <>
       {/* PRODUCT */}
-      <div className="flex flex-col font-redHat w-3/4 m-auto">
+      <div className="mt-2">
         <div>
           <h2 className="text-2xl">Le produit</h2>
         </div>
