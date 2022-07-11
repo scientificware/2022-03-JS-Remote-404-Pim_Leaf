@@ -205,8 +205,6 @@ function Suppliers() {
                 suppliers={suppliers}
                 searchInput={searchInput}
                 setSearchInput={setSearchInput}
-                connected={connected}
-                pending={pending}
               />
             </div>
           </div>
