@@ -117,29 +117,13 @@ class CompanyManager extends AbstractManager {
     );
   }
 
-  updateCompanyInfo(item) {
-    const sqlQuery = `update ${CompanyManager.table} 
-    set company_name = ?, 
-    description = ?, 
-    address = ?, 
-    postcode = ?, 
-    city = ?, 
-    mail = ?, 
-    phone = ? 
-    where id = ?`;
-
-    const sqlValue = [
-      item.company,
-      item.description,
-      item.address,
-      item.postcode,
-      item.city,
-      item.mail,
-      item.phone,
-      item.id,
-    ];
-
-    return this.connection.query(sqlQuery, sqlValue);
+  updateCompanyInfo(company, id) {
+    return this.connection.query(
+      `update ${CompanyManager.table} 
+    set ? 
+    where id = ?`,
+      [company, id]
+    );
   }
 }
 

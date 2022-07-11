@@ -1,43 +1,51 @@
+/* eslint-disable no-alert */
 /* eslint-disable import/no-unresolved */
 import { useState, useEffect, useContext } from "react";
 import axios from "axios";
-
-import { Typography, Box, Modal } from "@material-ui/core";
-
-import ButtonBlue from "@components/common/ButtonBlue";
 
 import FormField from "@components/common/FormField";
 
 import UserExport from "@contexts/UserContext";
 
-const style = {
-  position: "absolute",
-  top: "50%",
-  left: "50%",
-  transform: "translate(-50%, -50%)",
-  width: 400,
-  bgcolor: "background.paper",
-  border: "2px solid #000",
-  boxShadow: 24,
-  p: 4,
-};
-
 function Company() {
   const { user } = useContext(UserExport.UserContext);
 
-  const [data, setDatas] = useState();
+  const [datas, setDatas] = useState();
+  const [newDatas, setNewDatas] = useState();
 
   useEffect(() => {
     axios
       .get(`${import.meta.env.VITE_BACKEND_URL}company/${user.user_id}`)
       .then((res) => {
         setDatas(res.data);
+      })
+      .catch((err) => {
+        console.error(err);
       });
   }, []);
 
-  const [open, setOpen] = useState(false);
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
+  function updateDatas() {
+    axios
+      .put(
+        `${import.meta.env.VITE_BACKEND_URL}company/${user.user_id}`,
+        newDatas
+      )
+      .then(() => {
+        alert("Vos données ont bien été modifiées.");
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  }
+
+  const changeInfos = (event) => {
+    const changeDatas = { ...newDatas };
+    changeDatas[event.target.name] = event.target.value;
+    setNewDatas(changeDatas);
+    setDatas({ ...datas, ...changeDatas });
+  };
+
+  if (!datas) return "Données en cours de chargement";
 
   return (
     <main className="font-redHat flex flex-col w-4/5 m-auto">
@@ -47,72 +55,67 @@ function Company() {
 
       <form>
         <FormField
-          name="Nom"
-          labels="name"
-          placeholder={data && data.company_name}
+          name="company_name"
+          label="nom de l'entreprise"
+          placeholder={datas && datas.company_name}
+          changeInfos={changeInfos}
         />
+        <div className="text-xl font-bold">Domaine d{`'`}activité</div>
+        <div className="bg-middleBlue bg-opacity-50 text-darkBlue p-2 mt-1 mb-3 shadow-lg placeholder-darkBlue">
+          <p>{datas && datas.domain}</p>
+        </div>
 
         <FormField
-          name="Domaine d'activité"
-          labels="domain"
-          placeholder={data && data.domain}
-        />
-
-        <FormField
-          name="Description"
-          labels="description"
-          placeholder={data && data.description}
+          name="description"
+          label="description"
+          placeholder={datas && datas.description}
+          changeInfos={changeInfos}
         />
         <fieldset className="flex justify-between">
           <FormField
-            name="Adresse"
-            labels="address"
-            placeholder={data && data.address}
+            name="address"
+            label="adresse"
+            placeholder={datas && datas.address}
+            changeInfos={changeInfos}
           />
 
           <FormField
-            name="Code postal"
-            labels="postcode"
-            placeholder={data && data.postcode}
+            name="postcode"
+            label="Code postal"
+            placeholder={datas && datas.postcode}
+            changeInfos={changeInfos}
           />
 
           <FormField
-            name="Ville"
-            labels="city"
-            placeholder={data && data.city}
+            name="city"
+            label="Ville"
+            placeholder={datas && datas.city}
+            changeInfos={changeInfos}
           />
         </fieldset>
 
         <FormField
-          name="Email de contact"
-          labels="email"
-          placeholder={data && data.company_mail}
+          name="company_mail"
+          label="Email"
+          placeholder={datas && datas.company_mail}
+          changeInfos={changeInfos}
         />
 
         <FormField
-          name="Téléphone"
-          labels="phone"
-          placeholder={data && data.phone}
+          name="phone"
+          label="Téléphone de l'entreprise"
+          placeholder={datas && datas.phone}
+          changeInfos={changeInfos}
         />
       </form>
 
-      <ButtonBlue action={handleOpen} text="Changez mes informations" />
-
-      <Modal
-        open={open}
-        onClose={handleClose}
-        aria-labelledby="modal-modal-title"
-        aria-describedby="modal-modal-description"
+      <button
+        onClick={() => updateDatas()}
+        type="button"
+        className="py-6 w-1/4 text-white text-base bg-darkBlue hover:bg-opacity-80 rounded-full  m-auto my-12"
       >
-        <Box sx={style}>
-          <Typography id="modal-modal-title" variant="h6" component="h2">
-            Text in a modal
-          </Typography>
-          <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-            Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
-          </Typography>
-        </Box>
-      </Modal>
+        Update Datas
+      </button>
     </main>
   );
 }

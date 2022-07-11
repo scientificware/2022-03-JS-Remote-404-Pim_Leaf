@@ -33,7 +33,18 @@ class UsersManager extends AbstractManager {
   getCompanyInfos(id) {
     return this.connection
       .query(
-        `SELECT u.id AS user_id, c.id AS company_id, c.company_name, a.name AS domain, c.description, c.mail AS company_mail, c.address, c.postcode, c.city, c.phone FROM ${UsersManager.table} AS u
+        `SELECT
+        u.id AS user_id,
+        c.id AS company_id,
+        c.company_name,
+        a.name AS domain,
+        c.description,
+        c.company_mail,
+        c.address,
+        c.postcode,
+        c.city,
+        c.phone
+        FROM ${UsersManager.table} AS u
     INNER JOIN company AS c ON c.user_id = u.id
     INNER JOIN activity_field AS a ON a.id = c.activity_field_id
     WHERE u.id = ?`,

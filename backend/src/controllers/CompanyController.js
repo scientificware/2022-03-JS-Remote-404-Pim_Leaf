@@ -134,13 +134,8 @@ class CompanyController {
   };
 
   static editCompanyInformations = (req, res) => {
-    const item = req.body;
-    // TODO validations (length, format...)
-
-    item.id = parseInt(req.params.id, 10);
-
     models.company
-      .updateCompanyInfo(item)
+      .updateCompanyInfo(req.body, parseInt(req.params.id, 10))
       .then(([result]) => {
         if (result.affectedRows === 0) {
           res.sendStatus(404);
