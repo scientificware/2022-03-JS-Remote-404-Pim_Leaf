@@ -57,9 +57,10 @@ function LoginForm() {
               <img src={Padlock} alt="padlock" />
             </div>
             <input
-              className="bg-white bg-opacity-0  border-b border-b-white mt-8 mb-8 text-white"
+              className="bg-white bg-opacity-0  border-b border-b-white mt-8 mb-8 text-white
+              focus-visible:shadow-none"
               id="password"
-              type="text"
+              type="password"
               name="password"
               placeholder=""
               onChange={(event) => {
