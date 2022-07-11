@@ -1,3 +1,4 @@
+/* eslint-disable no-plusplus */
 /* eslint-disable jsx-a11y/control-has-associated-label */
 /* eslint-disable import/no-unresolved */
 
@@ -108,16 +109,17 @@ function Suppliers() {
             </tr>
           </thead>
           <tbody>
-            {pending
-              .filter(
-                (pend) =>
-                  pend.company_name.includes(searchInput) ||
-                  pend.city.includes(searchInput) ||
-                  pend.status.includes(searchInput)
-              )
-              .map((pend) => (
-                <SuppliersLines key={pend.supplier_id} human={pend} />
-              ))}
+            {pending &&
+              pending
+                .filter(
+                  (pend) =>
+                    pend.company_name.includes(searchInput) ||
+                    pend.city.includes(searchInput) ||
+                    pend.status.includes(searchInput)
+                )
+                .map((pend) => (
+                  <SuppliersLines key={pend.supplier_id} human={pend} />
+                ))}
           </tbody>
         </table>
 
@@ -153,16 +155,17 @@ function Suppliers() {
             </tr>
           </thead>
           <tbody>
-            {connected
-              .filter(
-                (connect) =>
-                  connect.company_name.includes(searchInput) ||
-                  connect.city.includes(searchInput) ||
-                  connect.status.includes(searchInput)
-              )
-              .map((connect) => (
-                <SuppliersLines key={connect.supplier_id} human={connect} />
-              ))}
+            {connected &&
+              connected
+                .filter(
+                  (connect) =>
+                    connect.company_name.includes(searchInput) ||
+                    connect.city.includes(searchInput) ||
+                    connect.status.includes(searchInput)
+                )
+                .map((connect) => (
+                  <SuppliersLines key={connect.supplier_id} human={connect} />
+                ))}
           </tbody>
         </table>
       </div>
@@ -179,15 +182,15 @@ function Suppliers() {
         {(close) => (
           <div className=" bg-darkBlue opacity-95 text-white">
             {" "}
-            <div className="flex pl-5 pr-5">
+            <div className="flexs pl-5 pr-5">
               <button type="button" onClick={close}>
                 <img
                   src={RetourButtonWhite}
                   alt="Bouton Retour"
-                  className="w-25 transition duration-120 ease-out hover:scale-105"
+                  className="w-25 justify-start transition duration-120 ease-out hover:scale-105"
                 />
               </button>
-              <h1 className="flex justify-center items-end p-4 text-2xl">
+              <h1 className="flex justify-center pb-4 text-2xl">
                 Rechercher mon fournisseur
               </h1>
             </div>
@@ -202,6 +205,8 @@ function Suppliers() {
                 suppliers={suppliers}
                 searchInput={searchInput}
                 setSearchInput={setSearchInput}
+                connected={connected}
+                pending={pending}
               />
             </div>
           </div>
