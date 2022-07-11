@@ -9,6 +9,15 @@ class ConnectionManager extends AbstractManager {
       [retailer, supplier]
     );
   }
+
+  validConnection(id) {
+    return this.connection.query(
+      `update ${ConnectionManager.table} 
+      set status = "Connecté" 
+      where id = ?`,
+      [id]
+    );
+  }
 }
 
 module.exports = ConnectionManager;
