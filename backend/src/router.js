@@ -38,7 +38,7 @@ router.get("/company/:id", UserController.readCompany);
 router.get("/user/:id", UserController.readUser);
 
 router.post("/retailer/connection", ConnectionController.add);
-router.post("/retailer/:id/product/:productId", StockController.add);
+router.post("/retailer/:id/stock", StockController.add);
 
 router.put("/company/:id", CompanyController.editCompanyInformations);
 router.put("/user/:id/profil", UserController.editUserProfil);

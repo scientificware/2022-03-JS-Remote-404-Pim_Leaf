@@ -3,7 +3,12 @@ const models = require("../models");
 class StockController {
   static add = (req, res) => {
     models.stock
-      .addStock(req.body.retailer_id, req.body.supplier_id)
+      .addStock(
+        req.body.product_id,
+        req.params.id,
+        req.body.supplier_id,
+        req.body.disponibility
+      )
       .then(([result]) => {
         res.status(201).send({ ...req.body, id: result.insertId });
       })
