@@ -34,6 +34,7 @@ class ProductsManager extends AbstractManager {
       c.company_name AS owner,
       comp.company_name AS supplier,
       cat.name,
+      s.supplier_id,
       s.disponibility
       FROM ${ProductsManager.table} AS p
       LEFT JOIN stock AS s ON s.product_id = p.id

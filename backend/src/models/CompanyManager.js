@@ -88,6 +88,7 @@ class CompanyManager extends AbstractManager {
   findAllRetailerPending(id) {
     return this.connection.query(
       `SELECT 
+      con.id, 
       con.retailer_id,
       con.supplier_id,
       c.company_name,

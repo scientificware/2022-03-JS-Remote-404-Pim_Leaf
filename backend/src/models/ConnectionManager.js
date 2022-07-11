@@ -5,8 +5,25 @@ class ConnectionManager extends AbstractManager {
 
   demandConnection(retailer, supplier) {
     return this.connection.query(
-      `insert into ${ConnectionManager.table} (status, retailer_id, supplier_id) values ("En attente de connexion", ?, ?)`,
+      `INSERT INTO ${ConnectionManager.table} (status, retailer_id, supplier_id) values ("En attente de connexion", ?, ?)`,
       [retailer, supplier]
+    );
+  }
+
+  validConnection(id) {
+    return this.connection.query(
+      `UPDATE ${ConnectionManager.table} 
+      SET status = "Connecté" 
+      WHERE id = ?`,
+      [id]
+    );
+  }
+
+  deleteConnection(id) {
+    return this.connection.query(
+      `DELETE FROM ${ConnectionManager.table} 
+      WHERE id = ?`,
+      [id]
     );
   }
 }
