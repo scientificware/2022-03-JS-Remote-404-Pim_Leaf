@@ -24,8 +24,8 @@ class ProductsController {
               .getProductLabels(req.params.id)
               .then(([allergensArr]) => {
                 if (
-                  product[0] == null ||
-                  allergensArr[0] == null ||
+                  product[0] == null &&
+                  allergensArr[0] == null &&
                   labelsArr[0] == null
                 ) {
                   res.sendStatus(404);
