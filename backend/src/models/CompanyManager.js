@@ -128,29 +128,16 @@ class CompanyManager extends AbstractManager {
     phone = ? 
     where id = ?`;
 
-    const sqlValue = [];
-    if (item.company_name) {
-      sqlValue.push(item.company_name);
-    }
-    if (item.description) {
-      sqlValue.push(item.description);
-    }
-    if (item.address) {
-      sqlValue.push(item.address);
-    }
-    if (item.postcode) {
-      sqlValue.push(item.postcode);
-    }
-    if (item.city) {
-      sqlValue.push(item.city);
-    }
-    if (item.mail) {
-      sqlValue.push(item.mail);
-    }
-    if (item.phone) {
-      sqlValue.push(item.phone);
-    }
-    sqlValue.push(item.id);
+    const sqlValue = [
+      item.company,
+      item.description,
+      item.address,
+      item.postcode,
+      item.city,
+      item.mail,
+      item.phone,
+      item.id,
+    ];
 
     return this.connection.query(sqlQuery, sqlValue);
   }
