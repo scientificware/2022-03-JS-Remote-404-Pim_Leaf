@@ -25,7 +25,10 @@ function Profil() {
 
   function updateDatas() {
     axios
-      .put(`${import.meta.env.VITE_BACKEND_URL}user/${user.user_id}`, newDatas)
+      .put(
+        `${import.meta.env.VITE_BACKEND_URL}user/${user.user_id}/profil`,
+        newDatas
+      )
       .then(() => {
         alert("Vos données ont bien été modifiées.");
       })

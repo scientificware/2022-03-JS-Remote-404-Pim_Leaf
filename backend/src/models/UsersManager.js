@@ -63,6 +63,13 @@ class UsersManager extends AbstractManager {
       )
       .then((res) => res[0]);
   }
+
+  putUserProfil(user, id) {
+    return this.connection.query(
+      `update ${UsersManager.table} set ? where id = ?`,
+      [user, id]
+    );
+  }
 }
 
 module.exports = UsersManager;

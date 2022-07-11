@@ -13,6 +13,22 @@ class UserController {
       });
   };
 
+  static editUserProfil = (req, res) => {
+    models.user
+      .putUserProfil(req.body, parseInt(req.params.id, 10))
+      .then(([result]) => {
+        if (result.affectedRows === 0) {
+          res.sendStatus(404);
+        } else {
+          res.sendStatus(204);
+        }
+      })
+      .catch((err) => {
+        console.error(err);
+        res.sendStatus(500);
+      });
+  };
+
   static readUser = (req, res) => {
     models.user
       .getUserInfos(req.params.id)
