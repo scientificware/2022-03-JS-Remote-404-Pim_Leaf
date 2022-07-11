@@ -1,28 +1,18 @@
+/* eslint-disable no-plusplus */
 /* eslint-disable jsx-a11y/control-has-associated-label */
 /* eslint-disable import/no-unresolved */
 
 import { useState, useEffect, useContext } from "react";
 import axios from "axios";
+import Popup from "reactjs-popup";
 import SearchBarHumans from "@components/common/SearchBarHumans";
 import SuppliersLines from "@components/retailers/SuppliersLines";
-
-import { Typography, Box, Modal } from "@material-ui/core";
+import ModalAddSuppliers from "@components/retailers/ModalAddSuppliers";
 
 import ButtonPillPlus from "@components/common/ButtonPillPlus";
+import RetourButtonWhite from "@assets/retour_button_white.svg";
 
 import UserExport from "@contexts/UserContext";
-
-const style = {
-  position: "absolute",
-  top: "50%",
-  left: "50%",
-  transform: "translate(-50%, -50%)",
-  width: 400,
-  bgcolor: "background.paper",
-  border: "2px solid #000",
-  boxShadow: 24,
-  p: 4,
-};
 
 function Suppliers() {
   const { user } = useContext(UserExport.UserContext);
@@ -31,10 +21,12 @@ function Suppliers() {
 
   const [connected, setConnected] = useState([]);
   const [pending, setPending] = useState([]);
+  const [suppliers, setSuppliers] = useState([]);
 
-  const [open, setOpen] = useState(false);
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
+  const contentStyle = {
+    height: "auto",
+    overlfow: "scroll", // <-- This tells the modal to scroll
+  };
 
   useEffect(() => {
     axios
@@ -62,6 +54,15 @@ function Suppliers() {
       .catch((error) => {
         console.warn(error.response.data);
       });
+
+    axios
+      .get(`${import.meta.env.VITE_BACKEND_URL}retailer/suppliers`)
+      .then((res) => {
+        setSuppliers(res.data);
+      })
+      .catch((error) => {
+        console.warn(error.response.data);
+      });
   }, []);
 
   return (
@@ -76,10 +77,6 @@ function Suppliers() {
       />
 
       <div className="font-redHat w-4/5 m-auto">
-        <div className="flex flex-row justify-end">
-          <ButtonPillPlus action={handleOpen} />
-        </div>
-
         <h2 className="text-2xl font-redHat mb-4">En attente de connexion</h2>
         <table className="w-full shadow-md rounded-lg overflow-hidden">
           <thead>
@@ -112,16 +109,17 @@ function Suppliers() {
             </tr>
           </thead>
           <tbody>
-            {pending
-              .filter(
-                (pend) =>
-                  pend.company_name.includes(searchInput) ||
-                  pend.city.includes(searchInput) ||
-                  pend.status.includes(searchInput)
-              )
-              .map((pend) => (
-                <SuppliersLines key={pend.supplier_id} human={pend} />
-              ))}
+            {pending &&
+              pending
+                .filter(
+                  (pend) =>
+                    pend.company_name.includes(searchInput) ||
+                    pend.city.includes(searchInput) ||
+                    pend.status.includes(searchInput)
+                )
+                .map((pend) => (
+                  <SuppliersLines key={pend.supplier_id} human={pend} />
+                ))}
           </tbody>
         </table>
 
@@ -157,35 +155,61 @@ function Suppliers() {
             </tr>
           </thead>
           <tbody>
-            {connected
-              .filter(
-                (connect) =>
-                  connect.company_name.includes(searchInput) ||
-                  connect.city.includes(searchInput) ||
-                  connect.status.includes(searchInput)
-              )
-              .map((connect) => (
-                <SuppliersLines key={connect.supplier_id} human={connect} />
-              ))}
+            {connected &&
+              connected
+                .filter(
+                  (connect) =>
+                    connect.company_name.includes(searchInput) ||
+                    connect.city.includes(searchInput) ||
+                    connect.status.includes(searchInput)
+                )
+                .map((connect) => (
+                  <SuppliersLines key={connect.supplier_id} human={connect} />
+                ))}
           </tbody>
         </table>
       </div>
 
-      <Modal
-        open={open}
-        onClose={handleClose}
-        aria-labelledby="modal-modal-title"
-        aria-describedby="modal-modal-description"
+      <Popup
+        trigger={
+          <div className="flex flex-row justify-end">
+            <ButtonPillPlus />
+          </div>
+        }
+        modal
+        contentStyle={contentStyle}
       >
-        <Box sx={style}>
-          <Typography id="modal-modal-title" variant="h6" component="h2">
-            Text in a modal
-          </Typography>
-          <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-            Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
-          </Typography>
-        </Box>
-      </Modal>
+        {(close) => (
+          <div className=" bg-darkBlue opacity-95 text-white">
+            {" "}
+            <div className="flexs pl-5 pr-5">
+              <button type="button" onClick={close}>
+                <img
+                  src={RetourButtonWhite}
+                  alt="Bouton Retour"
+                  className="w-25 justify-start transition duration-120 ease-out hover:scale-105"
+                />
+              </button>
+              <h1 className="flex justify-center pb-4 text-2xl">
+                Rechercher mon fournisseur
+              </h1>
+            </div>
+            <div className=" mb-10 mt-5">
+              <SearchBarHumans
+                searchInput={searchInput}
+                setSearchInput={setSearchInput}
+              />
+            </div>
+            <div className="flex justify-center overflow-y-scroll h-5/6">
+              <ModalAddSuppliers
+                suppliers={suppliers}
+                searchInput={searchInput}
+                setSearchInput={setSearchInput}
+              />
+            </div>
+          </div>
+        )}
+      </Popup>
     </main>
   );
 }
