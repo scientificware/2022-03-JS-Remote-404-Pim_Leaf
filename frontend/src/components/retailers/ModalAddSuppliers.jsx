@@ -23,11 +23,15 @@ function ModalAddSuppliers({ suppliers, searchInput }) {
           {suppliers
             .filter(
               (supplier) =>
-                supplier.name.includes(searchInput) ||
-                supplier.domaine.includes(searchInput)
+                supplier.company_name.includes(searchInput) ||
+                supplier.domain.includes(searchInput)
             )
-            .map(({ id, name, domaine }) => (
-              <SuppliersListModal id={id} name={name} domaine={domaine} />
+            .map((supplier) => (
+              <SuppliersListModal
+                id={supplier.id}
+                name={supplier.company_name}
+                domaine={supplier.domain}
+              />
             ))}
         </tbody>
       </table>
