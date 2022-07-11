@@ -67,13 +67,18 @@ function Profil() {
           changeInfos={changeInfos}
         />
 
-        <FormField name="oldPass" label="Ancien mot de passe" />
+        <FormField name="oldPass" label="Ancien mot de passe" type="password" />
 
-        <FormField name="newPass" label="Nouveau mot de passe" />
+        <FormField
+          name="newPass"
+          label="Nouveau mot de passe"
+          type="password"
+        />
 
         <FormField
           name="checkNewPass"
           label="Confirmer le nouveau mot de passe"
+          type="password"
         />
       </form>
 

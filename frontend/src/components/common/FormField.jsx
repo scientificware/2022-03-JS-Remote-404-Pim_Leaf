@@ -1,9 +1,15 @@
-function FormField({ name, label, placeholder = "", changeInfos }) {
+function FormField({
+  name,
+  label,
+  placeholder = "",
+  changeInfos,
+  type = "text",
+}) {
   return (
     <label htmlFor={name} className="text-xl font-bold flex flex-col">
       {label}
       <input
-        type="text"
+        type={type}
         name={name}
         placeholder={placeholder}
         onChange={(e) => changeInfos(e)}
