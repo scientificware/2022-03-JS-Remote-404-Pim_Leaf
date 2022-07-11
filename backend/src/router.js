@@ -5,6 +5,7 @@ const {
   AuthController,
   ProductsController,
   CompanyController,
+  ConnectionController,
   UserController,
 } = require("./controllers");
 
@@ -34,6 +35,8 @@ router.get(
 router.get("/supplier/clients", CompanyController.browseRetailers);
 router.get("/company/:id", UserController.readCompany);
 router.get("/user/:id", UserController.readUser);
+
+router.post("/retailer/connection", ConnectionController.add);
 
 router.put("/company/:id", CompanyController.editCompanyInformations);
 router.put("/user/:id/profil", UserController.editUserProfil);
