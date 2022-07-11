@@ -147,7 +147,7 @@ CREATE TABLE `company` (
   `address` VARCHAR(255) NULL,
   `postcode` INT NULL,
   `city` VARCHAR(255) NULL,
-  `mail` VARCHAR(255) NOT NULL,
+  `company_mail` VARCHAR(255) NOT NULL,
   `phone` VARCHAR(20) NULL,
   `description` VARCHAR(255) NULL,
   `file_id` INT NULL,
@@ -165,7 +165,7 @@ CREATE TABLE `company` (
 --
 
 LOCK TABLES `company` WRITE;
-INSERT INTO `company` (`company_name`, `address`, `postcode`, `city`, `mail`, `phone`, `description`, `file_id`, `company_group_id`, `activity_field_id`, `user_id`) VALUES
+INSERT INTO `company` (`company_name`, `address`, `postcode`, `city`, `company_mail`, `phone`, `description`, `file_id`, `company_group_id`, `activity_field_id`, `user_id`) VALUES
 ("Eco Vrac", "13, avenue du Maréchal Foch", 68100, "Mulhouse", "ecovrac@email.com", "+33-655-535-768", "desc test", NULL, 1, 1, 1),
 ("Valfleuri", "5, rue de la Charente", 68270, "Wittenheim", "valfleuri@email.com", "+33-755-552-764", "desc test", NULL, 1, 5, 2),
 ("Le petit épicier","6 rue des timoniers",29470,"Plougastel-Daoulas","le-petit-epicier@email.com","+33-655-586-499", "desc test", NULL, 1, 2, 3),

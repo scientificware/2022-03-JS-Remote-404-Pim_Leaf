@@ -2,42 +2,46 @@
 import { useState, useEffect, useContext } from "react";
 import axios from "axios";
 
-import { Typography, Box, Modal } from "@material-ui/core";
-
-import ButtonBlue from "@components/common/ButtonBlue";
-
 import FormField from "@components/common/FormField";
 
 import UserExport from "@contexts/UserContext";
 
-const style = {
-  position: "absolute",
-  top: "50%",
-  left: "50%",
-  transform: "translate(-50%, -50%)",
-  width: 400,
-  bgcolor: "background.paper",
-  border: "2px solid #000",
-  boxShadow: 24,
-  p: 4,
-};
-
 function Profil() {
   const { user } = useContext(UserExport.UserContext);
 
-  const [data, setDatas] = useState();
+  const [datas, setDatas] = useState();
+  const [newDatas, setNewDatas] = useState();
 
   useEffect(() => {
     axios
       .get(`${import.meta.env.VITE_BACKEND_URL}user/${user.user_id}`)
       .then((res) => {
         setDatas(res.data);
+      })
+      .catch((err) => {
+        console.error(err);
       });
   }, []);
 
-  const [open, setOpen] = useState(false);
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
+  function updateDatas() {
+    axios
+      .put(`${import.meta.env.VITE_BACKEND_URL}user/${user.user_id}`, newDatas)
+      .then(() => {
+        alert("Vos données ont bien été modifiées.");
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  }
+
+  const changeInfos = (event) => {
+    const changeDatas = { ...newDatas };
+    changeDatas[event.target.name] = event.target.value;
+    setNewDatas(changeDatas);
+    setDatas({ ...datas, ...changeDatas });
+  };
+
+  if (!datas) return "Données en cours de chargement";
 
   return (
     <main className="font-redHat flex flex-col w-4/5 m-auto">
@@ -45,43 +49,38 @@ function Profil() {
         Mon profil
       </h1>
 
-      <h2 className="text-xl text-middleBlue">
-        Mon entreprise : {data && data.company_name}
-      </h2>
       <form>
-        <FormField name="Nom" labels="name" placeholder={data && data.name} />
-
         <FormField
-          name="Email de contact"
-          labels="email"
-          placeholder={data && data.mail}
+          name="name"
+          label="Nom"
+          placeholder={datas && datas.name}
+          changeInfos={changeInfos}
         />
 
-        <FormField name="Nouveau mot de passe" labels="newPass" />
+        <FormField
+          name="mail"
+          label="Email de contact"
+          placeholder={datas && datas.mail}
+          changeInfos={changeInfos}
+        />
+
+        <FormField name="oldPass" label="Ancien mot de passe" />
+
+        <FormField name="newPass" label="Nouveau mot de passe" />
 
         <FormField
-          name="Confirmer le nouveau mot de passe"
-          labels="checkNewPass"
+          name="checkNewPass"
+          label="Confirmer le nouveau mot de passe"
         />
       </form>
 
-      <ButtonBlue action={handleOpen} text="Changez mes informations" />
-
-      <Modal
-        open={open}
-        onClose={handleClose}
-        aria-labelledby="modal-modal-title"
-        aria-describedby="modal-modal-description"
+      <button
+        onClick={() => updateDatas()}
+        type="button"
+        className="py-6 w-1/4 text-white text-base bg-darkBlue hover:bg-opacity-80 rounded-full  m-auto my-12"
       >
-        <Box sx={style}>
-          <Typography id="modal-modal-title" variant="h6" component="h2">
-            Text in a modal
-          </Typography>
-          <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-            Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
-          </Typography>
-        </Box>
-      </Modal>
+        Update Datas
+      </button>
     </main>
   );
 }
