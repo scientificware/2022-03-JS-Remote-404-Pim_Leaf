@@ -45,4 +45,9 @@ router.put(
   ConnectionController.updateConnection
 );
 
+router.delete(
+  "/supplier/clients/pending/:id",
+  ConnectionController.deleteConnection
+);
+
 module.exports = router;
