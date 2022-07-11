@@ -40,5 +40,9 @@ router.post("/retailer/connection", ConnectionController.add);
 
 router.put("/company/:id", CompanyController.editCompanyInformations);
 router.put("/user/:id/profil", UserController.editUserProfil);
+router.put(
+  "/supplier/clients/pending/:id",
+  ConnectionController.updateConnection
+);
 
 module.exports = router;
