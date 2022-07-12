@@ -19,6 +19,7 @@ function Products() {
   const [products, setProducts] = useState([]);
   const [searchInput, setSearchInput] = useState("");
   const { user } = useContext(UserExport.UserContext);
+  console.log(user);
 
   const handleCheckProducts = (prod) => {
     const newProduct = [...products];
@@ -82,47 +83,51 @@ function Products() {
 
       <div className="font-redHat w-4/5 m-auto">
         <div className="flex flex-row justify-end">
-          <Popup
-            trigger={
-              <div className="flex flex-row justify-end pb-5">
-                <ButtonPillMinus />
-              </div>
-            }
-            modal
-            contentStyle={contentStyle}
-          >
-            {(close) => (
-              <div className=" bg-darkBlue opacity-95 text-white flex flex-col items-center">
-                <button type="button" onClick={close}>
-                  <img
-                    src={RetourButtonWhite}
-                    alt="Bouton Retour"
-                    className="w-25 flex justify-start transition duration-120 ease-out hover:scale-105"
-                  />
-                </button>
-                <h1 className="p-10 flex justify-center text-2xl">
-                  Vous êtes sur le point de supprimer ces produits de votre
-                  stock:
-                </h1>
-                {products
-                  .filter((product) => product.check === true)
-                  .map((product) => (
-                    <div id={product.id}>
-                      <p>{product.product_name}</p>
-                      <p>{product.supplier}</p>
-                      <p>{product.name}</p>
-                    </div>
-                  ))}
-                <button
-                  type="button"
-                  onClick={() => handleClickMinus(products)}
-                  className="bg-white w-20 text-darkBlue p-1 rounded-2xl transition duration-120 ease-out hover:bg-middleBlue mb-2 mt-2  focus:bg-lightGreen opacity-80"
-                >
-                  Confirmer
-                </button>
-              </div>
-            )}
-          </Popup>
+          {user.company_group_id === 1 ? (
+            <Popup
+              trigger={
+                <div className="flex flex-row justify-end pb-5">
+                  <ButtonPillMinus />
+                </div>
+              }
+              modal
+              contentStyle={contentStyle}
+            >
+              {(close) => (
+                <div className=" bg-darkBlue opacity-95 text-white flex flex-col items-center">
+                  <button type="button" onClick={close}>
+                    <img
+                      src={RetourButtonWhite}
+                      alt="Bouton Retour"
+                      className="w-25 flex justify-start transition duration-120 ease-out hover:scale-105"
+                    />
+                  </button>
+                  <h1 className="p-10 flex justify-center text-2xl">
+                    Vous êtes sur le point de supprimer ces produits de votre
+                    stock:
+                  </h1>
+                  {products
+                    .filter((product) => product.check === true)
+                    .map((product) => (
+                      <div id={product.id}>
+                        <p>{product.product_name}</p>
+                        <p>{product.supplier}</p>
+                        <p>{product.name}</p>
+                      </div>
+                    ))}
+                  <button
+                    type="button"
+                    onClick={() => handleClickMinus(products)}
+                    className="bg-white w-20 text-darkBlue p-1 rounded-2xl transition duration-120 ease-out hover:bg-middleBlue mb-2 mt-2  focus:bg-lightGreen opacity-80"
+                  >
+                    Confirmer
+                  </button>
+                </div>
+              )}
+            </Popup>
+          ) : (
+            <div className="text-white h-12">.</div>
+          )}
         </div>
 
         <table className="w-full">
