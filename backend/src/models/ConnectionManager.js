@@ -3,10 +3,10 @@ const AbstractManager = require("./AbstractManager");
 class ConnectionManager extends AbstractManager {
   static table = "connection";
 
-  demandConnection(retailer, supplier) {
+  demandConnection(user) {
     return this.connection.query(
       `INSERT INTO ${ConnectionManager.table} (status, retailer_id, supplier_id) values ("En attente de connexion", ?, ?)`,
-      [retailer, supplier]
+      [user.retailer_id, user.supplier_id]
     );
   }
 
