@@ -1,33 +1,28 @@
 /* eslint-disable no-alert */
-import { useEffect, useContext, useState } from "react";
 import axios from "axios";
-import UserExport from "../../contexts/UserContext";
 
-function SuppliersListModal({ supplierId, name, domaine }) {
-  const { user } = useContext(UserExport.UserContext);
-
-  const [postedId, setPostedId] = useState({});
-  const [handleClick, sethandleClick] = useState(false);
+function SuppliersListModal({
+  name,
+  domaine,
+  handleClick,
+  sethandleClick,
+  id,
+  user,
+}) {
   const changeStatus = () => {
-    setPostedId({
-      retailer_id: `${user.user_id}`,
-      supplier_id: `${supplierId}`,
-    });
-    sethandleClick(true);
-  };
-
-  useEffect(() => {
     axios
       .post(`${import.meta.env.VITE_BACKEND_URL}retailer/connection`, {
-        postedId,
+        retailer_id: `${user.user_id}`,
+        supplier_id: `${id}`,
       })
       .then(() => {
-        alert("votre message demande de connaxion a été prise en compte");
+        alert("votre demande de connexion a été prise en compte");
       })
       .catch((error) => {
         console.warn(error);
       });
-  }, [postedId]);
+    sethandleClick(true);
+  };
 
   return (
     <tr className="odd:bg-lightBlue/10 even:bg-middleBlue/30">
