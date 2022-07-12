@@ -36,6 +36,8 @@ router.get(
 router.get("/supplier/clients", CompanyController.browseRetailers);
 router.get("/company/:id", UserController.readCompany);
 router.get("/user/:id", UserController.readUser);
+router.get("/retailer/:id/stock/:productid", StockController.getInfoStock);
+router.get("/supplier/:id/stock/:productid", StockController.getInfoStock);
 
 router.post("/retailer/connection", ConnectionController.add);
 router.post("/retailer/:id/stock", StockController.add);
