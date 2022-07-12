@@ -3,9 +3,9 @@ const models = require("../models");
 class ConnectionController {
   static add = (req, res) => {
     models.connection
-      .demandConnection(req.body.postedId)
+      .demandConnection(req.body)
       .then(([result]) => {
-        res.status(201).send({ ...req.body.postedId, id: result.insertId });
+        res.status(201).send({ ...req.body, id: result.insertId });
       })
       .catch((err) => {
         console.error(err);
