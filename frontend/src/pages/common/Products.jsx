@@ -19,7 +19,6 @@ function Products() {
   const [products, setProducts] = useState([]);
   const [searchInput, setSearchInput] = useState("");
   const { user } = useContext(UserExport.UserContext);
-  console.log(user);
 
   const handleCheckProducts = (prod) => {
     const newProduct = [...products];
