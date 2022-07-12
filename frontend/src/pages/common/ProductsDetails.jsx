@@ -29,25 +29,20 @@ function ProductsDetails() {
     axios
       .get(`${import.meta.env.VITE_BACKEND_URL}company/${user.company_id}`)
       .then((res) => {
+        setSupplierInfo(res.data);
+      });
+    axios
+      .get(
+        `${import.meta.env.VITE_BACKEND_URL}retailer/${
+          user.user_id
+        }/stock/${id}`
+      )
+      .then((res) => {
         setRetailerInfo(res.data);
       });
   }, []);
 
-  useEffect(() => {
-    axios
-      .get(`${import.meta.env.VITE_BACKEND_URL}retailer/${user.id}/stock/${id}`)
-      .then((res) => {
-        setSupplierInfo(res.data);
-      });
-  }, []);
-
-  if (!productInfo) {
-    return <p>Wait a bit here</p>;
-  }
-  if (!supplierInfo) {
-    return <p>Wait a bit here</p>;
-  }
-  if (!retailerInfo) {
+  if (!productInfo || !supplierInfo || !retailerInfo) {
     return <p>Wait a bit here</p>;
   }
 
@@ -98,8 +93,8 @@ function ProductsDetails() {
           />
 
           <ProductsDetailsRetailer
-            tips={retailerInfo.tips}
-            recipeIdea={retailerInfo.recipe_idea}
+            tips={retailerInfo[0].tips}
+            recipeIdea={retailerInfo[0].recipe_idea}
           />
         </section>
       </div>
