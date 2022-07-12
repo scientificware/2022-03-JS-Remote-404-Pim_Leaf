@@ -1,3 +1,4 @@
+/* eslint-disable no-plusplus */
 const models = require("../models");
 
 class StockController {
@@ -14,13 +15,9 @@ class StockController {
   };
 
   static add = (req, res) => {
+    const product = req.body;
     models.stock
-      .addStock(
-        req.body.product_id,
-        req.params.id,
-        req.body.supplier_id,
-        req.body.disponibility
-      )
+      .addStock(product)
       .then(([result]) => {
         res.status(201).send({ ...req.body, id: result.insertId });
       })

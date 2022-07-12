@@ -1,8 +1,11 @@
+/* eslint-disable no-alert */
+/* eslint-disable no-plusplus */
 /* eslint-disable jsx-a11y/control-has-associated-label */
 /* eslint-disable no-else-return */
 /* eslint-disable import/no-unresolved */
 
 import { useParams } from "react-router-dom";
+import Popup from "reactjs-popup";
 
 import SearchBar from "@components/common/SearchBar";
 import ProductsDetailsSupplier from "@components/retailers/ProductsDetailsSupplier";
@@ -10,25 +13,12 @@ import SuppliersDetailsDescription from "@components/retailers/SuppliersDetailsD
 import ProductsLines from "@components/common/ProductsLines";
 import { MdDone } from "react-icons/md";
 import ButtonPillPlus from "@components/common/ButtonPillPlus";
+import RetourButtonWhite from "@assets/retour_button_white.svg";
 
 import axios from "axios";
 import { useState, useContext, useEffect } from "react";
 
-import { Typography, Box, Modal } from "@material-ui/core";
-
 import UserExport from "@contexts/UserContext";
-
-const style = {
-  position: "absolute",
-  top: "50%",
-  left: "50%",
-  transform: "translate(-50%, -50%)",
-  width: 400,
-  bgcolor: "background.paper",
-  border: "2px solid #000",
-  boxShadow: 24,
-  p: 4,
-};
 
 function SuppliersDetails() {
   const { id } = useParams();
@@ -37,20 +27,29 @@ function SuppliersDetails() {
   const [products, setProducts] = useState([]);
   const [supplier, setSupplier] = useState();
 
+  const contentStyle = {
+    height: "auto",
+    overlfow: "scroll", // <-- This tells the modal to scroll
+  };
+
   const handleCheckProducts = (prod) => {
     const newProduct = [...products];
     const index = newProduct.indexOf(prod);
     newProduct[index].check = !newProduct[index].check;
     setProducts(newProduct);
   };
-
-  const [open, setOpen] = useState(false);
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
+  const addProducts = products
+    .filter((product) => product.check === true)
+    .map((product) => ({
+      product_id: product.id,
+      owner_id: `${user.user_id}`,
+      supplier_id: product.supplier_id,
+      disponibility: "1",
+    }));
 
   useEffect(() => {
     axios
-      .get(`${import.meta.env.VITE_BACKEND_URL}company/${id}`)
+      .get(`${import.meta.env.VITE_BACKEND_URL}company/${user.user_id}`)
       .then((res) => setSupplier(res.data));
 
     axios
@@ -68,8 +67,17 @@ function SuppliersDetails() {
       });
   }, []);
 
-  console.warn(user);
-
+  const handleClick = () => {
+    for (let i = 0; i < addProducts.length; i++) {
+      axios
+        .post(
+          `${import.meta.env.VITE_BACKEND_URL}retailer/${user.user_id}/stock`,
+          addProducts[i]
+        )
+        .then(() => alert("Les produits ont été ajoutés avec succès"))
+        .catch((err) => console.error(err));
+    }
+  };
   if (supplier) {
     return (
       <main>
@@ -97,10 +105,46 @@ function SuppliersDetails() {
               setSearchInput={setSearchInput}
             />
           </div>
-
-          <div className="flex flex-row justify-end">
-            <ButtonPillPlus action={handleOpen} />
-          </div>
+          <Popup
+            trigger={
+              <div className="flex flex-row justify-end pb-5">
+                <ButtonPillPlus />
+              </div>
+            }
+            modal
+            contentStyle={contentStyle}
+          >
+            {(close) => (
+              <div className=" bg-darkBlue opacity-95 text-white">
+                <button type="button" onClick={close}>
+                  <img
+                    src={RetourButtonWhite}
+                    alt="Bouton Retour"
+                    className="w-25 justify-start transition duration-120 ease-out hover:scale-105"
+                  />
+                </button>
+                <h1 className="p-10 flex justify-center text-2xl">
+                  Vous êtes sur le point d ajouter ces produits à votre stock:
+                </h1>
+                {products
+                  .filter((product) => product.check === true)
+                  .map((product) => (
+                    <div id={product.id}>
+                      <p>{product.product_name}</p>
+                      <p>{product.supplier}</p>
+                      <p>{product.name}</p>
+                    </div>
+                  ))}
+                <button
+                  type="button"
+                  onClick={() => handleClick()}
+                  className="bg-white text-darkBlue p-1 rounded-2xl flex transition duration-120 ease-out hover:bg-middleBlue mb-2 mt-2  focus:bg-lightGreen opacity-80"
+                >
+                  Confirmer
+                </button>
+              </div>
+            )}
+          </Popup>
 
           <table className="w-full mb-20">
             <thead>
@@ -142,22 +186,6 @@ function SuppliersDetails() {
             </tbody>
           </table>
         </div>
-
-        <Modal
-          open={open}
-          onClose={handleClose}
-          aria-labelledby="modal-modal-title"
-          aria-describedby="modal-modal-description"
-        >
-          <Box sx={style}>
-            <Typography id="modal-modal-title" variant="h6" component="h2">
-              Text in a modal
-            </Typography>
-            <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-              Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
-            </Typography>
-          </Box>
-        </Modal>
       </main>
     );
   } else {
