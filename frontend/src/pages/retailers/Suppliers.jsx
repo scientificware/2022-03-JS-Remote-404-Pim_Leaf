@@ -66,6 +66,47 @@ function Suppliers() {
       />
 
       <div className="font-redHat w-4/5 m-auto">
+        <Popup
+          trigger={
+            <div className="flex flex-row justify-end">
+              <ButtonPillPlus />
+            </div>
+          }
+          modal
+          contentStyle={contentStyle}
+        >
+          {(close) => (
+            <div className=" bg-darkBlue opacity-95 text-white">
+              {" "}
+              <div className="flexs pl-5 pr-5">
+                <button type="button" onClick={close}>
+                  <img
+                    src={RetourButtonWhite}
+                    alt="Bouton Retour"
+                    className="w-25 justify-start transition duration-120 ease-out hover:scale-105"
+                  />
+                </button>
+                <h1 className="flex justify-center pb-4 text-2xl">
+                  Rechercher mon fournisseur
+                </h1>
+              </div>
+              <div className=" mb-10 mt-5">
+                <SearchBarHumans
+                  searchInput={searchInput}
+                  setSearchInput={setSearchInput}
+                />
+              </div>
+              <div className="flex justify-center overflow-y-scroll h-5/6">
+                <ModalAddSuppliers
+                  searchInput={searchInput}
+                  setSearchInput={setSearchInput}
+                  connected={connected}
+                  pending={pending}
+                />
+              </div>
+            </div>
+          )}
+        </Popup>
         <h2 className="text-2xl font-redHat mb-4">En attente de connexion</h2>
         <table className="w-full shadow-md rounded-lg overflow-hidden">
           <thead>
@@ -158,48 +199,6 @@ function Suppliers() {
           </tbody>
         </table>
       </div>
-
-      <Popup
-        trigger={
-          <div className="flex flex-row justify-end">
-            <ButtonPillPlus />
-          </div>
-        }
-        modal
-        contentStyle={contentStyle}
-      >
-        {(close) => (
-          <div className=" bg-darkBlue opacity-95 text-white">
-            {" "}
-            <div className="flexs pl-5 pr-5">
-              <button type="button" onClick={close}>
-                <img
-                  src={RetourButtonWhite}
-                  alt="Bouton Retour"
-                  className="w-25 justify-start transition duration-120 ease-out hover:scale-105"
-                />
-              </button>
-              <h1 className="flex justify-center pb-4 text-2xl">
-                Rechercher mon fournisseur
-              </h1>
-            </div>
-            <div className=" mb-10 mt-5">
-              <SearchBarHumans
-                searchInput={searchInput}
-                setSearchInput={setSearchInput}
-              />
-            </div>
-            <div className="flex justify-center overflow-y-scroll h-5/6">
-              <ModalAddSuppliers
-                searchInput={searchInput}
-                setSearchInput={setSearchInput}
-                connected={connected}
-                pending={pending}
-              />
-            </div>
-          </div>
-        )}
-      </Popup>
     </main>
   );
 }

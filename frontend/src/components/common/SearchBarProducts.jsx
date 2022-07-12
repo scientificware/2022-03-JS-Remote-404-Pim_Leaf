@@ -17,7 +17,7 @@ function SearchBarProducts({ searchInput, setSearchInput }) {
           value={searchInput}
         />
         <button
-          type="submit"
+          type="button"
           className="bg-lightGrey flex justify-center w-10 rounded-tr-full rounded-br-full"
         >
           <img
