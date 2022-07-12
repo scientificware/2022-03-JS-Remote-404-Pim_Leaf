@@ -17,18 +17,16 @@ function SuppliersListModal({ supplierId, name, domaine }) {
   };
 
   useEffect(() => {
-    if (postedId !== {}) {
-      axios
-        .post(`${import.meta.env.VITE_BACKEND_URL}retailer/connection`, {
-          postedId,
-        })
-        .then(() => {
-          alert("votre message demande de connaxion a été prise en compte");
-        })
-        .catch((error) => {
-          console.warn(error);
-        });
-    }
+    axios
+      .post(`${import.meta.env.VITE_BACKEND_URL}retailer/connection`, {
+        postedId,
+      })
+      .then(() => {
+        alert("votre message demande de connaxion a été prise en compte");
+      })
+      .catch((error) => {
+        console.warn(error);
+      });
   }, [postedId]);
 
   return (
