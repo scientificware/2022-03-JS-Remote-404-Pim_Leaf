@@ -21,6 +21,13 @@ class StockManager extends AbstractManager {
       [id, productId]
     );
   }
+
+  deleteStock(id) {
+    return this.connection.query(
+      `DELETE FROM ${StockManager.table} WHERE id = ?`,
+      [id]
+    );
+  }
 }
 
 module.exports = StockManager;
