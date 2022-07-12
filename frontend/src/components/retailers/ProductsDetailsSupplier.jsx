@@ -1,3 +1,5 @@
+import { FcPhone, FcInvite, FcGlobe } from "react-icons/fc";
+
 function ProductsDetailsSupplier({
   company,
   description,
@@ -5,49 +7,50 @@ function ProductsDetailsSupplier({
   mail,
   address,
   postcode,
+  city,
+  website,
 }) {
   return (
-    <div className="mt-2">
-      <h2 className="text-2xl">Le Fabricant</h2>
+    <>
       {/* SUPPLIER */}
-      <article className="bg-middleBlue/50 shadow-lg mt-2">
-        <div className="flex flex-row">
-          {/* <div className="flex items-center">
-            <div className="col-span-1 row-span-2 p-10 flex justify-center">
-              <img src={logo.url} alt={logo.alt} className="object-contain" />
-            </div>
-          </div> */}
-          <div>
-            <div className="col-span-2 p-10">
-              <h2 className="text-3xl pb-2">{company}</h2>
-              <div>
-                <h3 className="text-2xl">Méthodes de fabrication</h3>
-                <p>{description}</p>
-              </div>
-            </div>
+      <div className="my-4">
+        <h2 className="text-3xl">Le Fabricant</h2>
 
-            <div className="p-10 grid grid-cols-2 grid-rows-4">
-              <p>Téléphone :</p>
-              <a href="tel:+0000000000">{phone}</a>
+        <article className="bg-middleBlue/50 font-redHat flex p-10 shadow-lg my-3">
+          <header className="w-1/2">
+            <h2 className="text-3xl mb-2">{company}</h2>
 
-              <p>Mail :</p>
-              <a href="mailto: aaa@bbb.ccc">{mail}</a>
+            <span>
+              <p>{address}</p>
+              <p>
+                {postcode} - {city}
+              </p>
+            </span>
 
-              <p>Adresse :</p>
-              <a href="https://www.openstreetmap.org/#map=16/47.2171/-1.5300">
-                {address}
+            <hr className="w-1/2" />
+
+            <aside className="mt-6 grid grid-rows-3 gap-3">
+              <a href={`tel:${phone}`} className="font-bold flex align-middle">
+                <FcPhone className="mr-2 text-3xl" /> Téléphone : {phone}
               </a>
 
-              <p>Code Postale: </p>
-              <a href="nothing">{postcode}</a>
+              <a href={`mailto:${mail}`} className="font-bold flex">
+                <FcInvite className="mr-2 text-3xl" /> Mail : {mail}
+              </a>
 
-              <p>Site web :</p>
-              <a href="#Company">www.COMPANY.com</a>
-            </div>
+              <a href={website} className="font-bold flex">
+                <FcGlobe className="mr-2 text-3xl" /> Site web : {website}
+              </a>
+            </aside>
+          </header>
+
+          <div>
+            <h3 className="text-2xl">Méthodes de fabrication</h3>
+            <p>{description}</p>
           </div>
-        </div>
-      </article>
-    </div>
+        </article>
+      </div>
+    </>
   );
 }
 

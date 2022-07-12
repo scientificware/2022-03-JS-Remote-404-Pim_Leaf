@@ -2,13 +2,12 @@ function ProductsDetailsProduct({ detail, country, region, advise, label }) {
   return (
     <>
       {/* PRODUCT */}
-      <div className="mt-2">
-        <div>
-          <h2 className="text-2xl">Le produit</h2>
-        </div>
-        <article className="bg-middleBlue/50 font-redHat flex justify-between p-10 shadow-lg mt-2">
-          <div className="flex flex-col">
-            <div className="mt-4 mb-10">
+      <div className="my-4">
+        <h2 className="text-3xl">Le produit</h2>
+
+        <article className="bg-middleBlue/50 font-redHat flex p-10 shadow-lg my-3">
+          <div className="w-2/3">
+            <div className="mb-10">
               <h3 className="text-2xl">Ingrédients</h3>
               <p>{detail}</p>
             </div>
@@ -22,7 +21,7 @@ function ProductsDetailsProduct({ detail, country, region, advise, label }) {
           </div>
 
           <div className="flex flex-col">
-            <div className="mt-4 mb-10">
+            <div className="mb-10">
               <h3 className="text-2xl">Origine</h3>
               <p>{country}</p>
               <p>{region}</p>
