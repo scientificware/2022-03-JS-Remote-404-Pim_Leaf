@@ -44,11 +44,6 @@ router.get(
   "/retailer/:rid/supplier/:sid/stock",
   StockController.getSupplierStock
 );
-// router.post("retailer/:rid/stock/product/:pid", StockController.addProduct);
-// router.delete(
-//   "retailer/:rid/stock/product/:pid",
-//   StockController.deleteProduct
-// );
 
 router.post("/retailer/connection", ConnectionController.add);
 router.post("/retailer/:id/stock", StockController.add);
