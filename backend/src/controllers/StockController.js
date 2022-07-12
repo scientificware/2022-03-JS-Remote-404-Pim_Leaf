@@ -29,6 +29,21 @@ class StockController {
         res.sendStatus(500);
       });
   };
+
+  static getSupplierStock = async (req, res) => {
+    try {
+      const [supplierStock] = await models.products.getProducts(req.params.sid);
+      const [retailerStock] = await models.products.getProducts(req.params.rid);
+      const retailerStockId = retailerStock.map((stock) => stock.id);
+      const availableStock = supplierStock.filter(
+        (product) => !retailerStockId.includes(product.id)
+      );
+      res.status(200).json(availableStock);
+    } catch (err) {
+      console.error(err);
+      res.status(500).send("broken");
+    }
+  };
 }
 
 module.exports = StockController;
