@@ -43,20 +43,22 @@ function ModalAddSuppliers({ searchInput, connected, pending }) {
           </tr>
         </thead>
         <tbody>
-          {suppliers
-            .filter((supplier) => !compare.includes(supplier.company_id))
-            .filter(
-              (supplier) =>
-                supplier.company_name.includes(searchInput) ||
-                supplier.domain.includes(searchInput)
-            )
-            .map((supplier) => (
-              <SuppliersListModal
-                id={supplier.id}
-                name={supplier.company_name}
-                domaine={supplier.domain}
-              />
-            ))}
+          {suppliers &&
+            suppliers
+              .filter((supplier) => !compare.includes(supplier.company_id))
+              .filter(
+                (supplier) =>
+                  supplier.company_name.includes(searchInput) ||
+                  supplier.domain.includes(searchInput)
+              )
+              .map((supplier) => (
+                <SuppliersListModal
+                  id={supplier.id}
+                  supplierId={supplier.company_id}
+                  name={supplier.company_name}
+                  domaine={supplier.domain}
+                />
+              ))}
         </tbody>
       </table>
     </div>
