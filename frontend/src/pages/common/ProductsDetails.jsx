@@ -42,13 +42,7 @@ function ProductsDetails() {
       });
   }, []);
 
-  if (!productInfo) {
-    return <p>Wait a bit here</p>;
-  }
-  if (!supplierInfo) {
-    return <p>Wait a bit here</p>;
-  }
-  if (!retailerInfo) {
+  if (!productInfo || !supplierInfo || !retailerInfo) {
     return <p>Wait a bit here</p>;
   }
 
