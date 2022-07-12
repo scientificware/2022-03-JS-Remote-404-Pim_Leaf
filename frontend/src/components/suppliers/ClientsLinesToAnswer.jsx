@@ -1,10 +1,12 @@
 /* eslint-disable import/no-unresolved */
-
 import { Link } from "react-router-dom";
-
 import { FiArrowRight } from "react-icons/fi";
 
-function ClientsLinesToAnswer({ human, action }) {
+function ClientsLinesToAnswer({
+  human,
+  handleClickAccepted,
+  handleClickRefused,
+}) {
   return (
     <tr className="odd:bg-lightBlue/10 even:bg-middleBlue/30 transition ease-in-out hover:bg-lightBlue duration-500 text-left">
       <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
@@ -20,7 +22,7 @@ function ClientsLinesToAnswer({ human, action }) {
       <td className="px-5 py-5 border-b bg-white text-sm flex">
         <button
           type="button"
-          onClick={action}
+          onClick={() => handleClickAccepted(human)}
           className="w-full relative transition duration-300 ease-in-out focus:outline-none focus:shadow-outline hover:bg-lightBlue hover:text-white font-normal py-2 px-4 rounded-full"
         >
           <span
@@ -33,7 +35,7 @@ function ClientsLinesToAnswer({ human, action }) {
 
         <button
           type="button"
-          onClick={action}
+          onClick={() => handleClickRefused(human)}
           className="w-full relative transition duration-300 ease-in-out focus:outline-none focus:shadow-outline hover:bg-lightBlue hover:text-white font-normal py-2 px-4 rounded-full"
         >
           <span
