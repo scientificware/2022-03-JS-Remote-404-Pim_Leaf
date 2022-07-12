@@ -1,3 +1,4 @@
+/* eslint-disable no-alert */
 /* eslint-disable import/no-unresolved */
 import { useState, useEffect, useContext } from "react";
 import axios from "axios";
