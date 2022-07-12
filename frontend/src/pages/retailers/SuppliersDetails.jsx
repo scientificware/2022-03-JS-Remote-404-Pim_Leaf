@@ -80,9 +80,11 @@ function SuppliersDetails() {
             company={supplier.company_name}
             description={supplier.description}
             phone={supplier.phone}
-            mail={supplier.mail}
+            mail={supplier.company_mail}
             address={supplier.address}
             postcode={supplier.postcode}
+            city={supplier.city}
+            website={supplier.website}
           />
 
           <div className="mt-10">
