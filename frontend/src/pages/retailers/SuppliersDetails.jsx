@@ -50,11 +50,15 @@ function SuppliersDetails() {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:5000/company/${id}`)
+      .get(`${import.meta.env.VITE_BACKEND_URL}company/${id}`)
       .then((res) => setSupplier(res.data));
 
     axios
-      .get(`${import.meta.env.VITE_BACKEND_URL}user/${id}/products`)
+      .get(
+        `${import.meta.env.VITE_BACKEND_URL}retailer/${
+          user.user_id
+        }/supplier/${id}/stock`
+      )
       .then((res) => {
         const prod = res.data.map((el) => ({ ...el, check: false }));
         setProducts(prod);
@@ -98,7 +102,7 @@ function SuppliersDetails() {
             <ButtonPillPlus action={handleOpen} />
           </div>
 
-          <table className="w-full">
+          <table className="w-full mb-20">
             <thead>
               <tr className="text-left h-12 shadow-md">
                 <th

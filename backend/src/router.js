@@ -39,6 +39,17 @@ router.get("/user/:id", UserController.readUser);
 router.get("/retailer/:id/stock/:productid", StockController.getInfoStock);
 router.get("/supplier/:id/stock/:productid", StockController.getInfoStock);
 
+// Benoît's Add
+router.get(
+  "/retailer/:rid/supplier/:sid/stock",
+  StockController.getSupplierStock
+);
+// router.post("retailer/:rid/stock/product/:pid", StockController.addProduct);
+// router.delete(
+//   "retailer/:rid/stock/product/:pid",
+//   StockController.deleteProduct
+// );
+
 router.post("/retailer/connection", ConnectionController.add);
 router.post("/retailer/:id/stock", StockController.add);
 
