@@ -1,3 +1,4 @@
+/* eslint-disable react/no-array-index-key */
 /* eslint-disable no-unused-vars */
 /* eslint-disable jsx-a11y/control-has-associated-label */
 /* eslint-disable import/no-unresolved */
@@ -8,21 +9,7 @@ import SearchBar from "@components/common/SearchBarProducts";
 import ClientsLines from "@components/suppliers/ClientsLines";
 import ClientsLinesToAnswer from "@components/suppliers/ClientsLinesToAnswer";
 
-import { Typography, Box, Modal } from "@material-ui/core";
-
 import UserExport from "@contexts/UserContext";
-
-const style = {
-  position: "absolute",
-  top: "50%",
-  left: "50%",
-  transform: "translate(-50%, -50%)",
-  width: 400,
-  bgcolor: "background.paper",
-  border: "2px solid #000",
-  boxShadow: 24,
-  p: 4,
-};
 
 function Clients() {
   const { user } = useContext(UserExport.UserContext);
@@ -31,11 +18,6 @@ function Clients() {
 
   const [connected, setConnected] = useState([]);
   const [pending, setPending] = useState([]);
-  const [answer, setAnswer] = useState();
-
-  const [open, setOpen] = useState(false);
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
 
   useEffect(() => {
     axios
@@ -64,6 +46,36 @@ function Clients() {
         console.warn(error.response.data);
       });
   }, []);
+
+  const handleClickAccepted = (human) => {
+    axios
+      .put(
+        `${import.meta.env.VITE_BACKEND_URL}supplier/clients/pending/${
+          human.id
+        }`
+      )
+      .then((res) => {
+        if (res.data === "connection has been updated") {
+          setConnected([...connected, { ...human, status: "Connecté" }]);
+          setPending(pending.filter((pend) => pend.id !== human.id));
+        }
+      })
+      .catch((err) => console.error(err));
+  };
+  const handleClickRefused = (human) => {
+    axios
+      .delete(
+        `${import.meta.env.VITE_BACKEND_URL}supplier/clients/pending/${
+          human.id
+        }`
+      )
+      .then((res) => {
+        if (res.data === "connection has been deleted") {
+          setPending(pending.filter((pend) => pend.id !== human.id));
+        }
+      })
+      .catch((err) => console.error(err));
+  };
 
   return (
     <main>
@@ -115,11 +127,12 @@ function Clients() {
                   pend.city.includes(searchInput) ||
                   pend.status.includes(searchInput)
               )
-              .map((pend) => (
+              .map((pend, index) => (
                 <ClientsLinesToAnswer
-                  key={pend.supplier_id}
+                  key={index}
                   human={pend}
-                  action={handleOpen}
+                  handleClickAccepted={handleClickAccepted}
+                  handleClickRefused={handleClickRefused}
                 />
               ))}
           </tbody>
@@ -164,28 +177,12 @@ function Clients() {
                   connect.city.includes(searchInput) ||
                   connect.status.includes(searchInput)
               )
-              .map((connect) => (
-                <ClientsLines key={connect.supplier_id} human={connect} />
+              .map((connect, index) => (
+                <ClientsLines key={index} human={connect} />
               ))}
           </tbody>
         </table>
       </div>
-
-      <Modal
-        open={open}
-        onClose={handleClose}
-        aria-labelledby="modal-modal-title"
-        aria-describedby="modal-modal-description"
-      >
-        <Box sx={style}>
-          <Typography id="modal-modal-title" variant="h6" component="h2">
-            Text in a modal
-          </Typography>
-          <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-            {answer}
-          </Typography>
-        </Box>
-      </Modal>
     </main>
   );
 }
