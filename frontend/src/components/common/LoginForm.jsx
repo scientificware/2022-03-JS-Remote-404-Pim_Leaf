@@ -1,3 +1,4 @@
+/* eslint-disable import/no-extraneous-dependencies */
 /* eslint-disable import/no-unresolved */
 import { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
@@ -6,6 +7,9 @@ import axios from "axios";
 import Avatar from "@assets/icon_login_avatar.svg";
 import Padlock from "@assets/padlock_login.png";
 import UserExport from "@contexts/UserContext";
+
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function LoginForm() {
   const [email, setEmail] = useState("");
@@ -23,6 +27,7 @@ function LoginForm() {
     axios
       .post(`${import.meta.env.VITE_BACKEND_URL}login`, { email, password })
       .then((res) => {
+        toast.success("Vous êtes connecté !");
         setUser(res.data);
         if (res.data.company_group_id === 1) {
           navigate("/commercant/produits");
@@ -30,7 +35,7 @@ function LoginForm() {
           navigate("/fournisseur/produits");
         }
       })
-      .catch((err) => console.error(err));
+      .catch(() => toast.warning("Votre email ou votre mot de passe est faux"));
   };
   return (
     <div>
@@ -73,7 +78,7 @@ function LoginForm() {
         <input
           type="button"
           value="Se connecter"
-          className="py-2 w-28 text-center text-white text-base bg-darkBlue hover:bg-opacity-90 rounded-full mt-12"
+          className="px-6 py-2.5 cursor-pointer text-center text-white text-base bg-darkBlue hover:bg-opacity-90 rounded-full mt-12"
           onClick={handleClick}
         />
         {msg && <p>{msg}</p>}

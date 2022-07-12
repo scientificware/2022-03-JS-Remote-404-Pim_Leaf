@@ -1,3 +1,4 @@
+/* eslint-disable import/no-extraneous-dependencies */
 /* eslint-disable import/no-unresolved */
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
@@ -11,6 +12,8 @@ import Logout from "@assets/icon_logout.svg";
 import OpenBurger from "@assets/burger_icon.png";
 import CloseBurger from "@assets/burger_close_icon.png";
 
+import { toast } from "react-toastify";
+
 function Nav() {
   const [navOpen, setNavOpen] = useState(false);
   const { user, setUser } = useContext(UserExport.UserContext);
@@ -19,6 +22,7 @@ function Nav() {
   const handleLogout = () => {
     setUser();
     navigate("/");
+    toast.success("Vous êtes déconnecté !");
   };
 
   return (
