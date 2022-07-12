@@ -21,7 +21,6 @@ function Suppliers() {
 
   const [connected, setConnected] = useState([]);
   const [pending, setPending] = useState([]);
-  const [suppliers, setSuppliers] = useState([]);
 
   const contentStyle = {
     height: "auto",
@@ -54,15 +53,6 @@ function Suppliers() {
       .catch((error) => {
         console.warn(error.response.data);
       });
-
-    axios
-      .get(`${import.meta.env.VITE_BACKEND_URL}retailer/suppliers`)
-      .then((res) => {
-        setSuppliers(res.data);
-      })
-      .catch((error) => {
-        console.warn(error.response.data);
-      });
   }, []);
 
   return (
@@ -70,7 +60,6 @@ function Suppliers() {
       <h1 className="text-3xl text-center font-bold font-barlow mt-14 mb-8">
         Mes Fournisseurs
       </h1>
-
       <SearchBarHumans
         searchInput={searchInput}
         setSearchInput={setSearchInput}
@@ -202,9 +191,10 @@ function Suppliers() {
             </div>
             <div className="flex justify-center overflow-y-scroll h-5/6">
               <ModalAddSuppliers
-                suppliers={suppliers}
                 searchInput={searchInput}
                 setSearchInput={setSearchInput}
+                connected={connected}
+                pending={pending}
               />
             </div>
           </div>
