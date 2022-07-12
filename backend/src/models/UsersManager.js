@@ -43,7 +43,8 @@ class UsersManager extends AbstractManager {
         c.address,
         c.postcode,
         c.city,
-        c.phone
+        c.phone,
+        c.website
         FROM ${UsersManager.table} AS u
     INNER JOIN company AS c ON c.user_id = u.id
     INNER JOIN activity_field AS a ON a.id = c.activity_field_id
