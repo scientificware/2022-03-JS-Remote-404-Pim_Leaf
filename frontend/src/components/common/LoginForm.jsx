@@ -35,7 +35,9 @@ function LoginForm() {
           navigate("/fournisseur/produits");
         }
       })
-      .catch(() => toast.warning("Votre email ou votre mot de passe est faux"));
+      .catch(() =>
+        toast.warning("Votre email ou votre mot de passe est incorrect")
+      );
   };
   return (
     <div>
