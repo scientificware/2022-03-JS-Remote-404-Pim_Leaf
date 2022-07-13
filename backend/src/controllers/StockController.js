@@ -27,6 +27,36 @@ class StockController {
       });
   };
 
+  // static addProduct = (req, res) => {
+  //   const product = req.body;
+  //   models.product
+  //     .addSupplierProduct(product)
+  //     .then(([product]) => {
+  //       models.stock.addStock(product).then(([result]) => {
+
+  //     }
+  //         console.log(result);
+  //       res.status(201).send({ ...req.body, id: result.insertId });
+  //     })
+  //     .catch((err) => {
+  //       console.error(err);
+  //       res.sendStatus(500);
+  //     });
+  // };
+
+  static addProduct = (req, res) => {
+    const product = req.body;
+    models.products
+      .addSupplierProduct(product)
+      .then(([result]) => {
+        res.status(201).send({ ...req.body, id: result.insertId });
+      })
+      .catch((err) => {
+        console.error(err);
+        res.sendStatus(500);
+      });
+  };
+
   static delete = (req, res) => {
     models.stock
       .deleteStock(req.params.id)

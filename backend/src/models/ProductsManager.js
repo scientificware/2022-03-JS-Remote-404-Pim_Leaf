@@ -94,6 +94,20 @@ class ProductsManager extends AbstractManager {
       [id]
     );
   }
+
+  addSupplierProduct(product) {
+    return this.connection.query(
+      `INSERT INTO ${ProductsManager.table} (product_name, detail, advise, manufacturing_method, category_id, origin_id) values (?, ?, ?, ?, ?, ?)`,
+      [
+        product.product_name,
+        product.detail,
+        product.advise,
+        product.manufacturing_method,
+        product.category_id,
+        product.origin_id,
+      ]
+    );
+  }
 }
 
 module.exports = ProductsManager;
