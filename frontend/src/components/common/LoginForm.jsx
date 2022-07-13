@@ -25,7 +25,11 @@ function LoginForm() {
       return;
     }
     axios
-      .post(`${import.meta.env.VITE_BACKEND_URL}login`, { email, password })
+      .post(
+        `${import.meta.env.VITE_BACKEND_URL}login`,
+        { email, password },
+        { withCredentials: true }
+      )
       .then((res) => {
         toast.success("Vous êtes connecté !");
         setUser(res.data);
