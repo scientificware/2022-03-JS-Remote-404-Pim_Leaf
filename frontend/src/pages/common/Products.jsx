@@ -15,6 +15,9 @@ import ProductsLines from "@components/common/ProductsLines";
 import RetourButtonWhite from "@assets/retour_button_white.svg";
 import ButtonPillMinus from "@components/common/ButtonPillMinus";
 
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 function Products() {
   const [products, setProducts] = useState([]);
   const [searchInput, setSearchInput] = useState("");
@@ -49,10 +52,10 @@ function Products() {
             filterProducts[i].stock_id
           }`
         )
-        .then(() => alert("Les produits ont été supprimés avec succès"))
-        .catch((error) => {
-          console.warn(error.response.data);
-        });
+        .then(() => {
+          toast.success("Les produits ont bien été supprimés.");
+        })
+        .catch(() => toast.error("Vos données n'ont pas pu être modifiées."));
     }
   };
 
