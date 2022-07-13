@@ -17,6 +17,9 @@ import ButtonPillPlus from "@components/common/ButtonPillPlus";
 import RetourButtonWhite from "@assets/retour_button_white.svg";
 import ModalAddProducts from "@components/retailers/ModalAddProducts";
 
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 import axios from "axios";
 import { useState, useContext, useEffect } from "react";
 
@@ -84,8 +87,14 @@ function SuppliersDetails() {
           `${import.meta.env.VITE_BACKEND_URL}retailer/${user.user_id}/stock`,
           addProducts[i]
         )
-        .then(() => alert("Les produits ont été ajoutés avec succès"))
-        .catch((err) => console.error(err));
+        .then(() =>
+          toast.success(`${products[i].product_name} a été ajouté avec susccès`)
+        )
+        .catch(() =>
+          toast.warning(
+            "Un problème est survenue durant l'ajout des produits, veuillez réessayer"
+          )
+        );
     }
   };
 
@@ -151,7 +160,7 @@ function SuppliersDetails() {
                   <button
                     type="button"
                     onClick={() => handleClick(products)}
-                    className="bg-white text-darkBlue p-1 rounded-2xl flex transition duration-120 ease-out hover:bg-middleBlue mb-2 mt-2  focus:bg-lightGreen opacity-80"
+                    className="bg-white text-darkBlue p-1 rounded-2xl flex transition duration-120 ease-out hover:bg-middleBlue mb-2 mt-2 active:bg-lightGreen opacity-80"
                   >
                     Confirmer
                   </button>
