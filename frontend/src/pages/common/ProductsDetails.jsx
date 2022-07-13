@@ -22,12 +22,16 @@ function ProductsDetails() {
 
   useEffect(() => {
     axios
-      .get(`${import.meta.env.VITE_BACKEND_URL}products/${id}`)
+      .get(`${import.meta.env.VITE_BACKEND_URL}products/${id}`, {
+        withCredentials: true,
+      })
       .then((res) => {
         setProductInfo(res.data);
       });
     axios
-      .get(`${import.meta.env.VITE_BACKEND_URL}company/${user.company_id}`)
+      .get(`${import.meta.env.VITE_BACKEND_URL}company/${user.company_id}`, {
+        withCredentials: true,
+      })
       .then((res) => {
         setSupplierInfo(res.data);
       });
@@ -35,7 +39,8 @@ function ProductsDetails() {
       .get(
         `${import.meta.env.VITE_BACKEND_URL}retailer/${
           user.user_id
-        }/stock/${id}`
+        }/stock/${id}`,
+        { withCredentials: true }
       )
       .then((res) => {
         setRetailerInfo(res.data);

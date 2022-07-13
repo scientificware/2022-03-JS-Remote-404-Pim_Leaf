@@ -32,7 +32,8 @@ function Suppliers() {
       .get(
         `${import.meta.env.VITE_BACKEND_URL}retailer/${
           user.user_id
-        }/suppliers/connected`
+        }/suppliers/connected`,
+        { withCredentials: true }
       )
       .then((res) => {
         setConnected(res.data);
@@ -45,7 +46,8 @@ function Suppliers() {
       .get(
         `${import.meta.env.VITE_BACKEND_URL}retailer/${
           user.user_id
-        }/suppliers/pending`
+        }/suppliers/pending`,
+        { withCredentials: true }
       )
       .then((res) => {
         setPending(res.data);

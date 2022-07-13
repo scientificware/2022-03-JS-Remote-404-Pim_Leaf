@@ -51,7 +51,9 @@ function ProductsTable() {
 
   useEffect(() => {
     axios
-      .get(`${import.meta.env.VITE_BACKEND_URL}user/3/products`)
+      .get(`${import.meta.env.VITE_BACKEND_URL}user/3/products`, {
+        withCredentials: true,
+      })
       .then((res) => {
         const prod = res.data.map((el) => ({ ...el, check: false }));
         setProducts(prod);

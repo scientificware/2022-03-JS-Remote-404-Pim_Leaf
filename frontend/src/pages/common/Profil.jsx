@@ -15,7 +15,9 @@ function Profil() {
 
   useEffect(() => {
     axios
-      .get(`${import.meta.env.VITE_BACKEND_URL}user/${user.user_id}`)
+      .get(`${import.meta.env.VITE_BACKEND_URL}user/${user.user_id}`, {
+        withCredentials: true,
+      })
       .then((res) => {
         setDatas(res.data);
       })
@@ -28,7 +30,8 @@ function Profil() {
     axios
       .put(
         `${import.meta.env.VITE_BACKEND_URL}user/${user.user_id}/profil`,
-        newDatas
+        newDatas,
+        { withCredentials: true }
       )
       .then(() => {
         alert("Vos données ont bien été modifiées.");

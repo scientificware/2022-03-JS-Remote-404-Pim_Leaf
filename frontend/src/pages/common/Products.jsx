@@ -47,7 +47,8 @@ function Products() {
         .delete(
           `${import.meta.env.VITE_BACKEND_URL}retailer/stock/${
             filterProducts[i].stock_id
-          }`
+          }`,
+          { withCredentials: true }
         )
         .then(() => alert("Les produits ont été supprimés avec succès"))
         .catch((error) => {
@@ -58,7 +59,9 @@ function Products() {
 
   useEffect(() => {
     axios
-      .get(`${import.meta.env.VITE_BACKEND_URL}user/${user.user_id}/products`)
+      .get(`${import.meta.env.VITE_BACKEND_URL}user/${user.user_id}/products`, {
+        withCredentials: true,
+      })
       .then((res) => {
         const prod = res.data.map((el) => ({ ...el, check: false }));
         setProducts(prod);
