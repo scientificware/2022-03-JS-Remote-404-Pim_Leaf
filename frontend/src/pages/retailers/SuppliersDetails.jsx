@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-expressions */
 /* eslint-disable no-alert */
 /* eslint-disable no-plusplus */
 /* eslint-disable jsx-a11y/control-has-associated-label */
@@ -68,7 +69,15 @@ function SuppliersDetails() {
       });
   }, []);
 
-  const handleClick = () => {
+  const handleClick = (prod) => {
+    const productToGet = [];
+    const productToDelete = [];
+    for (let i = 0; i < prod.length; i += 1) {
+      prod[i].check
+        ? productToDelete.push(prod[i])
+        : productToGet.push(prod[i]);
+    }
+    setProducts(productToGet);
     for (let i = 0; i < addProducts.length; i++) {
       axios
         .post(
@@ -141,7 +150,7 @@ function SuppliersDetails() {
                 <div className="flex justify-center pb-5">
                   <button
                     type="button"
-                    onClick={() => handleClick()}
+                    onClick={() => handleClick(products)}
                     className="bg-white text-darkBlue p-1 rounded-2xl flex transition duration-120 ease-out hover:bg-middleBlue mb-2 mt-2  focus:bg-lightGreen opacity-80"
                   >
                     Confirmer
