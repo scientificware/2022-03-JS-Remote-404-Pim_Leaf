@@ -4,7 +4,7 @@
 2. [x] Sprint 2 :heavy_check_mark:
 3. [x] Sprint 3 :heavy_check_mark:
 4. [x] Sprint 4 :heavy_check_mark:
-5. [ ] Sprint 5
+5. [x] Sprint 5 :heavy_check_mark:
 
 ![Logo Pimleaf](https://www.pimleaf.fr/survey/tmp/assets/181c5803/Logo%20Pimleaf-1-.png)
 
