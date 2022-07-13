@@ -6,7 +6,7 @@ import ProductsListModal from "@components/retailers/ProductsListModal";
 
 function ModalAddProducts({ products }) {
   return (
-    <div className="pl-10 pr-10 pb-10">
+    <div className="pl-10 pr-10 pb-5">
       <table>
         <thead>
           <tr>

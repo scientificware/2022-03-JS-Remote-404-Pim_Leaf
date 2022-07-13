@@ -118,29 +118,35 @@ function SuppliersDetails() {
           >
             {(close) => (
               <div className=" bg-darkBlue opacity-95 text-white">
-                <button type="button" onClick={close}>
-                  <img
-                    src={RetourButtonWhite}
-                    alt="Bouton Retour"
-                    className="w-25 justify-start transition duration-120 ease-out hover:scale-105"
-                  />
-                </button>
-                <h1 className="p-10 flex justify-center text-2xl">
-                  Vous êtes sur le point d ajouter ces produits à votre stock:
-                </h1>
-                <div className="flex justify-center overflow-y-scroll h-5/6">
-                  <ModalAddProducts
-                    products={products}
-                    handleClick={handleClick}
-                  />
+                <div>
+                  <div className="pl-5 pr-5 pb-5">
+                    <button type="button" onClick={close}>
+                      <img
+                        src={RetourButtonWhite}
+                        alt="Bouton Retour"
+                        className="w-25 justify-start transition duration-120 ease-out hover:scale-105"
+                      />
+                    </button>
+                    <h1 className="flex justify-center text-2xl">
+                      Ajouter ces produits à votre stock:
+                    </h1>
+                  </div>
+                  <div className="flex justify-center overflow-y-scroll h-5/6">
+                    <ModalAddProducts
+                      products={products}
+                      handleClick={handleClick}
+                    />
+                  </div>
                 </div>
-                <button
-                  type="button"
-                  onClick={() => handleClick()}
-                  className="bg-white text-darkBlue p-1 rounded-2xl flex transition duration-120 ease-out hover:bg-middleBlue mb-2 mt-2  focus:bg-lightGreen opacity-80"
-                >
-                  Confirmer
-                </button>
+                <div className="flex justify-center pb-5">
+                  <button
+                    type="button"
+                    onClick={() => handleClick()}
+                    className="bg-white text-darkBlue p-1 rounded-2xl flex transition duration-120 ease-out hover:bg-middleBlue mb-2 mt-2  focus:bg-lightGreen opacity-80"
+                  >
+                    Confirmer
+                  </button>
+                </div>
               </div>
             )}
           </Popup>
