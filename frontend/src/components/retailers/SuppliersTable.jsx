@@ -1,14 +1,10 @@
-/* eslint-disable jsx-a11y/control-has-associated-label */
 /* eslint-disable import/no-unresolved */
 
-import React from "react";
-import SuppliersList from "@retailersC/SuppliersList";
-
-function SuppliersTable({ suppliers, searchInput }) {
+function SuppliersTable() {
   return (
     <div className="container mx-auto px-4 sm:px-8">
       <div className="py-8">
-        <div>
+        {/* <div>
           <h2 className="text-2xl font-redHat leading-tight">
             Mes Fournisseurs
           </h2>
@@ -52,7 +48,7 @@ function SuppliersTable({ suppliers, searchInput }) {
               </tbody>
             </table>
           </div>
-        </div>
+        </div> */}
       </div>
     </div>
   );

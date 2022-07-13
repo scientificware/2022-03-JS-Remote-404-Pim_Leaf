@@ -33,7 +33,9 @@ function ListProducts() {
 
   useEffect(() => {
     axios
-      .get(`${import.meta.env.VITE_BACKEND_URL}products`)
+      .get(`${import.meta.env.VITE_BACKEND_URL}products`, {
+        withCredentials: true,
+      })
       .then((res) => {
         const prod = res.data.map((el) => ({ ...el, check: false }));
         setProducts(prod);

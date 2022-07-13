@@ -1,4 +1,4 @@
-function SearchBarProducts({ searchInput, setSearchInput }) {
+function SearchBarHumans({ searchInput, setSearchInput }) {
   const handleChange = (e) => {
     const input = e.target.value;
     const inputUp = input.charAt(0).toUpperCase() + input.slice(1);
@@ -17,7 +17,7 @@ function SearchBarProducts({ searchInput, setSearchInput }) {
           value={searchInput}
         />
         <button
-          type="submit"
+          type="button"
           className="bg-lightGrey flex justify-center w-10 rounded-tr-full rounded-br-full"
         >
           <img
@@ -31,4 +31,4 @@ function SearchBarProducts({ searchInput, setSearchInput }) {
   );
 }
 
-export default SearchBarProducts;
+export default SearchBarHumans;

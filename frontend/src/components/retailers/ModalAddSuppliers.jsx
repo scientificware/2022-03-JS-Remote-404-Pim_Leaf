@@ -1,16 +1,44 @@
+/* eslint-disable import/no-unresolved */
 /* eslint-disable jsx-a11y/control-has-associated-label */
 /* eslint-disable react/destructuring-assignment */
-/* eslint-disable import/no-unresolved */
 
-import SuppliersListModal from "@retailersC/SuppliersListModal";
+import SuppliersListModal from "@components/retailers/SuppliersListModal";
+import { useEffect, useState, useContext } from "react";
+import axios from "axios";
+import UserExport from "../../contexts/UserContext";
 
-function ModalAddSuppliers({ suppliers, searchInput }) {
+function ModalAddSuppliers({ searchInput, connected, pending }) {
+  const { user } = useContext(UserExport.UserContext);
+
+  const [suppliers, setSuppliers] = useState([]);
+
+  const connectId = connected.map((connect) => connect.supplier_id);
+  const pendId = pending.map((pend) => pend.supplier_id);
+  const compare = [...connectId, ...pendId];
+  const [handleClick, sethandleClick] = useState(false);
+
+  useEffect(() => {
+    axios
+      .get(`${import.meta.env.VITE_BACKEND_URL}retailer/suppliers`, {
+        withCredentials: true,
+      })
+      .then((res) => {
+        setSuppliers(res.data);
+      })
+      .catch((error) => {
+        console.warn(error.response.data);
+      });
+  }, []);
+
   return (
-    <div>
+    <div className="pl-10 pr-10 pb-10">
       <table>
         <thead>
           <tr>
-            <th scope="col" className="bg-middleBlue/70  text-l uppercase">
+            <th
+              scope="col"
+              className="bg-middleBlue/70  text-l uppercase text-left pl-5"
+            >
               Nom
             </th>
             <th scope="col" className="bg-middleBlue/70 text-l uppercase">
@@ -20,15 +48,24 @@ function ModalAddSuppliers({ suppliers, searchInput }) {
           </tr>
         </thead>
         <tbody>
-          {suppliers
-            .filter(
-              (supplier) =>
-                supplier.name.includes(searchInput) ||
-                supplier.domaine.includes(searchInput)
-            )
-            .map(({ id, name, domaine }) => (
-              <SuppliersListModal id={id} name={name} domaine={domaine} />
-            ))}
+          {suppliers &&
+            suppliers
+              .filter((supplier) => !compare.includes(supplier.company_id))
+              .filter(
+                (supplier) =>
+                  supplier.company_name.includes(searchInput) ||
+                  supplier.domain.includes(searchInput)
+              )
+              .map((supplier) => (
+                <SuppliersListModal
+                  id={supplier.company_id}
+                  name={supplier.company_name}
+                  domaine={supplier.domain}
+                  sethandleClick={sethandleClick}
+                  handleClick={handleClick}
+                  user={user}
+                />
+              ))}
         </tbody>
       </table>
     </div>

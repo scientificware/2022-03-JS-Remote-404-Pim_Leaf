@@ -1,3 +1,4 @@
+/* eslint-disable import/no-extraneous-dependencies */
 /* eslint-disable import/no-unresolved */
 import { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
@@ -6,6 +7,9 @@ import axios from "axios";
 import Avatar from "@assets/icon_login_avatar.svg";
 import Padlock from "@assets/padlock_login.png";
 import UserExport from "@contexts/UserContext";
+
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function LoginForm() {
   const [email, setEmail] = useState("");
@@ -21,16 +25,21 @@ function LoginForm() {
       return;
     }
     axios
-      .post(`${import.meta.env.VITE_BACKEND_URL}login`, { email, password })
+      .post(
+        `${import.meta.env.VITE_BACKEND_URL}login`,
+        { email, password },
+        { withCredentials: true }
+      )
       .then((res) => {
+        toast.success("Vous êtes connecté !");
         setUser(res.data);
         if (res.data.company_group_id === 1) {
-          navigate("/retailer/products");
+          navigate("/commercant/produits");
         } else if (res.data.company_group_id === 2) {
-          navigate("/supplier/products");
+          navigate("/fournisseur/produits");
         }
       })
-      .catch((err) => console.error(err));
+      .catch(() => toast.warning("Votre email ou votre mot de passe est faux"));
   };
   return (
     <div>
@@ -57,9 +66,10 @@ function LoginForm() {
               <img src={Padlock} alt="padlock" />
             </div>
             <input
-              className="bg-white bg-opacity-0  border-b border-b-white mt-8 mb-8 text-white"
+              className="bg-white bg-opacity-0  border-b border-b-white mt-8 mb-8 text-white
+              focus-visible:shadow-none"
               id="password"
-              type="text"
+              type="password"
               name="password"
               placeholder=""
               onChange={(event) => {
@@ -71,8 +81,8 @@ function LoginForm() {
         </label>
         <input
           type="button"
-          value="login"
-          className="py-2 w-28 text-center text-white text-base bg-darkBlue hover:bg-opacity-90 rounded-full mt-12"
+          value="Se connecter"
+          className="px-6 py-2.5 cursor-pointer text-center text-white text-base bg-darkBlue hover:bg-opacity-90 rounded-full mt-12"
           onClick={handleClick}
         />
         {msg && <p>{msg}</p>}

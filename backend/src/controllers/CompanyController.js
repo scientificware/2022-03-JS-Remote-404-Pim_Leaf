@@ -13,11 +13,19 @@ class CompanyController {
       });
   };
 
-  static browseSupplier = (req, res) => {
+  static browseSupplierConnected = (req, res) => {
     models.company
-      .findAllSupplier()
+      .findUserCompany(parseInt(req.params.id, 10))
       .then(([rows]) => {
-        res.send(rows);
+        models.company
+          .findAllSupplierConnected(rows[0].id)
+          .then(([data]) => {
+            res.status(200).json(data);
+          })
+          .catch((err) => {
+            console.error(err);
+            res.sendStatus(500);
+          });
       })
       .catch((err) => {
         console.error(err);
@@ -25,11 +33,83 @@ class CompanyController {
       });
   };
 
-  static browseTrader = (req, res) => {
+  static browseSupplierPending = (req, res) => {
     models.company
-      .findAllTrader()
+      .findUserCompany(parseInt(req.params.id, 10))
       .then(([rows]) => {
-        res.send(rows);
+        models.company
+          .findAllSupplierPending(rows[0].id)
+          .then(([data]) => {
+            res.status(200).json(data);
+          })
+          .catch((err) => {
+            console.error(err);
+            res.sendStatus(500);
+          });
+      })
+      .catch((err) => {
+        console.error(err);
+        res.sendStatus(500);
+      });
+  };
+
+  static browseSuppliers = (req, res) => {
+    models.company
+      .findAllSuppliers()
+      .then(([data]) => {
+        res.status(200).json(data);
+      })
+      .catch((err) => {
+        console.error(err);
+        res.sendStatus(500);
+      });
+  };
+
+  static browseRetailerConnected = (req, res) => {
+    models.company
+      .findUserCompany(parseInt(req.params.id, 10))
+      .then(([rows]) => {
+        models.company
+          .findAllRetailerConnected(rows[0].id)
+          .then(([data]) => {
+            res.status(200).json(data);
+          })
+          .catch((err) => {
+            console.error(err);
+            res.sendStatus(500);
+          });
+      })
+      .catch((err) => {
+        console.error(err);
+        res.sendStatus(500);
+      });
+  };
+
+  static browseRetailerPending = (req, res) => {
+    models.company
+      .findUserCompany(parseInt(req.params.id, 10))
+      .then(([rows]) => {
+        models.company
+          .findAllRetailerPending(rows[0].id)
+          .then(([data]) => {
+            res.status(200).json(data);
+          })
+          .catch((err) => {
+            console.error(err);
+            res.sendStatus(500);
+          });
+      })
+      .catch((err) => {
+        console.error(err);
+        res.sendStatus(500);
+      });
+  };
+
+  static browseRetailers = (req, res) => {
+    models.company
+      .findAllRetailers()
+      .then(([data]) => {
+        res.status(200).json(data);
       })
       .catch((err) => {
         console.error(err);
@@ -53,15 +133,9 @@ class CompanyController {
       });
   };
 
-  static edit = (req, res) => {
-    const item = req.body;
-
-    // TODO validations (length, format...)
-
-    item.id = parseInt(req.params.id, 10);
-
+  static editCompanyInformations = (req, res) => {
     models.company
-      .update(item)
+      .updateCompanyInfo(req.body, parseInt(req.params.id, 10))
       .then(([result]) => {
         if (result.affectedRows === 0) {
           res.sendStatus(404);

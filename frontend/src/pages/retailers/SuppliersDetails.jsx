@@ -1,60 +1,223 @@
+/* eslint-disable no-unused-expressions */
+/* eslint-disable no-alert */
+/* eslint-disable no-plusplus */
+/* eslint-disable jsx-a11y/control-has-associated-label */
+/* eslint-disable no-else-return */
 /* eslint-disable import/no-unresolved */
-import { useParams } from "react-router-dom";
 
-import DetailsSuppliers from "@retailersC/DetailsSuppliers";
-import SearchBarSuppliersDetails from "@components/SearchBarSupppliersDetails";
-import ButtonFunction from "@components/ButtonFunction";
-import dataSuppliers from "@data/MaxData";
-import dataProducts from "@data/DataProducts";
+import { useParams } from "react-router-dom";
+import Popup from "reactjs-popup";
+
+import SearchBar from "@components/common/SearchBar";
+import ProductsDetailsSupplier from "@components/retailers/ProductsDetailsSupplier";
+import SuppliersDetailsDescription from "@components/retailers/SuppliersDetailsDescription";
+import ProductsLines from "@components/common/ProductsLines";
+import { MdDone } from "react-icons/md";
+import ButtonPillPlus from "@components/common/ButtonPillPlus";
+import RetourButtonWhite from "@assets/retour_button_white.svg";
+import ModalAddProducts from "@components/retailers/ModalAddProducts";
+
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
+import axios from "axios";
+import { useState, useContext, useEffect } from "react";
+
+import UserExport from "@contexts/UserContext";
 
 function SuppliersDetails() {
   const { id } = useParams();
-  return (
-    <main>
-      <p className="text-5xl flex justify-center pt-10">
-        {dataSuppliers[parseInt(id, 10)].name}
-      </p>
-      <div className="bg-middleBlue/70 relative m-10 mt-16">
-        <article className="relative grid grid-cols-3 ">
-          <h1 className="absolute -top-10 text-4xl">Description</h1>
-          <div className="col-span-2 order-1 p-10">
-            <p className="text-3xl mb-4 flex grid-span-2 relative">
-              {dataSuppliers[parseInt(id, 10)].speciality}
-            </p>
-            <p className="text-2xl">
-              Lorem, ipsum dolor sit amet consectetur adipisicing elit. Eos
-              reiciendis rem esse laboriosam excepturi alias consectetur, hic
-              fuga quos ipsum doloremque non itaque minus tempore similique nemo
-              ipsa. Fugit, et? Lorem ipsum dolor sit amet consectetur,
-              adipisicing elit. Tempore voluptatibus blanditiis modi omnis
-              cumque quaerat nobis atque? Porro, quia molestiae vel
-              reprehenderit possimus minima laudantium. Qui nisi dicta
-              repudiandae molestiae?
-            </p>
+  const { user } = useContext(UserExport.UserContext);
+  const [searchInput, setSearchInput] = useState("");
+  const [products, setProducts] = useState([]);
+  const [supplier, setSupplier] = useState();
+
+  const contentStyle = {
+    height: "auto",
+    overlfow: "scroll", // <-- This tells the modal to scroll
+  };
+
+  const handleCheckProducts = (prod) => {
+    const newProduct = [...products];
+    const index = newProduct.indexOf(prod);
+    newProduct[index].check = !newProduct[index].check;
+    setProducts(newProduct);
+  };
+  const addProducts = products
+    .filter((product) => product.check === true)
+    .map((product) => ({
+      product_id: product.id,
+      owner_id: `${user.user_id}`,
+      supplier_id: product.supplier_id,
+      disponibility: "1",
+    }));
+
+  useEffect(() => {
+    axios
+      .get(`${import.meta.env.VITE_BACKEND_URL}company/${user.user_id}`, {
+        withCredentials: true,
+      })
+      .then((res) => setSupplier(res.data));
+
+    axios
+      .get(
+        `${import.meta.env.VITE_BACKEND_URL}retailer/${
+          user.user_id
+        }/supplier/${id}/stock`,
+        { withCredentials: true }
+      )
+      .then((res) => {
+        const prod = res.data.map((el) => ({ ...el, check: false }));
+        setProducts(prod);
+      })
+      .catch((error) => {
+        console.warn(error.response.data);
+      });
+  }, []);
+
+  const handleClick = (prod) => {
+    const productToGet = [];
+    const productToDelete = [];
+    for (let i = 0; i < prod.length; i += 1) {
+      prod[i].check
+        ? productToDelete.push(prod[i])
+        : productToGet.push(prod[i]);
+    }
+    setProducts(productToGet);
+    for (let i = 0; i < addProducts.length; i++) {
+      axios
+        .post(
+          `${import.meta.env.VITE_BACKEND_URL}retailer/${user.user_id}/stock`,
+          addProducts[i],
+          { withCredentials: true }
+        )
+        .then(() =>
+          toast.success(`${products[i].product_name} a été ajouté avec susccès`)
+        )
+        .catch(() =>
+          toast.warning(
+            "Un problème est survenue durant l'ajout des produits, veuillez réessayer"
+          )
+        );
+    }
+  };
+
+  if (supplier) {
+    return (
+      <main>
+        <h1 className="text-3xl text-center font-bold font-barlow mt-14 mb-8">
+          {supplier.company_name}
+        </h1>
+
+        <div className="flex flex-col font-redHat w-3/4 m-auto">
+          <SuppliersDetailsDescription description={supplier.description} />
+
+          <ProductsDetailsSupplier
+            company={supplier.company_name}
+            description={supplier.description}
+            phone={supplier.phone}
+            mail={supplier.company_mail}
+            address={supplier.address}
+            postcode={supplier.postcode}
+            city={supplier.city}
+            website={supplier.website}
+          />
+
+          <div className="mt-10">
+            <SearchBar
+              searchInput={searchInput}
+              setSearchInput={setSearchInput}
+            />
           </div>
-          <div className="col-span-2 order-1 p-10">
-            <h3 className="text-3xl uppercase mb-4 flex grid-span-2 relative">
-              Certification
-            </h3>
-          </div>
-        </article>
-      </div>
-      <div className="bg-middleBlue/70 relative m-10 mt-16">
-        <div className="col-span-2 order-1 ">
-          <h3 className=" absolute -top-10 text-4xl">Coordonees</h3>
-          <a
-            href="https://www.openstreetmap.org/search?query=mulhouse#map=13/47.7443/7.3457"
-            className="text-3xl flex grid-span-2 relative p-10"
+          <Popup
+            trigger={
+              <div className="flex flex-row justify-end pb-5">
+                <ButtonPillPlus />
+              </div>
+            }
+            modal
+            contentStyle={contentStyle}
           >
-            {dataSuppliers[parseInt(id, 10)].coordonees}
-          </a>
+            {(close) => (
+              <div className=" bg-darkBlue opacity-95 text-white">
+                <div>
+                  <div className="pl-5 pr-5 pb-5">
+                    <button type="button" onClick={close}>
+                      <img
+                        src={RetourButtonWhite}
+                        alt="Bouton Retour"
+                        className="w-25 justify-start transition duration-120 ease-out hover:scale-105"
+                      />
+                    </button>
+                    <h1 className="flex justify-center text-2xl">
+                      Ajouter ces produits à votre stock:
+                    </h1>
+                  </div>
+                  <div className="flex justify-center overflow-y-scroll h-5/6">
+                    <ModalAddProducts
+                      products={products}
+                      handleClick={handleClick}
+                    />
+                  </div>
+                </div>
+                <div className="flex justify-center pb-5">
+                  <button
+                    type="button"
+                    onClick={() => handleClick(products)}
+                    className="bg-white text-darkBlue p-1 rounded-2xl flex transition duration-120 ease-out hover:bg-middleBlue mb-2 mt-2 active:bg-lightGreen opacity-80"
+                  >
+                    Confirmer
+                  </button>
+                </div>
+              </div>
+            )}
+          </Popup>
+
+          <table className="w-full mb-20">
+            <thead>
+              <tr className="text-left h-12 shadow-md">
+                <th
+                  scope="col"
+                  className="bg-middleBlue/70 text-middleBlue/0 text-l uppercase"
+                />
+                <th scope="col" className="bg-middleBlue/70 text-l uppercase">
+                  Produit
+                </th>
+                <th scope="col" className="bg-middleBlue/70 text-l uppercase">
+                  {user.company_group_id === 1 ? "Fournisseur" : "Fabricant"}
+                </th>
+                <th scope="col" className="bg-middleBlue/70 text-l uppercase">
+                  Catégorie
+                </th>
+                <th scope="col" className="bg-middleBlue/70 text-l uppercase">
+                  Disponibilité
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              {products
+                .filter(
+                  (product) =>
+                    product.product_name.includes(searchInput) ||
+                    product.supplier.includes(searchInput) ||
+                    product.name.includes(searchInput)
+                )
+                .map((product) => (
+                  <ProductsLines
+                    key={product.id}
+                    product={product}
+                    MdDone={MdDone}
+                    handleCheckProducts={handleCheckProducts}
+                  />
+                ))}
+            </tbody>
+          </table>
         </div>
-      </div>
-      <SearchBarSuppliersDetails />
-      <ButtonFunction />
-      <DetailsSuppliers products={dataProducts} />
-    </main>
-  );
+      </main>
+    );
+  } else {
+    return null;
+  }
 }
 
 export default SuppliersDetails;

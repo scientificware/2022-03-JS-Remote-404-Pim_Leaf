@@ -13,9 +13,16 @@ class UsersManager extends AbstractManager {
   findCompanyUser(id) {
     return this.connection
       .query(
-        `SELECT user.mail, company.company_group_id FROM ${UsersManager.table}
-      LEFT JOIN company 
-      ON company.user_id = user.id
+        `SELECT
+        u.id AS user_id,
+        u.name AS user_name,
+        u.mail,
+        c.id AS company_id,
+        c.company_name,
+        c.company_group_id
+        FROM ${UsersManager.table} u
+      LEFT JOIN company c
+      ON c.user_id = u.id
       WHERE user_id = ?`,
         [id]
       )
@@ -26,7 +33,19 @@ class UsersManager extends AbstractManager {
   getCompanyInfos(id) {
     return this.connection
       .query(
-        `SELECT u.id AS user_id, a.name AS domain, c.description, c.mail AS company_mail, c.address, c.postcode, c.city, c.phone FROM ${UsersManager.table} AS u
+        `SELECT
+        u.id AS user_id,
+        c.id AS company_id,
+        c.company_name,
+        a.name AS domain,
+        c.description,
+        c.company_mail,
+        c.address,
+        c.postcode,
+        c.city,
+        c.phone,
+        c.website
+        FROM ${UsersManager.table} AS u
     INNER JOIN company AS c ON c.user_id = u.id
     INNER JOIN activity_field AS a ON a.id = c.activity_field_id
     WHERE u.id = ?`,
@@ -44,6 +63,13 @@ class UsersManager extends AbstractManager {
         [id]
       )
       .then((res) => res[0]);
+  }
+
+  putUserProfil(user, id) {
+    return this.connection.query(
+      `update ${UsersManager.table} set ? where id = ?`,
+      [user, id]
+    );
   }
 }
 

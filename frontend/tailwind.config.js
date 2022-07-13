@@ -10,6 +10,9 @@ module.exports = {
       middleGreen: "#299740",
       lightGreen: "#3AD800",
       white: "#FFFFFF",
+      buttonRed: "#9d261d",
+      buttonOrange: "#f89406",
+      buttonGreen: "#46a546",
     },
     fontFamily: {
       barlow: ["Barlow", "sans-serif"],

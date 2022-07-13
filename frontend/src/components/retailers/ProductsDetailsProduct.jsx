@@ -1,14 +1,13 @@
-function ProductsDetailsProduct({ detail, origin, advise, label }) {
+function ProductsDetailsProduct({ detail, country, region, advise, label }) {
   return (
     <>
       {/* PRODUCT */}
-      <div className="flex flex-col font-redHat w-3/4 m-auto">
-        <div>
-          <h2 className="text-2xl">Le produit</h2>
-        </div>
-        <article className="bg-middleBlue/50 font-redHat flex justify-between p-10 shadow-lg mt-2">
-          <div className="flex flex-col">
-            <div className="mt-4 mb-10">
+      <div className="my-4">
+        <h2 className="text-3xl">Le produit</h2>
+
+        <article className="bg-middleBlue/50 font-redHat flex p-10 shadow-lg my-3">
+          <div className="w-2/3">
+            <div className="mb-10">
               <h3 className="text-2xl">Ingrédients</h3>
               <p>{detail}</p>
             </div>
@@ -22,14 +21,14 @@ function ProductsDetailsProduct({ detail, origin, advise, label }) {
           </div>
 
           <div className="flex flex-col">
-            <div className="mt-4 mb-10">
+            <div className="mb-10">
               <h3 className="text-2xl">Origine</h3>
-              <p>{origin.country}</p>
-              <p>{origin.region}</p>
+              <p>{country}</p>
+              <p>{region}</p>
             </div>
             <div className="col-span-1 order-4 grid grid-cols-2 pb-10">
               <h3 className="text-2xl col-span-2">Labels</h3>
-              <img src={label.file.url} alt={label.file.alt} />
+              <p>{label}</p>
             </div>
           </div>
         </article>

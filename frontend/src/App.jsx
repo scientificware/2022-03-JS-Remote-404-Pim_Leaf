@@ -7,20 +7,20 @@ import ProtectedRouteRetailer from "@components/layout/ProtectRouteRetailer";
 import ProtectedRouteSupplier from "@components/layout/ProtectRouteSupplier";
 import DashboardLayout from "@components/layout/DashBoardLayout";
 
-import Login from "@pages/Login";
-import Company from "@pages/Company";
-import CompanyDetails from "@pages/CompanyDetails";
-import Profil from "@pages/Profil";
+// common
+import Company from "@pages/common/Company";
+import Login from "@pages/common/Login";
+import Products from "@pages/common/Products";
+import ProductsDetails from "@pages/common/ProductsDetails";
+import Profil from "@pages/common/Profil";
 
-import Products from "@retailersP/Products";
+// retailers
 import Suppliers from "@retailersP/Suppliers";
 import SuppliersDetails from "@retailersP/SuppliersDetails";
-import ProductsDetails from "@retailersP/ProductsDetails";
 
-import SuppliersProducts from "@suppliersP/SupProducts";
-import SuppliersProductsDetails from "@suppliersP/SupProductsDetails";
-import SuppliersClients from "@suppliersP/SuppliersClients";
-import SuppliersClientsDetails from "@suppliersP/SuppliersClientsDetails";
+// suppliers
+import Clients from "@suppliersP/Clients";
+import ClientsDetails from "@suppliersP/ClientsDetails";
 
 import UserExport from "@contexts/UserContext";
 
@@ -43,39 +43,41 @@ function App() {
               </ProtectedRoute>
             }
           >
-            <Route path="company" element={<Company />} />
-            <Route path="company/:id" element={<CompanyDetails />} />
+            <Route path="entreprise" element={<Company />} />
             <Route path="profil" element={<Profil />} />
           </Route>
 
           {/* RETAILERS */}
           <Route
-            path="/retailer"
+            path="/commercant"
             element={
               <ProtectedRouteRetailer user={user}>
                 <DashboardLayout />
               </ProtectedRouteRetailer>
             }
           >
-            <Route path="products" element={<Products />} />
-            <Route path="products/:id" element={<ProductsDetails />} />
-            <Route path="suppliers" element={<Suppliers />} />
-            <Route path="suppliers/:id" element={<SuppliersDetails />} />
+            <Route path="produits" element={<Products />} />
+            <Route path="produit/:id/details" element={<ProductsDetails />} />
+            <Route path="fournisseurs" element={<Suppliers />} />
+            <Route
+              path="fournisseur/:id/details"
+              element={<SuppliersDetails />}
+            />
           </Route>
 
           {/* SUPPLIERS */}
           <Route
-            path="/supplier"
+            path="/fournisseur"
             element={
               <ProtectedRouteSupplier user={user}>
                 <DashboardLayout />
               </ProtectedRouteSupplier>
             }
           >
-            <Route path="products" element={<SuppliersProducts />} />
-            <Route path="products/:id" element={<SuppliersProductsDetails />} />
-            <Route path="client" element={<SuppliersClients />} />
-            <Route path="client/:id" element={<SuppliersClientsDetails />} />
+            <Route path="produits" element={<Products />} />
+            <Route path="produit/:id/details" element={<ProductsDetails />} />
+            <Route path="clients" element={<Clients />} />
+            <Route path="client/:id/details" element={<ClientsDetails />} />
           </Route>
         </Routes>
       </div>

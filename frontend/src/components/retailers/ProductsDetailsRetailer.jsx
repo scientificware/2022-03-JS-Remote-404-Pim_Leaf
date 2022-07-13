@@ -1,20 +1,23 @@
-function ProductsDetailsRetailer({ advise, recipeIdea }) {
+function ProductsDetailsRetailer({ tips, recipeIdea }) {
   return (
-    <div className="flex flex-col mt-20 font-redHat w-3/4 m-auto ">
-      <h2 className="text-2xl">Mon commerce</h2>
+    <>
       {/* COMPANY */}
-      <article className="bg-middleBlue/50 mb-10 flex justify-around shadow-lg mt-2">
-        <div className="p-10">
-          <h3 className="text-2xl pb-2">Astuces</h3>
-          <p>{advise}</p>
-        </div>
+      <div className="my-4">
+        <h2 className="text-3xl">Mon commerce</h2>
 
-        <div className="p-10">
-          <h3 className="text-2xl pb-2">Idées recettes</h3>
-          <p>{recipeIdea}</p>
-        </div>
-      </article>
-    </div>
+        <article className="bg-middleBlue/50 font-redHat flex p-10 shadow-lg my-3">
+          <div className="mb-10 w-1/2">
+            <h3 className="text-2xl pb-2">Astuces</h3>
+            <p>{tips}</p>
+          </div>
+
+          <div className="mb-10">
+            <h3 className="text-2xl pb-2">Idées recettes</h3>
+            <p>{recipeIdea}</p>
+          </div>
+        </article>
+      </div>
+    </>
   );
 }
 
