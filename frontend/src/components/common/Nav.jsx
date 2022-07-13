@@ -13,6 +13,7 @@ import OpenBurger from "@assets/burger_icon.png";
 import CloseBurger from "@assets/burger_close_icon.png";
 
 import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function Nav() {
   const [navOpen, setNavOpen] = useState(false);

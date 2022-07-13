@@ -60,7 +60,7 @@ function Company() {
       <form>
         <FormField
           name="company_name"
-          label="nom de l'entreprise"
+          label="Nom de l'entreprise"
           placeholder={datas && datas.company_name}
           changeInfos={changeInfos}
         />
@@ -71,14 +71,14 @@ function Company() {
 
         <FormField
           name="description"
-          label="description"
+          label="Description"
           placeholder={datas && datas.description}
           changeInfos={changeInfos}
         />
         <fieldset className="flex justify-between">
           <FormField
             name="address"
-            label="adresse"
+            label="Adresse"
             placeholder={datas && datas.address}
             changeInfos={changeInfos}
           />
