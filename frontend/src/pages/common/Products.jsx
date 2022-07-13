@@ -34,8 +34,9 @@ function Products() {
   };
 
   const contentStyle = {
-    height: "auto",
     overlfow: "scroll", // <-- This tells the modal to scroll
+    width: "50%",
+    height: "auto",
   };
 
   const handleClickMinus = (prod) => {
@@ -105,7 +106,7 @@ function Products() {
               contentStyle={contentStyle}
             >
               {(close) => (
-                <div className=" bg-darkBlue opacity-95 text-white">
+                <div className="bg-darkBlue opacity-95 text-white">
                   <div className="pl-5 pr-5 pb-5">
                     <button type="button" onClick={close}>
                       <img
@@ -128,7 +129,7 @@ function Products() {
                     <button
                       type="button"
                       onClick={() => handleClickMinus(products)}
-                      className="bg-white w-20 text-darkBlue p-1 rounded-2xl transition duration-120 ease-out hover:bg-middleBlue mb-2 mt-2  active:bg-lightGreen opacity-80"
+                      className="bg-white w-40 text-darkBlue p-4 rounded-full transition duration-120 ease-out hover:bg-middleBlue my-2 active:bg-lightGreen opacity-80"
                     >
                       Confirmer
                     </button>
@@ -140,7 +141,7 @@ function Products() {
             // Modal add Product For Suppliers
             <Popup
               trigger={
-                <div className="flex flex-row justify-end pb-5">
+                <div className="flex flex-row justify-end">
                   <ButtonPillPlus />
                 </div>
               }
@@ -148,7 +149,7 @@ function Products() {
               contentStyle={contentStyle}
             >
               {(close) => (
-                <div className=" bg-darkBlue opacity-95 text-white">
+                <div className="bg-darkBlue opacity-95 text-white">
                   <div className="pl-5 pr-5 pb-5">
                     <button type="button" onClick={close}>
                       <img
@@ -161,7 +162,7 @@ function Products() {
                       Ajouter un Produit:
                     </h1>
                   </div>
-                  <div className="flex justify-center pb-5">
+                  <div className="flex justify-center flex-col">
                     <ModalCreateProduct />
                   </div>
                 </div>

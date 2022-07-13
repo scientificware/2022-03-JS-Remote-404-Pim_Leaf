@@ -81,8 +81,8 @@ function ModalCreateProduct() {
   };
 
   return (
-    <div>
-      <form>
+    <>
+      <form className="w-4/5 m-auto">
         <FormField
           name="product_name"
           label="Nom du Produit"
@@ -107,39 +107,45 @@ function ModalCreateProduct() {
           placeholder=""
           changeInfos={changeInfos}
         />
-        <p>Catégorie du produit</p>
-        <select
-          className="text-darkBlue"
-          onChange={(e) => handleChangeCategorie(e)}
-        >
-          {categorie.map((cat) => (
-            <option key={cat.id} value={cat.id}>
-              {cat.name}
-            </option>
-          ))}
-        </select>
-        <p>Origine du produit</p>
-        <select
-          className="text-darkBlue"
-          onChange={(e) => handleChangeOrigin(e)}
-        >
-          {origin.map((or) => (
-            <option key={origin.id} value={or.id}>
-              {or.country} {or.region}
-            </option>
-          ))}
-        </select>
+        <label htmlFor="category" className="text-xl font-bold flex flex-col">
+          Catégorie du produit
+          <select
+            name="category"
+            className=" bg-opacity-50 text-darkBlue p-2 mt-1 mb-3 shadow-lg"
+            onChange={(e) => handleChangeCategorie(e)}
+          >
+            {categorie.map((cat) => (
+              <option key={cat.id} value={cat.id}>
+                {cat.name}
+              </option>
+            ))}
+          </select>
+        </label>
+        <label htmlFor="origin" className="text-xl font-bold flex flex-col">
+          Origine du produit
+          <select
+            name="origin"
+            className=" bg-opacity-50 text-darkBlue p-2 mt-1 mb-3 shadow-lg"
+            onChange={(e) => handleChangeOrigin(e)}
+          >
+            {origin.map((or) => (
+              <option key={origin.id} value={or.id}>
+                {or.country} {or.region}
+              </option>
+            ))}
+          </select>
+        </label>
       </form>
       <div className="flex justify-center pb-5">
         <button
           type="button"
           onClick={() => handleClickConfirm()}
-          className="bg-white w-20 text-darkBlue p-1 rounded-2xl transition duration-120 ease-out hover:bg-middleBlue mb-2 mt-2  active:bg-lightGreen opacity-80"
+          className="bg-white w-40 text-darkBlue p-4 rounded-full transition duration-120 ease-out hover:bg-middleBlue my-2 active:bg-lightGreen opacity-80"
         >
           Confirmer
         </button>
       </div>
-    </div>
+    </>
   );
 }
 
