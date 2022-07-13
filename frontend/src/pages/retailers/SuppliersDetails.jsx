@@ -14,6 +14,7 @@ import ProductsLines from "@components/common/ProductsLines";
 import { MdDone } from "react-icons/md";
 import ButtonPillPlus from "@components/common/ButtonPillPlus";
 import RetourButtonWhite from "@assets/retour_button_white.svg";
+import ModalAddProducts from "@components/retailers/ModalAddProducts";
 
 import axios from "axios";
 import { useState, useContext, useEffect } from "react";
@@ -78,6 +79,7 @@ function SuppliersDetails() {
         .catch((err) => console.error(err));
     }
   };
+
   if (supplier) {
     return (
       <main>
@@ -126,15 +128,12 @@ function SuppliersDetails() {
                 <h1 className="p-10 flex justify-center text-2xl">
                   Vous êtes sur le point d ajouter ces produits à votre stock:
                 </h1>
-                {products
-                  .filter((product) => product.check === true)
-                  .map((product) => (
-                    <div id={product.id}>
-                      <p>{product.product_name}</p>
-                      <p>{product.supplier}</p>
-                      <p>{product.name}</p>
-                    </div>
-                  ))}
+                <div className="flex justify-center overflow-y-scroll h-5/6">
+                  <ModalAddProducts
+                    products={products}
+                    handleClick={handleClick}
+                  />
+                </div>
                 <button
                   type="button"
                   onClick={() => handleClick()}
