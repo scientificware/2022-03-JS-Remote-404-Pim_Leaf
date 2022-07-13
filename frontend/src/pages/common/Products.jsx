@@ -17,6 +17,7 @@ import ButtonPillMinus from "@components/common/ButtonPillMinus";
 
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import ModalAddProducts from "@components/retailers/ModalAddProducts";
 
 function Products() {
   const [products, setProducts] = useState([]);
@@ -53,9 +54,11 @@ function Products() {
           }`
         )
         .then(() => {
-          toast.success("Les produits ont bien été supprimés.");
+          toast.success(`${products[i].product_name} a bien été supprimé.`);
         })
-        .catch(() => toast.error("Vos données n'ont pas pu être modifiées."));
+        .catch(() =>
+          toast.error("Un problème est survenue, veuillez réessayer.")
+        );
     }
   };
 
@@ -96,34 +99,34 @@ function Products() {
               contentStyle={contentStyle}
             >
               {(close) => (
-                <div className=" bg-darkBlue opacity-95 text-white flex flex-col items-center">
-                  <button type="button" onClick={close}>
-                    <img
-                      src={RetourButtonWhite}
-                      alt="Bouton Retour"
-                      className="w-25 flex justify-start transition duration-120 ease-out hover:scale-105"
+                <div className=" bg-darkBlue opacity-95 text-white">
+                  <div className="pl-5 pr-5 pb-5">
+                    <button type="button" onClick={close}>
+                      <img
+                        src={RetourButtonWhite}
+                        alt="Bouton Retour"
+                        className="w-25 flex justify-start transition duration-120 ease-out hover:scale-105"
+                      />
+                    </button>
+                    <h1 className="flex justify-center text-2xl">
+                      Voulez vous supprimer ces produits de votre stock:
+                    </h1>
+                  </div>
+                  <div className="flex justify-center pb-5">
+                    <ModalAddProducts
+                      products={products}
+                      handleClick={handleClickMinus}
                     />
-                  </button>
-                  <h1 className="p-10 flex justify-center text-2xl">
-                    Vous êtes sur le point de supprimer ces produits de votre
-                    stock:
-                  </h1>
-                  {products
-                    .filter((product) => product.check === true)
-                    .map((product) => (
-                      <div id={product.id}>
-                        <p>{product.product_name}</p>
-                        <p>{product.supplier}</p>
-                        <p>{product.name}</p>
-                      </div>
-                    ))}
-                  <button
-                    type="button"
-                    onClick={() => handleClickMinus(products)}
-                    className="bg-white w-20 text-darkBlue p-1 rounded-2xl transition duration-120 ease-out hover:bg-middleBlue mb-2 mt-2  focus:bg-lightGreen opacity-80"
-                  >
-                    Confirmer
-                  </button>
+                  </div>
+                  <div className="flex justify-center pb-5">
+                    <button
+                      type="button"
+                      onClick={() => handleClickMinus(products)}
+                      className="bg-white w-20 text-darkBlue p-1 rounded-2xl transition duration-120 ease-out hover:bg-middleBlue mb-2 mt-2  active:bg-lightGreen opacity-80"
+                    >
+                      Confirmer
+                    </button>
+                  </div>
                 </div>
               )}
             </Popup>
