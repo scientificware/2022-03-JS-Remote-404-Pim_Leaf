@@ -27,6 +27,26 @@ class StockController {
       });
   };
 
+  static addProduct = (req, res) => {
+    models.products
+      .addSupplierProduct(req.body)
+      .then(([result]) => {
+        const stocking = {
+          product_id: result.insertId,
+          owner_id: parseInt(req.params.id, 10),
+          supplier_id: parseInt(req.params.id, 10),
+          disponibility: 1,
+        };
+        models.stock.addStock(stocking).then(() => {
+          res.status(201).send("Nice done");
+        });
+      })
+      .catch((err) => {
+        console.error(err);
+        res.sendStatus(500);
+      });
+  };
+
   static delete = (req, res) => {
     models.stock
       .deleteStock(req.params.id)
