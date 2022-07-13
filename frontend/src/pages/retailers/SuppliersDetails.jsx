@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-expressions */
 /* eslint-disable no-alert */
 /* eslint-disable no-plusplus */
 /* eslint-disable jsx-a11y/control-has-associated-label */
@@ -14,6 +15,10 @@ import ProductsLines from "@components/common/ProductsLines";
 import { MdDone } from "react-icons/md";
 import ButtonPillPlus from "@components/common/ButtonPillPlus";
 import RetourButtonWhite from "@assets/retour_button_white.svg";
+import ModalAddProducts from "@components/retailers/ModalAddProducts";
+
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 import axios from "axios";
 import { useState, useContext, useEffect } from "react";
@@ -67,17 +72,32 @@ function SuppliersDetails() {
       });
   }, []);
 
-  const handleClick = () => {
+  const handleClick = (prod) => {
+    const productToGet = [];
+    const productToDelete = [];
+    for (let i = 0; i < prod.length; i += 1) {
+      prod[i].check
+        ? productToDelete.push(prod[i])
+        : productToGet.push(prod[i]);
+    }
+    setProducts(productToGet);
     for (let i = 0; i < addProducts.length; i++) {
       axios
         .post(
           `${import.meta.env.VITE_BACKEND_URL}retailer/${user.user_id}/stock`,
           addProducts[i]
         )
-        .then(() => alert("Les produits ont été ajoutés avec succès"))
-        .catch((err) => console.error(err));
+        .then(() =>
+          toast.success(`${products[i].product_name} a été ajouté avec susccès`)
+        )
+        .catch(() =>
+          toast.warning(
+            "Un problème est survenue durant l'ajout des produits, veuillez réessayer"
+          )
+        );
     }
   };
+
   if (supplier) {
     return (
       <main>
@@ -116,32 +136,35 @@ function SuppliersDetails() {
           >
             {(close) => (
               <div className=" bg-darkBlue opacity-95 text-white">
-                <button type="button" onClick={close}>
-                  <img
-                    src={RetourButtonWhite}
-                    alt="Bouton Retour"
-                    className="w-25 justify-start transition duration-120 ease-out hover:scale-105"
-                  />
-                </button>
-                <h1 className="p-10 flex justify-center text-2xl">
-                  Vous êtes sur le point d ajouter ces produits à votre stock:
-                </h1>
-                {products
-                  .filter((product) => product.check === true)
-                  .map((product) => (
-                    <div id={product.id}>
-                      <p>{product.product_name}</p>
-                      <p>{product.supplier}</p>
-                      <p>{product.name}</p>
-                    </div>
-                  ))}
-                <button
-                  type="button"
-                  onClick={() => handleClick()}
-                  className="bg-white text-darkBlue p-1 rounded-2xl flex transition duration-120 ease-out hover:bg-middleBlue mb-2 mt-2  focus:bg-lightGreen opacity-80"
-                >
-                  Confirmer
-                </button>
+                <div>
+                  <div className="pl-5 pr-5 pb-5">
+                    <button type="button" onClick={close}>
+                      <img
+                        src={RetourButtonWhite}
+                        alt="Bouton Retour"
+                        className="w-25 justify-start transition duration-120 ease-out hover:scale-105"
+                      />
+                    </button>
+                    <h1 className="flex justify-center text-2xl">
+                      Ajouter ces produits à votre stock:
+                    </h1>
+                  </div>
+                  <div className="flex justify-center overflow-y-scroll h-5/6">
+                    <ModalAddProducts
+                      products={products}
+                      handleClick={handleClick}
+                    />
+                  </div>
+                </div>
+                <div className="flex justify-center pb-5">
+                  <button
+                    type="button"
+                    onClick={() => handleClick(products)}
+                    className="bg-white text-darkBlue p-1 rounded-2xl flex transition duration-120 ease-out hover:bg-middleBlue mb-2 mt-2 active:bg-lightGreen opacity-80"
+                  >
+                    Confirmer
+                  </button>
+                </div>
               </div>
             )}
           </Popup>
