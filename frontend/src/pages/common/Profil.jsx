@@ -7,6 +7,9 @@ import FormField from "@components/common/FormField";
 
 import UserExport from "@contexts/UserContext";
 
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 function Profil() {
   const { user } = useContext(UserExport.UserContext);
 
@@ -31,11 +34,9 @@ function Profil() {
         newDatas
       )
       .then(() => {
-        alert("Vos données ont bien été modifiées.");
+        toast.success("Vos données ont bien été modifiées.");
       })
-      .catch((err) => {
-        console.error(err);
-      });
+      .catch(() => toast.warning("Vos données n'ont pas pu être modifiées."));
   }
 
   const changeInfos = (event) => {
