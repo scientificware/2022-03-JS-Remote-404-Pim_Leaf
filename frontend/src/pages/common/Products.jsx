@@ -14,10 +14,12 @@ import SearchBarProducts from "@components/common/SearchBarProducts";
 import ProductsLines from "@components/common/ProductsLines";
 import RetourButtonWhite from "@assets/retour_button_white.svg";
 import ButtonPillMinus from "@components/common/ButtonPillMinus";
+import ButtonPillPlus from "@components/common/ButtonPillPlus";
+import ModalAddProducts from "@components/retailers/ModalAddProducts";
+import ModalCreateProduct from "@components/retailers/ModalCreateProduct";
 
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import ModalAddProducts from "@components/retailers/ModalAddProducts";
 
 function Products() {
   const [products, setProducts] = useState([]);
@@ -92,6 +94,7 @@ function Products() {
       <div className="font-redHat w-4/5 m-auto">
         <div className="flex flex-row justify-end">
           {user.company_group_id === 1 ? (
+            // Modal Delete Product For Retailers
             <Popup
               trigger={
                 <div className="flex flex-row justify-end pb-5">
@@ -134,7 +137,36 @@ function Products() {
               )}
             </Popup>
           ) : (
-            <div className="text-white h-12">.</div>
+            // Modal add Product For Suppliers
+            <Popup
+              trigger={
+                <div className="flex flex-row justify-end pb-5">
+                  <ButtonPillPlus />
+                </div>
+              }
+              modal
+              contentStyle={contentStyle}
+            >
+              {(close) => (
+                <div className=" bg-darkBlue opacity-95 text-white">
+                  <div className="pl-5 pr-5 pb-5">
+                    <button type="button" onClick={close}>
+                      <img
+                        src={RetourButtonWhite}
+                        alt="Bouton Retour"
+                        className="w-25 flex justify-start transition duration-120 ease-out hover:scale-105"
+                      />
+                    </button>
+                    <h1 className="flex justify-center text-2xl">
+                      Ajouter un Produit:
+                    </h1>
+                  </div>
+                  <div className="flex justify-center pb-5">
+                    <ModalCreateProduct />
+                  </div>
+                </div>
+              )}
+            </Popup>
           )}
         </div>
 
