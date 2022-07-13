@@ -27,6 +27,18 @@ class StockController {
       });
   };
 
+  static delete = (req, res) => {
+    models.stock
+      .deleteStock(req.params.id)
+      .then(() => {
+        res.sendStatus(204);
+      })
+      .catch((err) => {
+        console.error(err);
+        res.sendStatus(500);
+      });
+  };
+
   static getSupplierStock = async (req, res) => {
     try {
       const [supplierStock] = await models.products.getProducts(req.params.sid);

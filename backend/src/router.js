@@ -59,5 +59,6 @@ router.delete(
   "/supplier/clients/pending/:id",
   ConnectionController.deleteConnection
 );
+router.delete("/retailer/stock/:id", StockController.delete);
 
 module.exports = router;

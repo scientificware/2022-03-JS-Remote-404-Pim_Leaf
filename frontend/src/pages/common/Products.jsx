@@ -1,31 +1,19 @@
-/* eslint-disable jsx-a11y/control-has-associated-label */
-/* eslint-disable import/no-unresolved */
 /* eslint-disable no-unused-expressions */
+/* eslint-disable no-alert */
+/* eslint-disable no-plusplus */
+/* eslint-disable jsx-a11y/control-has-associated-label */
 /* eslint-disable import/no-unresolved */
 import { useState, useEffect, useContext } from "react";
 import { MdDone } from "react-icons/md";
 import axios from "axios";
-
-import { Typography, Box, Modal } from "@material-ui/core";
+import Popup from "reactjs-popup";
 
 import UserExport from "@contexts/UserContext";
 
-import ButtonPillMinus from "@components/common/ButtonPillMinus";
-import ButtonPillPlus from "@components/common/ButtonPillPlus";
 import SearchBarProducts from "@components/common/SearchBarProducts";
 import ProductsLines from "@components/common/ProductsLines";
-
-const style = {
-  position: "absolute",
-  top: "50%",
-  left: "50%",
-  transform: "translate(-50%, -50%)",
-  width: 400,
-  bgcolor: "background.paper",
-  border: "2px solid #000",
-  boxShadow: 24,
-  p: 4,
-};
+import RetourButtonWhite from "@assets/retour_button_white.svg";
+import ButtonPillMinus from "@components/common/ButtonPillMinus";
 
 function Products() {
   const [products, setProducts] = useState([]);
@@ -39,6 +27,11 @@ function Products() {
     setProducts(newProduct);
   };
 
+  const contentStyle = {
+    height: "auto",
+    overlfow: "scroll", // <-- This tells the modal to scroll
+  };
+
   const handleClickMinus = (prod) => {
     const productToGet = [];
     const productToDelete = [];
@@ -48,11 +41,20 @@ function Products() {
         : productToGet.push(prod[i]);
     }
     setProducts(productToGet);
+    const filterProducts = products.filter((product) => product.check === true);
+    for (let i = 0; i < products.length; i++) {
+      axios
+        .delete(
+          `${import.meta.env.VITE_BACKEND_URL}retailer/stock/${
+            filterProducts[i].stock_id
+          }`
+        )
+        .then(() => alert("Les produits ont été supprimés avec succès"))
+        .catch((error) => {
+          console.warn(error.response.data);
+        });
+    }
   };
-
-  const [open, setOpen] = useState(false);
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
 
   useEffect(() => {
     axios
@@ -80,8 +82,51 @@ function Products() {
 
       <div className="font-redHat w-4/5 m-auto">
         <div className="flex flex-row justify-end">
-          <ButtonPillPlus action={handleOpen} />
-          <ButtonPillMinus action={handleClickMinus} target={products} />
+          {user.company_group_id === 1 ? (
+            <Popup
+              trigger={
+                <div className="flex flex-row justify-end pb-5">
+                  <ButtonPillMinus />
+                </div>
+              }
+              modal
+              contentStyle={contentStyle}
+            >
+              {(close) => (
+                <div className=" bg-darkBlue opacity-95 text-white flex flex-col items-center">
+                  <button type="button" onClick={close}>
+                    <img
+                      src={RetourButtonWhite}
+                      alt="Bouton Retour"
+                      className="w-25 flex justify-start transition duration-120 ease-out hover:scale-105"
+                    />
+                  </button>
+                  <h1 className="p-10 flex justify-center text-2xl">
+                    Vous êtes sur le point de supprimer ces produits de votre
+                    stock:
+                  </h1>
+                  {products
+                    .filter((product) => product.check === true)
+                    .map((product) => (
+                      <div id={product.id}>
+                        <p>{product.product_name}</p>
+                        <p>{product.supplier}</p>
+                        <p>{product.name}</p>
+                      </div>
+                    ))}
+                  <button
+                    type="button"
+                    onClick={() => handleClickMinus(products)}
+                    className="bg-white w-20 text-darkBlue p-1 rounded-2xl transition duration-120 ease-out hover:bg-middleBlue mb-2 mt-2  focus:bg-lightGreen opacity-80"
+                  >
+                    Confirmer
+                  </button>
+                </div>
+              )}
+            </Popup>
+          ) : (
+            <div className="text-white h-12">.</div>
+          )}
         </div>
 
         <table className="w-full">
@@ -124,22 +169,6 @@ function Products() {
           </tbody>
         </table>
       </div>
-
-      <Modal
-        open={open}
-        onClose={handleClose}
-        aria-labelledby="modal-modal-title"
-        aria-describedby="modal-modal-description"
-      >
-        <Box sx={style}>
-          <Typography id="modal-modal-title" variant="h6" component="h2">
-            Text in a modal
-          </Typography>
-          <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-            Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
-          </Typography>
-        </Box>
-      </Modal>
     </main>
   );
 }
