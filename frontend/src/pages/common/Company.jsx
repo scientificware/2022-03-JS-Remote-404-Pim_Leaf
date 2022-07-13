@@ -18,7 +18,9 @@ function Company() {
 
   useEffect(() => {
     axios
-      .get(`${import.meta.env.VITE_BACKEND_URL}company/${user.user_id}`)
+      .get(`${import.meta.env.VITE_BACKEND_URL}company/${user.user_id}`, {
+        withCredentials: true,
+      })
       .then((res) => {
         setDatas(res.data);
       })
@@ -31,7 +33,8 @@ function Company() {
     axios
       .put(
         `${import.meta.env.VITE_BACKEND_URL}company/${user.user_id}`,
-        newDatas
+        newDatas,
+        { withCredentials: true }
       )
       .then(() => {
         toast.success("Vos données ont bien été modifiées.");

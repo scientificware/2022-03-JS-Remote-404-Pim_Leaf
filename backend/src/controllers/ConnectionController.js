@@ -15,7 +15,7 @@ class ConnectionController {
 
   static updateConnection = (req, res) => {
     models.connection
-      .validConnection(req.params.id)
+      .validConnection(req.body.status, req.params.id)
       .then(() => {
         res.status(201).send("connection has been updated");
       })

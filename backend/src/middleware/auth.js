@@ -1,4 +1,5 @@
 const Joi = require("joi");
+const jwt = require("jsonwebtoken");
 
 const checkData = (req, res, next) => {
   const { error } = Joi.object({
@@ -13,4 +14,25 @@ const checkData = (req, res, next) => {
   }
 };
 
-module.exports = { checkData };
+const checkAuth = (req, res, next) => {
+  if (req.cookies) {
+    jwt.verify(
+      req.cookies.user_token,
+      process.env.PRIVATETOKEN,
+      (err, decode) => {
+        if (err) {
+          res
+            .status(401)
+            .send("Merci de vous connecter pour naviguer sur ce site.");
+        } else {
+          req.user_token = decode;
+          next();
+        }
+      }
+    );
+  } else {
+    res.status(401).send("Désolé vos informations sont erronées.");
+  }
+};
+
+module.exports = { checkData, checkAuth };

@@ -19,7 +19,9 @@ function ModalAddSuppliers({ searchInput, connected, pending }) {
 
   useEffect(() => {
     axios
-      .get(`${import.meta.env.VITE_BACKEND_URL}retailer/suppliers`)
+      .get(`${import.meta.env.VITE_BACKEND_URL}retailer/suppliers`, {
+        withCredentials: true,
+      })
       .then((res) => {
         setSuppliers(res.data);
       })

@@ -11,10 +11,14 @@ function SuppliersListModal({
 }) {
   const changeStatus = () => {
     axios
-      .post(`${import.meta.env.VITE_BACKEND_URL}retailer/connection`, {
-        retailer_id: `${user.user_id}`,
-        supplier_id: `${id}`,
-      })
+      .post(
+        `${import.meta.env.VITE_BACKEND_URL}retailer/connection`,
+        {
+          retailer_id: `${user.user_id}`,
+          supplier_id: `${id}`,
+        },
+        { withCredentials: true }
+      )
       .then(() => {
         alert("votre demande de connexion a été prise en compte");
       })

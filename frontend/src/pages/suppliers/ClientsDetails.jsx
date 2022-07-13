@@ -13,7 +13,9 @@ function ClientsDetails() {
 
   useEffect(() => {
     axios
-      .get(`${import.meta.env.VITE_BACKEND_URL}company/${id}`)
+      .get(`${import.meta.env.VITE_BACKEND_URL}company/${id}`, {
+        withCredentials: true,
+      })
       .then((res) => setClient(res.data));
   }, []);
 

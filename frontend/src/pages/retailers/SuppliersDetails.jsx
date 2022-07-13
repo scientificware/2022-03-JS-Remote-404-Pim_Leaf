@@ -54,14 +54,17 @@ function SuppliersDetails() {
 
   useEffect(() => {
     axios
-      .get(`${import.meta.env.VITE_BACKEND_URL}company/${user.user_id}`)
+      .get(`${import.meta.env.VITE_BACKEND_URL}company/${user.user_id}`, {
+        withCredentials: true,
+      })
       .then((res) => setSupplier(res.data));
 
     axios
       .get(
         `${import.meta.env.VITE_BACKEND_URL}retailer/${
           user.user_id
-        }/supplier/${id}/stock`
+        }/supplier/${id}/stock`,
+        { withCredentials: true }
       )
       .then((res) => {
         const prod = res.data.map((el) => ({ ...el, check: false }));
@@ -85,7 +88,8 @@ function SuppliersDetails() {
       axios
         .post(
           `${import.meta.env.VITE_BACKEND_URL}retailer/${user.user_id}/stock`,
-          addProducts[i]
+          addProducts[i],
+          { withCredentials: true }
         )
         .then(() =>
           toast.success(`${products[i].product_name} a été ajouté avec susccès`)

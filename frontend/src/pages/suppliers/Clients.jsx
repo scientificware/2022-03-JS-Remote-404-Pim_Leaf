@@ -24,7 +24,8 @@ function Clients() {
       .get(
         `${import.meta.env.VITE_BACKEND_URL}supplier/${
           user.user_id
-        }/clients/connected`
+        }/clients/connected`,
+        { withCredentials: true }
       )
       .then((res) => {
         setConnected(res.data);
@@ -37,7 +38,8 @@ function Clients() {
       .get(
         `${import.meta.env.VITE_BACKEND_URL}supplier/${
           user.user_id
-        }/clients/pending`
+        }/clients/pending`,
+        { withCredentials: true }
       )
       .then((res) => {
         setPending(res.data);
@@ -52,7 +54,9 @@ function Clients() {
       .put(
         `${import.meta.env.VITE_BACKEND_URL}supplier/clients/pending/${
           human.id
-        }`
+        }`,
+        { status: "Connecté" },
+        { withCredentials: true }
       )
       .then((res) => {
         if (res.data === "connection has been updated") {
@@ -67,7 +71,8 @@ function Clients() {
       .delete(
         `${import.meta.env.VITE_BACKEND_URL}supplier/clients/pending/${
           human.id
-        }`
+        }`,
+        { withCredentials: true }
       )
       .then((res) => {
         if (res.data === "connection has been deleted") {

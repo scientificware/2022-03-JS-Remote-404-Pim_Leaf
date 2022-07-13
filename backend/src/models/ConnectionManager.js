@@ -10,12 +10,12 @@ class ConnectionManager extends AbstractManager {
     );
   }
 
-  validConnection(id) {
+  validConnection(status, id) {
     return this.connection.query(
       `UPDATE ${ConnectionManager.table} 
-      SET status = "Connecté" 
+      SET status = ? 
       WHERE id = ?`,
-      [id]
+      [status, id]
     );
   }
 
