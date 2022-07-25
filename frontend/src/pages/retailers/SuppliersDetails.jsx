@@ -92,11 +92,11 @@ function SuppliersDetails() {
           { withCredentials: true }
         )
         .then(() =>
-          toast.success(`${products[i].product_name} a été ajouté avec susccès`)
+          toast.success(`${products[i].product_name} a été ajouté avec succès`)
         )
         .catch(() =>
           toast.warning(
-            "Un problème est survenue durant l'ajout des produits, veuillez réessayer"
+            "Un problème est survenu durant l'ajout des produits, veuillez réessayer"
           )
         );
     }

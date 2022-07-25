@@ -59,6 +59,7 @@ router.get(
 
 router.post("/retailer/connection", checkAuth, ConnectionController.add);
 router.post("/retailer/:id/stock", checkAuth, StockController.add);
+router.post("/supplier/:id/stock", checkAuth, StockController.addProduct);
 
 router.put(
   "/company/:id",
