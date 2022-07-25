@@ -27,7 +27,7 @@ const origin = [
   { id: 3, country: "Afrique du Sud", region: null },
   { id: 4, country: "Inde", region: null },
   { id: 5, country: "Ethiopie", region: null },
-  { id: 6, country: "Guatemalas", region: null },
+  { id: 6, country: "Guatemala", region: null },
   { id: 7, country: "Inde", region: null },
   { id: 10, country: "France", region: "Drome" },
 ];
@@ -67,9 +67,7 @@ function ModalCreateProduct() {
       .then(() => {
         toast.success(`Votre produit a été ajouté avec succès.`);
       })
-      .catch(() =>
-        toast.error("Un problème est survenue, veuillez réessayer.")
-      );
+      .catch(() => toast.error("Un problème est survenu, veuillez réessayer."));
   };
 
   const handleChangeCategorie = (event) => {

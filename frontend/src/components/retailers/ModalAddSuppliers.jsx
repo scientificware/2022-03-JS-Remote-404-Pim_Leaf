@@ -42,7 +42,7 @@ function ModalAddSuppliers({ searchInput, connected, pending }) {
               Nom
             </th>
             <th scope="col" className="bg-middleBlue/70 text-l uppercase">
-              Cathégorie
+              Catégorie
             </th>
             <th scope="col" className="bg-middleBlue/70" />
           </tr>
