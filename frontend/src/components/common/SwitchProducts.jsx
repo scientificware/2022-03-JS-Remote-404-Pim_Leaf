@@ -5,7 +5,7 @@ function SwitchProducts({ disponibility }) {
   const enabledClass = " transform translate-x-5";
 
   return (
-    <div className="flex h-10 items-center ">
+    <div className="flex h-10 items-center">
       <div
         className="w-12 h-7 flex rounded-full p-1 cursor-pointer ml-10"
         style={{
