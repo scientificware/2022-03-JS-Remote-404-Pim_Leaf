@@ -67,7 +67,7 @@ function Profil() {
 
         <FormField
           name="mail"
-          label="Email de contact"
+          label="E-mail de contact"
           placeholder={datas && datas.mail}
           changeInfos={changeInfos}
         />

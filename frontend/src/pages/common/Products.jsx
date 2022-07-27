@@ -116,7 +116,7 @@ function Products() {
                       />
                     </button>
                     <h1 className="flex justify-center text-2xl">
-                      Voulez vous supprimer ces produits de votre stock:
+                      Voulez-vous supprimer ces produits de votre stock :
                     </h1>
                   </div>
                   <div className="flex justify-center pb-5">
@@ -159,7 +159,7 @@ function Products() {
                       />
                     </button>
                     <h1 className="flex justify-center text-2xl">
-                      Ajouter un Produit:
+                      Ajouter un produit :
                     </h1>
                   </div>
                   <div className="flex justify-center flex-col">

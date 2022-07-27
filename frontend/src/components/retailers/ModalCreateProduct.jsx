@@ -83,7 +83,7 @@ function ModalCreateProduct() {
       <form className="w-4/5 m-auto">
         <FormField
           name="product_name"
-          label="Nom du Produit"
+          label="Nom du produit"
           placeholder=""
           changeInfos={changeInfos}
         />
