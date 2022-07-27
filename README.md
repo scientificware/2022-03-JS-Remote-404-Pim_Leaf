@@ -1,86 +1,85 @@
-# PROJECT ACHIEVEMENT :trophy:
+![Logo Pimleaf](/frontend/src/assets/logo_text.png)
 
-1. [x] Sprint 1 :heavy_check_mark:
-2. [x] Sprint 2 :heavy_check_mark:
-3. [x] Sprint 3 :heavy_check_mark:
-4. [x] Sprint 4 :heavy_check_mark:
-5. [ ] Sprint 5
+# Lancer l'application en local :rocket:
 
-![Logo Pimleaf](https://www.pimleaf.fr/survey/tmp/assets/181c5803/Logo%20Pimleaf-1-.png)
+### Logiciels minimum à installer :
 
-# HOW TO launch :star:
+- vscode
+- git
+- node
+- mysql
 
-install on computer :
+### Cloner le projet :
 
-- vscode + git + node + mysql
+1. Lancer un git clone dans un dossier local lié à ce repo GitHub.
+2. Lancer la commande `npm install` depuis un terminal sur le dossier racine.
 
-clone the project :
+   > la commande npm install peut s'aliaser en `npm i` ou `npm add`.
 
-- git clone this repo on a local folder.
-- head to the main folder in a shell then launch "npm i" to install node dependencies.
-- repeat the "npm i" command in the "/frontend" and "/backend" subfolders.
-- in the "/backend" folder, launch the "npm run migrate" command to populate DB.
+3. Lancer de nouveau la commande `npm install` depuis le dossier "/frontend" puis depuis le dossier **"/backend"**.
+4. Depuis le dossier **"/backend"**, lancer la commande `npm run migrate` pour peupler la Base de Données des ressources d'exemple.
+5. Copier les fichiers **".env.sample"** dans les dossiers **"/frontend"** et **"/backend"** respectivement.
+6. Renommer les copies en **".env"** et injecter les données personnelles pour vous connecter à votre Base de Données.
 
-deploy :
+### Déployer le projet :
 
-- back to the main folder, run "npm run dev" to see the site deployed on http://localhost:3000.
+- Lancer la commande `npm run dev` depuis le dossier racine pour voir le site déployé en http://localhost:3000 par défaut.
 
-# RESOURCES LINKS :rocket:
+# Fonctionnement de ReactJS v6 :robot:
 
-- Google Drive for Assets [LINK](https://drive.google.com/drive/folders/1hMR7FfGbupMqo02WwPGFPcJILT5Amzjn).
+### Principe de base
 
-# 5DEV CONVENTION :chart_with_upwards_trend:
+Le principe de React est de gérer des composants qui sont affichés sur la page internet.
 
-## :framed_picture: IMAGES
+À chaque fois que l'état d'un composant change, React le recharge pour afficher les changements l'affectant. Cela a pour effet de changer dynamiquement l'affichage de la page internet sans consommer trop de ressources car seul le (ou les) composant affecté est re-rendu.
 
-- Labels images should be 96x96 pixels wide and have PNG extension
-- Icons should have SVG extension
-- Background should have WEBP extension
+### Les States
 
-## FONTS
+L'état d'un composant change le plus souvent en fonction du changement des **"states"** qui l'affectent. Ces states sont des variables de React qui doivent être changées par React. Elles s'écrivent sous la forme :
 
-MAIN PAGES
-
-- title : Barlow
-- texte : Red Hat Display
-
-## COLORS
-
-## :balloon: CSS
-
-- class => each term separated by an hyphen (eg "class-test")
-- id => each term separated by an underscore (eg "id_test")
-
-## :shipit: JS
-
-minimal page code :
-
-```
-function "PageName"() {
-  return (
-    <main id="PageName">
-      <h1>"PageName"</h1>
-    </main>
-  );
-}
-
-export default "PageName";
+```js
+const [state, setState] = useState(initialValue);
 ```
 
-minimal component code :
+### L'imbrication
 
-```
-function "ComponentName"() {
-  return (
-    <>
-      <h1>"ComponentName"</h1>
-    </>
-  );
-}
+Les composants sont **imbriqués** entre parents et enfants.
 
-export default "ComponentName";
-```
+Les states peuvent passer en **_props_** _des parents aux enfants_, mais _pas des enfants aux parents_.
 
-## :floppy_disk: DataBase Columns
+> Dans le contexte de ReactJS, une _props_ est un argument.
 
-should be lowercase, singular, underscore separation
+# Hiérarchie interne du projet :arrows_counterclockwise:
+
+Le projet est découpé en deux parties distinctes : le **/backend** et **/frontend**.
+
+## Backend
+
+- "migrate.js" & "database.sql" : fichiers de ressources BDD.
+- ".env" : contient les données confidentielles du back.
+- "src"
+  1. "app.js" : point d'entrée du back en Express. Il fait appel à plusieurs fichiers et renvoie vers "router.js".
+  2. "router.js" : contient les routes qui passent par les middlewares ("/middlewares") avant d'être renvoyées vers les contrôleurs ("/controllers").
+  3. "middlewares" : actions à réaliser pour formater les données envoyées depuis le front avant de pouvoir les transmettre aux contrôleurs.
+  4. les contrôleurs renvoient vers les modèles/managers ("/models") qui réalisent les requêtes SQL.
+  5. les modèles renvoient ensuite la donnée aux contrôleurs qui la renvoient au front.
+
+## Frontend
+
+- "tailwind.config.js", "postcss.config.js" : fichiers pour gérer le style de Tailwind appliqué dans le projet.
+- "vite.config.js" : fichier de configuration de Vite (contient principalement les alias des routes front).
+- ".env" : contient la route d'appel du back.
+- "index.html" : point d'entrée du navigateur qui appelle le point d'entrée de l'application React : "main.jsx".
+- "src"
+
+  - assets : dossier des ressources utilisées
+  - contexts : contient les fichiers pour pouvoir générer des states pour le profil utilisateur partout dans l'application.
+
+  1. "main.jsx" : point d'entrée de React. Appelle "App.jsx".
+  2. "App.jsx" : définit les routes front et appelle les pages et quelques composants comme le "layout" pour sécuriser les routes.
+  3. pages : dossier qui contient les pages visibles sur le navigateur. Elles sont composées des composants ("/components") et lancent parfois des appels au back via **axios**.
+  4. components : dossier qui contient des éléments de code réutilisables sur les pages.
+
+  # Mot de la fin :smile_cat:
+
+  Merci d'avoir fait confiance à l'équipe de 5DEV. On souhaite bonne route à PimLeaf.
