@@ -9,7 +9,7 @@ import { useParams } from "react-router-dom";
 import Popup from "reactjs-popup";
 
 import SearchBar from "@components/common/SearchBar";
-import ProductsDetailsSupplier from "@components/retailers/ProductsDetailsSupplier";
+import InfosDetailsSupplier from "@components/retailers/InfosDetailsSupplier";
 import SuppliersDetailsDescription from "@components/retailers/SuppliersDetailsDescription";
 import ProductsLines from "@components/common/ProductsLines";
 import { MdDone } from "react-icons/md";
@@ -37,12 +37,18 @@ function SuppliersDetails() {
     overlfow: "scroll", // <-- This tells the modal to scroll
   };
 
+  // La fonction handleCheckProducts permet de modifier le state setProduct en modifiant la clé { check : false } en { check : true }
+  // Elle prendra en argument le state products
   const handleCheckProducts = (prod) => {
     const newProduct = [...products];
     const index = newProduct.indexOf(prod);
     newProduct[index].check = !newProduct[index].check;
     setProducts(newProduct);
   };
+  // La fonction addProduct() a pour but de filtrer les produits ayant la clé {check : true }
+  // Elle va permettre d'ajouter les produits avec cette clé au stock de l'utilisateur
+  // Elle prendra en argument le state products
+  // Cette fonction sera appelée sur le OnClick du bouton Confirmer de la modal
   const addProducts = products
     .filter((product) => product.check === true)
     .map((product) => ({
@@ -54,12 +60,14 @@ function SuppliersDetails() {
 
   useEffect(() => {
     axios
-      .get(`${import.meta.env.VITE_BACKEND_URL}company/${user.user_id}`, {
+      // Requête qui récupère les informations qui sur l'entreprise du fournisseur
+      .get(`${import.meta.env.VITE_BACKEND_URL}company/${id}`, {
         withCredentials: true,
       })
       .then((res) => setSupplier(res.data));
 
     axios
+      // Requête qui récupère les produits du fournisseur qui ne sont pas dans le stock de l'utilisateur
       .get(
         `${import.meta.env.VITE_BACKEND_URL}retailer/${
           user.user_id
@@ -75,6 +83,8 @@ function SuppliersDetails() {
       });
   }, []);
 
+  // La fonction handleClick a pour but d'ajouter les produits comportant la clé { check : true } au stock de l'utilisateur
+  // Elle prendra en argument le state products
   const handleClick = (prod) => {
     const productToGet = [];
     const productToDelete = [];
@@ -86,6 +96,7 @@ function SuppliersDetails() {
     setProducts(productToGet);
     for (let i = 0; i < addProducts.length; i++) {
       axios
+        // Cette requête récupère les produits qui ne sont pas dans le stock de l'utilisateur
         .post(
           `${import.meta.env.VITE_BACKEND_URL}retailer/${user.user_id}/stock`,
           addProducts[i],
@@ -112,7 +123,7 @@ function SuppliersDetails() {
         <div className="flex flex-col font-redHat w-3/4 m-auto">
           <SuppliersDetailsDescription description={supplier.description} />
 
-          <ProductsDetailsSupplier
+          <InfosDetailsSupplier
             company={supplier.company_name}
             description={supplier.description}
             phone={supplier.phone}

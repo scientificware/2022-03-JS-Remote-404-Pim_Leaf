@@ -12,6 +12,9 @@ import ProductsDetailsSupplier from "@retailersC/ProductsDetailsSupplier";
 import ButtonPillDownload from "@components/common/ButtonPillDownload";
 import RetourButton from "@assets/retour_button_blue.svg";
 
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 function ProductsDetails() {
   const { user } = useContext(UserExport.UserContext);
   const { id } = useParams();
@@ -22,6 +25,7 @@ function ProductsDetails() {
 
   useEffect(() => {
     axios
+      // Requête qui récupère les détail du produit grace à l'id provenant du param d'url
       .get(`${import.meta.env.VITE_BACKEND_URL}products/${id}`, {
         withCredentials: true,
       })
@@ -29,6 +33,7 @@ function ProductsDetails() {
         setProductInfo(res.data);
         axios
           .get(
+            // Récupère les informations de l'entreprise du fournisseur en fonction de l'id du produit màj dans le state productInfos
             `${import.meta.env.VITE_BACKEND_URL}company/${
               res.data[0].supplier_id
             }`,
@@ -38,11 +43,22 @@ function ProductsDetails() {
           )
           .then((result) => {
             setSupplierInfo(result.data);
-          });
-      });
+          })
+          .catch(() =>
+            toast.warning(
+              "Un problème est survenue lors du chargement des informations du produit, veuillez réessayer."
+            )
+          );
+      })
+      .catch(() =>
+        toast.warning(
+          "Un problème est survenue lors du chargement de vos données, veuillez réessayer."
+        )
+      );
 
     axios
       .get(
+        // Récupère les informations qui concerne les conseils et les astuces d'un produit renseignées par le commerçant
         `${import.meta.env.VITE_BACKEND_URL}retailer/${
           user.user_id
         }/stock/${id}`,
@@ -50,7 +66,12 @@ function ProductsDetails() {
       )
       .then((res) => {
         setRetailerInfo(res.data);
-      });
+      })
+      .catch(() =>
+        toast.warning(
+          "Un problème est survenue lors du chargement de vos données, veuillez réessayer."
+        )
+      );
   }, []);
 
   if (!productInfo || !supplierInfo || !retailerInfo) {

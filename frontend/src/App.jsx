@@ -32,6 +32,8 @@ function App() {
   return (
     <BrowserRouter>
       <div className="h-screen bg-center bg-cover">
+        {/* Routes protégées communes aux retailers et aux suppliers  */}
+
         <Routes>
           {/* COMMON */}
           <Route path="/" element={<Login />} />
@@ -46,6 +48,7 @@ function App() {
             <Route path="entreprise" element={<Company />} />
             <Route path="profil" element={<Profil />} />
           </Route>
+          {/* Routes protégées des retailers  */}
 
           {/* RETAILERS */}
           <Route
@@ -64,6 +67,7 @@ function App() {
               element={<SuppliersDetails />}
             />
           </Route>
+          {/* Routes protégées des suppliers  */}
 
           {/* SUPPLIERS */}
           <Route

@@ -30,6 +30,7 @@ function Suppliers() {
   useEffect(() => {
     axios
       .get(
+        // Récupère la liste des suppliers connectés à l'utilisateur
         `${import.meta.env.VITE_BACKEND_URL}retailer/${
           user.user_id
         }/suppliers/connected`,
@@ -41,9 +42,9 @@ function Suppliers() {
       .catch((error) => {
         console.warn(error.response.data);
       });
-
     axios
       .get(
+        // Récupère la liste des suppliers en attente de connexion
         `${import.meta.env.VITE_BACKEND_URL}retailer/${
           user.user_id
         }/suppliers/pending`,
