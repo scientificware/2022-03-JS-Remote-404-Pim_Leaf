@@ -11,6 +11,10 @@ function SearchBarHumans({ searchInput, setSearchInput }) {
         <input
           className="bg-lightGrey h-10 w-1/3 pl-5 rounded-tl-full rounded-bl-full text-m focus:outline-none text-darkBlue"
           type="search"
+          onKeyPress={(e) => {
+            // eslint-disable-next-line no-unused-expressions
+            e.key === "Enter" && e.preventDefault();
+          }}
           name="search"
           placeholder="Rechercher"
           onChange={handleChange}
