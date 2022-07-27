@@ -27,14 +27,20 @@ function ProductsDetails() {
       })
       .then((res) => {
         setProductInfo(res.data);
+        axios
+          .get(
+            `${import.meta.env.VITE_BACKEND_URL}company/${
+              res.data[0].supplier_id
+            }`,
+            {
+              withCredentials: true,
+            }
+          )
+          .then((result) => {
+            setSupplierInfo(result.data);
+          });
       });
-    axios
-      .get(`${import.meta.env.VITE_BACKEND_URL}company/${user.company_id}`, {
-        withCredentials: true,
-      })
-      .then((res) => {
-        setSupplierInfo(res.data);
-      });
+
     axios
       .get(
         `${import.meta.env.VITE_BACKEND_URL}retailer/${
@@ -48,7 +54,7 @@ function ProductsDetails() {
   }, []);
 
   if (!productInfo || !supplierInfo || !retailerInfo) {
-    return <p>Wait a bit here</p>;
+    return "";
   }
 
   return (
