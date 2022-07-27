@@ -6,7 +6,7 @@ import { FiArrowRight } from "react-icons/fi";
 
 function ClientsLines({ human }) {
   return (
-    <tr className="odd:bg-lightBlue/10 even:bg-middleBlue/30 transition ease-in-out hover:bg-lightBlue duration-500 text-left">
+    <tr className="text-left">
       <td className="px-5 py-5 border-b  bg-white text-sm">
         <Link to={`/fournisseur/client/${human.retailer_id}/details`}>
           {human.company_name}
