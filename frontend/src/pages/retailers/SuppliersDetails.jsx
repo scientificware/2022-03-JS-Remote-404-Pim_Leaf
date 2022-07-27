@@ -150,7 +150,7 @@ function SuppliersDetails() {
                       />
                     </button>
                     <h1 className="flex justify-center text-2xl">
-                      Ajouter ces produits à votre stock:
+                      Ajouter ces produits à votre stock :
                     </h1>
                   </div>
                   <div className="flex justify-center overflow-y-scroll h-5/6">

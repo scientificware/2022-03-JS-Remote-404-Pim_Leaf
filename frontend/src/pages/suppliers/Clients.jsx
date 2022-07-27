@@ -85,7 +85,7 @@ function Clients() {
   return (
     <main>
       <h1 className="text-3xl text-center font-bold font-barlow mt-14 mb-8">
-        Mes Clients
+        Mes clients
       </h1>
 
       <SearchBar searchInput={searchInput} setSearchInput={setSearchInput} />

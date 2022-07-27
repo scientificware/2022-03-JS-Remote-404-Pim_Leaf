@@ -100,7 +100,7 @@ function Company() {
 
         <FormField
           name="company_mail"
-          label="Email"
+          label="E-mail"
           placeholder={datas && datas.company_mail}
           changeInfos={changeInfos}
         />

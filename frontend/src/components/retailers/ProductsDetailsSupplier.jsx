@@ -35,7 +35,7 @@ function ProductsDetailsSupplier({
               </a>
 
               <a href={`mailto:${mail}`} className="font-bold flex">
-                <FcInvite className="mr-2 text-3xl" /> Mail : {mail}
+                <FcInvite className="mr-2 text-3xl" /> E-mail : {mail}
               </a>
 
               <a href={website} className="font-bold flex">
