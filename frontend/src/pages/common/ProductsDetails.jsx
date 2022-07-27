@@ -12,6 +12,9 @@ import ProductsDetailsSupplier from "@retailersC/ProductsDetailsSupplier";
 import ButtonPillDownload from "@components/common/ButtonPillDownload";
 import RetourButton from "@assets/retour_button_blue.svg";
 
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 function ProductsDetails() {
   const { user } = useContext(UserExport.UserContext);
   const { id } = useParams();
@@ -40,8 +43,18 @@ function ProductsDetails() {
           )
           .then((result) => {
             setSupplierInfo(result.data);
-          });
-      });
+          })
+          .catch(() =>
+            toast.warning(
+              "Un problème est survenue lors du chargement des informations du produit, veuillez réessayer."
+            )
+          );
+      })
+      .catch(() =>
+        toast.warning(
+          "Un problème est survenue lors du chargement de vos données, veuillez réessayer."
+        )
+      );
 
     axios
       .get(
@@ -53,7 +66,12 @@ function ProductsDetails() {
       )
       .then((res) => {
         setRetailerInfo(res.data);
-      });
+      })
+      .catch(() =>
+        toast.warning(
+          "Un problème est survenue lors du chargement de vos données, veuillez réessayer."
+        )
+      );
   }, []);
 
   if (!productInfo || !supplierInfo || !retailerInfo) {
