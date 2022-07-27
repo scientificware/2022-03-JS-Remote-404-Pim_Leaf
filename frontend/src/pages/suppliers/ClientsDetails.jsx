@@ -12,6 +12,7 @@ function ClientsDetails() {
   const [client, setClient] = useState();
 
   useEffect(() => {
+    // Récupère le détail des informations du fournisseur
     axios
       .get(`${import.meta.env.VITE_BACKEND_URL}company/${id}`, {
         withCredentials: true,
