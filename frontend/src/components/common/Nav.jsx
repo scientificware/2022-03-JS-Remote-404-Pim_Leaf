@@ -51,14 +51,14 @@ function Nav() {
           !navOpen ? "right-[-100%]" : "right-0"
         } `}
       >
-        <li className="lg:inline-block  lg:ml-10 ml-5 lg:my-0 my-6 border-b-2 border-transparent hover:border-white duration-300">
+        <li className="lg:inline-block  lg:ml-10 ml-5 lg:my-0 my-6 border-b-2 hover:border-white duration-300">
           <Link
             to={
               user.company_group_id === 1
                 ? "/commercant/produits"
                 : "/fournisseur/produits"
             }
-            className="text-#14252F cursor-pointer font-Barlow font-normal text-sm inline-block lg:py-5 py-3"
+            className="text-darkBlue cursor-pointer font-Barlow font-normal text-sm inline-block lg:py-5 py-3"
             onClick={() => setNavOpen(!navOpen)}
           >
             <span className="font-bold mr-1.5">01</span>
@@ -66,11 +66,11 @@ function Nav() {
           </Link>
         </li>
 
-        <li className="lg:inline-block  lg:ml-10 ml-5 lg:my-0 my-6 border-b-2 border-transparent hover:border-white duration-300">
+        <li className="lg:inline-block  lg:ml-10 ml-5 lg:my-0 my-6 border-b-2 hover:border-white duration-300">
           {user.company_group_id === 1 ? (
             <Link
               to="/commercant/fournisseurs"
-              className="text-#14252F cursor-pointer font-Barlow font-normal text-sm inline-block lg:py-5 py-3"
+              className="text-darkBlue cursor-pointer font-Barlow font-normal text-sm inline-block lg:py-5 py-3"
               onClick={() => setNavOpen(!navOpen)}
             >
               <span className="font-bold mr-1.5">02</span>
@@ -79,7 +79,7 @@ function Nav() {
           ) : (
             <Link
               to="/fournisseur/clients"
-              className="text-#14252F cursor-pointer font-Barlow font-normal text-sm inline-block lg:py-5 py-3"
+              className="text-darkBlue cursor-pointer font-Barlow font-normal text-sm inline-block lg:py-5 py-3"
               onClick={() => setNavOpen(!navOpen)}
             >
               <span className="font-bold mr-1.5">02</span>
@@ -88,10 +88,10 @@ function Nav() {
           )}
         </li>
 
-        <li className="lg:inline-block  lg:ml-10 ml-5 lg:my-0 my-6 border-b-2 border-transparent hover:border-white duration-300">
+        <li className="lg:inline-block  lg:ml-10 ml-5 lg:my-0 my-6 border-b-2 hover:border-white duration-300">
           <Link
             to={user.company_group_id === 1 ? "/entreprise" : "/entreprise"}
-            className="text-#14252F cursor-pointer font-Barlow font-normal text-sm inline-block lg:py-5 py-3"
+            className="text-darkBlue cursor-pointer font-Barlow font-normal text-sm inline-block lg:py-5 py-3"
             onClick={() => setNavOpen(!navOpen)}
           >
             <span className="font-bold mr-1.5">03</span>
@@ -99,10 +99,10 @@ function Nav() {
           </Link>
         </li>
 
-        <li className="lg:inline-block  lg:ml-10 ml-5 lg:my-0 my-6 border-b-2 border-transparent hover:border-white duration-300">
+        <li className="lg:inline-block  lg:ml-10 ml-5 lg:my-0 my-6 border-b-2 hover:border-white duration-300">
           <Link
             to={user.company_group_id === 1 ? "/profil" : "/profil"}
-            className="text-#14252F cursor-pointer font-Barlow font-normal text-sm inline-block lg:py-5 py-3"
+            className="text-darkBlue cursor-pointer font-Barlow font-normal text-sm inline-block lg:py-5 py-3"
             onClick={() => setNavOpen(!navOpen)}
           >
             <span className="font-bold mr-1.5">04</span>
@@ -113,7 +113,7 @@ function Nav() {
         <li className="lg:inline-block  lg:ml-10 ml-5 lg:my-0 my-6">
           <Link
             to="/"
-            className="text-#14252F cursor-pointer font-Barlow font-normal text-sm inline-block lg:py-5 py-3"
+            className="text-darkBlue cursor-pointer font-Barlow font-normal text-sm inline-block lg:py-5 py-3"
             onClick={handleLogout}
           >
             <div className="">

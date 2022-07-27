@@ -8,18 +8,18 @@ function ClientsLinesToAnswer({
   handleClickRefused,
 }) {
   return (
-    <tr className="odd:bg-lightBlue/10 even:bg-middleBlue/30 transition ease-in-out hover:bg-lightBlue duration-500 text-left">
-      <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
+    <tr className="text-left border-b">
+      <td className="px-5 py-5 bg-white text-sm">
         <Link to={`/fournisseur/client/${human.retailer_id}/details`}>
           {human.company_name}
         </Link>
       </td>
 
-      <td className="px-5 py-5 border-b bg-white text-sm">{human.domain}</td>
+      <td className="px-5 py-5  bg-white text-sm">{human.domain}</td>
 
-      <td className="px-5 py-5 border-b bg-white text-sm">{human.city}</td>
+      <td className="px-5 py-5  bg-white text-sm">{human.city}</td>
 
-      <td className="px-5 py-5 border-b bg-white text-sm flex">
+      <td className="px-5 py-5 bg-white text-sm flex">
         <button
           type="button"
           onClick={() => handleClickAccepted(human)}
@@ -47,7 +47,7 @@ function ClientsLinesToAnswer({
         </button>
       </td>
 
-      <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
+      <td className="px-5 py-5 bg-white text-sm">
         <Link to={`/fournisseur/client/${human.retailer_id}/details`}>
           <button
             type="button"
