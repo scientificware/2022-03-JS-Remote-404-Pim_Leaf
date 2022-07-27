@@ -18,6 +18,7 @@ function Company() {
 
   useEffect(() => {
     axios
+      // Cette requête permet de récupérer les informations sur l'entreprise de l'utilisateur
       .get(`${import.meta.env.VITE_BACKEND_URL}company/${user.user_id}`, {
         withCredentials: true,
       })
@@ -29,8 +30,11 @@ function Company() {
       });
   }, []);
 
+  // La fonction updateDatas() permet de modifier les informations sur l'entreprise de l'utilisateur
+  // Elle est appelé sur le onClick du bouton "Enregistrer"
   function updateDatas() {
     axios
+      // Cette requête permet de modifier les informations de l'entreprise de l'utilisateur
       .put(
         `${import.meta.env.VITE_BACKEND_URL}company/${user.user_id}`,
         newDatas,
