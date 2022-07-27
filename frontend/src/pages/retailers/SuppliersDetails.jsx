@@ -60,12 +60,14 @@ function SuppliersDetails() {
 
   useEffect(() => {
     axios
+      // Requête qui récupère les informations qui sur l'entreprise du fournisseur
       .get(`${import.meta.env.VITE_BACKEND_URL}company/${id}`, {
         withCredentials: true,
       })
       .then((res) => setSupplier(res.data));
 
     axios
+      // Requête qui récupère les produits du fournisseur qui ne sont pas dans le stock de l'utilisateur
       .get(
         `${import.meta.env.VITE_BACKEND_URL}retailer/${
           user.user_id
@@ -81,6 +83,8 @@ function SuppliersDetails() {
       });
   }, []);
 
+  // La fonction handleClick a pour but d'ajouter les produits comportant la clé { check : true } au stock de l'utilisateur
+  // Elle prendra en argument le state products
   const handleClick = (prod) => {
     const productToGet = [];
     const productToDelete = [];
@@ -92,6 +96,7 @@ function SuppliersDetails() {
     setProducts(productToGet);
     for (let i = 0; i < addProducts.length; i++) {
       axios
+        // Cette requête récupère les produits qui ne sont pas dans le stock de l'utilisateur
         .post(
           `${import.meta.env.VITE_BACKEND_URL}retailer/${user.user_id}/stock`,
           addProducts[i],
