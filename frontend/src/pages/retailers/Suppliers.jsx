@@ -42,7 +42,6 @@ function Suppliers() {
       .catch((error) => {
         console.warn(error.response.data);
       });
-
     axios
       .get(
         // Récupère la liste des suppliers en attente de connexion
