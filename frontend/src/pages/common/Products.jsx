@@ -26,6 +26,9 @@ function Products() {
   const [searchInput, setSearchInput] = useState("");
   const { user } = useContext(UserExport.UserContext);
 
+  // La fonction handleCheckProducts permet de modifier le state setProduct en modifiant la clé { check : false } en { check : true }
+  // Elle prendra en argument le state products
+
   const handleCheckProducts = (prod) => {
     const newProduct = [...products];
     const index = newProduct.indexOf(prod);
@@ -39,6 +42,11 @@ function Products() {
     height: "auto",
   };
 
+  // La fonction handleClickMinus a pour but de filtrer les produits ayant la clé {check : true }
+  // Elle va permettre de supprimer les produits avec cette clé du stock de l'utilisateur
+  // Elle prendra en argument le state products
+  // Cette fonction sera appelée sur le OnClick du bouton Confirmer de la modal
+
   const handleClickMinus = (prod) => {
     const productToGet = [];
     const productToDelete = [];
@@ -51,6 +59,7 @@ function Products() {
     const filterProducts = products.filter((product) => product.check === true);
     for (let i = 0; i < products.length; i++) {
       axios
+        // Cette requête supprime les produits { check : true } du stock de l'utilisateur
         .delete(
           `${import.meta.env.VITE_BACKEND_URL}retailer/stock/${
             filterProducts[i].stock_id
@@ -68,6 +77,7 @@ function Products() {
 
   useEffect(() => {
     axios
+      // Cette requête récupère les produits présent dans le stock de l'utilisateur
       .get(`${import.meta.env.VITE_BACKEND_URL}user/${user.user_id}/products`, {
         withCredentials: true,
       })
