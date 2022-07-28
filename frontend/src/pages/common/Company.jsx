@@ -80,26 +80,30 @@ function Company() {
           changeInfos={changeInfos}
         />
         <fieldset className="flex justify-between">
-          <FormField
-            name="address"
-            label="Adresse"
-            placeholder={datas && datas.address}
-            changeInfos={changeInfos}
-          />
-
+          <div className="w-2/6">
+            <FormField
+              name="address"
+              label="Adresse"
+              placeholder={datas && datas.address}
+              changeInfos={changeInfos}
+            />
+          </div>
+          <div className="w-1/6">
           <FormField
             name="postcode"
             label="Code postal"
             placeholder={datas && datas.postcode}
             changeInfos={changeInfos}
           />
-
+          </div>
+        <div className="w-2/6">
           <FormField
             name="city"
             label="Ville"
             placeholder={datas && datas.city}
             changeInfos={changeInfos}
           />
+          </div>
         </fieldset>
 
         <FormField

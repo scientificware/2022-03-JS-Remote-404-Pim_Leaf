@@ -124,10 +124,14 @@ function ProductsDetails() {
             website={supplierInfo.website}
           />
 
-          <ProductsDetailsRetailer
-            tips={retailerInfo[0].tips}
-            recipeIdea={retailerInfo[0].recipe_idea}
-          />
+          {user.company_group_id === 1 ? (
+            <ProductsDetailsRetailer
+              tips={retailerInfo[0].tips}
+              recipeIdea={retailerInfo[0].recipe_idea}
+            />
+          ) : (
+            ""
+          )}
         </section>
       </div>
     </main>
