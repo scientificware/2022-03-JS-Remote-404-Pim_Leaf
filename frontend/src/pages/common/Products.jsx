@@ -67,10 +67,10 @@ function Products() {
           { withCredentials: true }
         )
         .then(() => {
-          toast.success(`${products[i].product_name} a bien été supprimé.`);
+          toast.success(`Votre produit a bien été supprimé.`);
         })
         .catch(() =>
-          toast.error("Un problème est survenue, veuillez réessayer.")
+          toast.error("Un problème est survenu, veuillez réessayer.")
         );
     }
   };
