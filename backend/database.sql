@@ -198,7 +198,6 @@ CREATE TABLE `connection` (
 LOCK TABLES `connection` WRITE;
 INSERT INTO `connection` (`status`, `retailer_id`, `supplier_id`) VALUES
 ("Connecté", 1, 4),
-("En attente de connexion", 1, 5),
 ("En attente de connexion", 2, 4),
 ("Connecté", 2, 5),
 ("En attente de connexion", 3, 5);
