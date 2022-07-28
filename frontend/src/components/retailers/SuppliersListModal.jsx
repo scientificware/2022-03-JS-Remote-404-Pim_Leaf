@@ -1,6 +1,9 @@
 /* eslint-disable no-alert */
 import axios from "axios";
 
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 function SuppliersListModal({
   name,
   domaine,
@@ -20,7 +23,7 @@ function SuppliersListModal({
         { withCredentials: true }
       )
       .then(() => {
-        alert("votre demande de connexion a été prise en compte");
+        toast.success(` Votre demande de connexion a été prise en compte`);
       })
       .catch((error) => {
         console.warn(error);
