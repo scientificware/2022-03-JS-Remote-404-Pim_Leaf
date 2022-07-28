@@ -89,20 +89,20 @@ function Company() {
             />
           </div>
           <div className="w-1/6">
-          <FormField
-            name="postcode"
-            label="Code postal"
-            placeholder={datas && datas.postcode}
-            changeInfos={changeInfos}
-          />
+            <FormField
+              name="postcode"
+              label="Code postal"
+              placeholder={datas && datas.postcode}
+              changeInfos={changeInfos}
+            />
           </div>
-        <div className="w-2/6">
-          <FormField
-            name="city"
-            label="Ville"
-            placeholder={datas && datas.city}
-            changeInfos={changeInfos}
-          />
+          <div className="w-2/6">
+            <FormField
+              name="city"
+              label="Ville"
+              placeholder={datas && datas.city}
+              changeInfos={changeInfos}
+            />
           </div>
         </fieldset>
 
