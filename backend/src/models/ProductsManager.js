@@ -52,17 +52,20 @@ class ProductsManager extends AbstractManager {
   getProductDetails(id) {
     return this.connection.query(
       `SELECT
-    p.id AS product_id,
-    p.product_name,
-    p.detail AS product_details,
-    p.advise AS product_advise,
-    cat.name AS category,
-    o.country,
-    o.region
-    FROM ${ProductsManager.table} AS p
-    INNER JOIN category AS cat ON p.category_id = cat.id
-    INNER JOIN origin AS o ON p.origin_id = o.id
-    WHERE p.id = ?`,
+      p.id AS product_id,
+      p.product_name,
+      p.detail AS product_details,
+      p.advise AS product_advise,
+      cat.name AS category,
+      o.country,
+      o.region,
+      c.id AS supplier_id
+      FROM ${ProductsManager.table} AS p
+      INNER JOIN category AS cat ON p.category_id = cat.id
+      INNER JOIN origin AS o ON p.origin_id = o.id
+      INNER JOIN stock AS s ON p.id=s.product_id
+      INNER JOIN company AS c ON c.id=s.owner_id
+      WHERE p.id =? AND c.company_group_id = 2`,
       [id]
     );
   }

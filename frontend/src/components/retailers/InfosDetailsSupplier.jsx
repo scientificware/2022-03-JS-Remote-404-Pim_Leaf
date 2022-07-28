@@ -45,7 +45,7 @@ function ProductsDetailsSupplier({
           </header>
 
           <div>
-            <h3 className="text-2xl">Méthodes de fabrication</h3>
+            <h3 className="text-2xl">Description</h3>
             <p>{description}</p>
           </div>
         </article>

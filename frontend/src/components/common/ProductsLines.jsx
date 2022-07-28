@@ -23,7 +23,7 @@ function ProductsLines({ product, MdDone, handleCheckProducts }) {
           <MdDone onClick={() => handleCheckProducts(product)} />
         </div>
       </td>
-      <td className="text-left text-l border-y-8 border-white">
+      <td className="text-left text-l border-y-8 border-white py-2.5">
         <Link
           to={
             user.company_group_id === 1
@@ -40,7 +40,7 @@ function ProductsLines({ product, MdDone, handleCheckProducts }) {
       <td className="text-left text-l border-y-8 border-white">
         {product.name}
       </td>
-      <td className="text-left text-l border-y-8 border-white">
+      <td className="text-left text-l border-y-8 border-white hidden">
         <div className="flex items-center ">
           {product.disponibility !== 0 ? (
             <SwitchProducts disponibility />

@@ -22,6 +22,7 @@ function Clients() {
   useEffect(() => {
     axios
       .get(
+        // Cette requête récupère les retailers connectés avec l'utilisateur
         `${import.meta.env.VITE_BACKEND_URL}supplier/${
           user.user_id
         }/clients/connected`,
@@ -35,6 +36,7 @@ function Clients() {
       });
 
     axios
+      // Cette requête récupère les retailers en attente de connection
       .get(
         `${import.meta.env.VITE_BACKEND_URL}supplier/${
           user.user_id
@@ -49,9 +51,11 @@ function Clients() {
       });
   }, []);
 
+  // La fonction handleClickAccepted permet de modifier le status de connection de l'utilisateur en "connecté"
   const handleClickAccepted = (human) => {
     axios
       .put(
+        // Cette requête permet de modifier le status de connection de "en attente" à "accepter"
         `${import.meta.env.VITE_BACKEND_URL}supplier/clients/pending/${
           human.id
         }`,
@@ -66,8 +70,10 @@ function Clients() {
       })
       .catch((err) => console.error(err));
   };
+  // La fonction handleClickAccepted permet de supprimer la demande de connection
   const handleClickRefused = (human) => {
     axios
+      // Cette requête permet de supprimer le status de connection
       .delete(
         `${import.meta.env.VITE_BACKEND_URL}supplier/clients/pending/${
           human.id
@@ -85,7 +91,7 @@ function Clients() {
   return (
     <main>
       <h1 className="text-3xl text-center font-bold font-barlow mt-14 mb-8">
-        Mes Clients
+        Mes clients
       </h1>
 
       <SearchBar searchInput={searchInput} setSearchInput={setSearchInput} />

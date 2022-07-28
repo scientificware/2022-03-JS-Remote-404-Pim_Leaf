@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 
-import ProductsDetailsSupplier from "@components/retailers/ProductsDetailsSupplier";
+import InfosDetailsSupplier from "@components/retailers/InfosDetailsSupplier";
 import SuppliersDetailsDescription from "@components/retailers/SuppliersDetailsDescription";
 
 function ClientsDetails() {
@@ -12,6 +12,7 @@ function ClientsDetails() {
   const [client, setClient] = useState();
 
   useEffect(() => {
+    // Récupère le détail des informations du fournisseur
     axios
       .get(`${import.meta.env.VITE_BACKEND_URL}company/${id}`, {
         withCredentials: true,
@@ -31,7 +32,7 @@ function ClientsDetails() {
       <div className="flex flex-col font-redHat w-3/4 m-auto">
         <SuppliersDetailsDescription description={client.description} />
 
-        <ProductsDetailsSupplier
+        <InfosDetailsSupplier
           company={client.company_name}
           description={client.description}
           phone={client.phone}

@@ -6,8 +6,8 @@ import { FiArrowRight } from "react-icons/fi";
 
 function SuppliersLines({ human }) {
   return (
-    <tr className="odd:bg-lightBlue/10 even:bg-middleBlue/30 transition ease-in-out hover:bg-lightBlue duration-500 text-left">
-      <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
+    <tr className="text-left border-b">
+      <td className="px-5 py-5 bg-white text-sm">
         {human.status === "Connecté" ? (
           <Link to={`/commercant/fournisseur/${human.supplier_id}/details`}>
             {human.company_name}
@@ -17,15 +17,11 @@ function SuppliersLines({ human }) {
         )}
       </td>
 
-      <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-        {human.domain}
-      </td>
+      <td className="px-5 py-5 bg-white text-sm">{human.domain}</td>
 
-      <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-        {human.city}
-      </td>
+      <td className="px-5 py-5 bg-white text-sm">{human.city}</td>
 
-      <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
+      <td className="px-5 py-5 bg-white text-sm">
         <span className="relative inline-block px-3 py-1 font-semibold text-darkBlue/90 leading-tight">
           {human.status === "En attente de connexion" ? (
             <span
@@ -44,7 +40,7 @@ function SuppliersLines({ human }) {
           <span className="relative">{human.status}</span>
         </span>
       </td>
-      <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
+      <td className="px-5 py-5 bg-white text-sm">
         {human.status === "Connecté" ? (
           <Link to={`/commercant/fournisseur/${human.supplier_id}/details`}>
             <button

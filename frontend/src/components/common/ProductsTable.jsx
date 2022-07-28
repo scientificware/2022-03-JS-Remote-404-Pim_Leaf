@@ -86,7 +86,10 @@ function ProductsTable() {
                 <th scope="col" className="bg-middleBlue/70 text-l uppercase">
                   Catégorie
                 </th>
-                <th scope="col" className="bg-middleBlue/70 text-l uppercase">
+                <th
+                  scope="col"
+                  className="bg-middleBlue/70 text-l uppercase hidden"
+                >
                   Disponibilité
                 </th>
               </tr>

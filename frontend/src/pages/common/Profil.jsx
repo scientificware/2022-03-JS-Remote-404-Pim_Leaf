@@ -18,6 +18,7 @@ function Profil() {
 
   useEffect(() => {
     axios
+      // Cette requête récupère les informations de l'utilisateur connecté
       .get(`${import.meta.env.VITE_BACKEND_URL}user/${user.user_id}`, {
         withCredentials: true,
       })
@@ -31,6 +32,7 @@ function Profil() {
 
   function updateDatas() {
     axios
+      // Cette requête permet de modifier les informations sur le profil utilisateur
       .put(
         `${import.meta.env.VITE_BACKEND_URL}user/${user.user_id}/profil`,
         newDatas,
@@ -42,6 +44,8 @@ function Profil() {
       .catch(() => toast.warning("Vos données n'ont pas pu être modifiées."));
   }
 
+  // La fonction changeInfos() à pour but d'enregistrer les informations tapées par l'utilisateur dans les champs du composant
+  // Elle prendra comme argument e
   const changeInfos = (event) => {
     const changeDatas = { ...newDatas };
     changeDatas[event.target.name] = event.target.value;
@@ -49,7 +53,7 @@ function Profil() {
     setDatas({ ...datas, ...changeDatas });
   };
 
-  if (!datas) return "Données en cours de chargement";
+  if (!datas) return "";
 
   return (
     <main className="font-redHat flex flex-col w-4/5 m-auto">
@@ -67,7 +71,7 @@ function Profil() {
 
         <FormField
           name="mail"
-          label="Email de contact"
+          label="E-mail de contact"
           placeholder={datas && datas.mail}
           changeInfos={changeInfos}
         />

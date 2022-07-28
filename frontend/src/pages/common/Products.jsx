@@ -26,6 +26,9 @@ function Products() {
   const [searchInput, setSearchInput] = useState("");
   const { user } = useContext(UserExport.UserContext);
 
+  // La fonction handleCheckProducts permet de modifier le state setProduct en modifiant la clé { check : false } en { check : true }
+  // Elle prendra en argument le state products
+
   const handleCheckProducts = (prod) => {
     const newProduct = [...products];
     const index = newProduct.indexOf(prod);
@@ -39,6 +42,11 @@ function Products() {
     height: "auto",
   };
 
+  // La fonction handleClickMinus a pour but de filtrer les produits ayant la clé {check : true }
+  // Elle va permettre de supprimer les produits avec cette clé du stock de l'utilisateur
+  // Elle prendra en argument le state products
+  // Cette fonction sera appelée sur le OnClick du bouton Confirmer de la modal
+
   const handleClickMinus = (prod) => {
     const productToGet = [];
     const productToDelete = [];
@@ -51,6 +59,7 @@ function Products() {
     const filterProducts = products.filter((product) => product.check === true);
     for (let i = 0; i < products.length; i++) {
       axios
+        // Cette requête supprime les produits { check : true } du stock de l'utilisateur
         .delete(
           `${import.meta.env.VITE_BACKEND_URL}retailer/stock/${
             filterProducts[i].stock_id
@@ -58,16 +67,17 @@ function Products() {
           { withCredentials: true }
         )
         .then(() => {
-          toast.success(`${products[i].product_name} a bien été supprimé.`);
+          toast.success(`Votre produit a bien été supprimé.`);
         })
         .catch(() =>
-          toast.error("Un problème est survenue, veuillez réessayer.")
+          toast.error("Un problème est survenu, veuillez réessayer.")
         );
     }
   };
 
   useEffect(() => {
     axios
+      // Cette requête récupère les produits présent dans le stock de l'utilisateur
       .get(`${import.meta.env.VITE_BACKEND_URL}user/${user.user_id}/products`, {
         withCredentials: true,
       })
@@ -116,7 +126,7 @@ function Products() {
                       />
                     </button>
                     <h1 className="flex justify-center text-2xl">
-                      Voulez vous supprimer ces produits de votre stock:
+                      Voulez-vous supprimer ces produits de votre stock :
                     </h1>
                   </div>
                   <div className="flex justify-center pb-5">
@@ -159,7 +169,7 @@ function Products() {
                       />
                     </button>
                     <h1 className="flex justify-center text-2xl">
-                      Ajouter un Produit:
+                      Ajouter un produit :
                     </h1>
                   </div>
                   <div className="flex justify-center flex-col">
@@ -187,7 +197,10 @@ function Products() {
               <th scope="col" className="bg-middleBlue/70 text-l uppercase">
                 Catégorie
               </th>
-              <th scope="col" className="bg-middleBlue/70 text-l uppercase">
+              <th
+                scope="col"
+                className="bg-middleBlue/70 text-l uppercase hidden"
+              >
                 Disponibilité
               </th>
             </tr>

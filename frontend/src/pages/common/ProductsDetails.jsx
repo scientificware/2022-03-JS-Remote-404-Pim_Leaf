@@ -12,6 +12,9 @@ import ProductsDetailsSupplier from "@retailersC/ProductsDetailsSupplier";
 import ButtonPillDownload from "@components/common/ButtonPillDownload";
 import RetourButton from "@assets/retour_button_blue.svg";
 
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 function ProductsDetails() {
   const { user } = useContext(UserExport.UserContext);
   const { id } = useParams();
@@ -22,21 +25,40 @@ function ProductsDetails() {
 
   useEffect(() => {
     axios
+      // Requête qui récupère les détail du produit grace à l'id provenant du param d'url
       .get(`${import.meta.env.VITE_BACKEND_URL}products/${id}`, {
         withCredentials: true,
       })
       .then((res) => {
         setProductInfo(res.data);
-      });
-    axios
-      .get(`${import.meta.env.VITE_BACKEND_URL}company/${user.company_id}`, {
-        withCredentials: true,
+        axios
+          .get(
+            // Récupère les informations de l'entreprise du fournisseur en fonction de l'id du produit màj dans le state productInfos
+            `${import.meta.env.VITE_BACKEND_URL}company/${
+              res.data[0].supplier_id
+            }`,
+            {
+              withCredentials: true,
+            }
+          )
+          .then((result) => {
+            setSupplierInfo(result.data);
+          })
+          .catch(() =>
+            toast.warning(
+              "Un problème est survenue lors du chargement des informations du produit, veuillez réessayer."
+            )
+          );
       })
-      .then((res) => {
-        setSupplierInfo(res.data);
-      });
+      .catch(() =>
+        toast.warning(
+          "Un problème est survenue lors du chargement de vos données, veuillez réessayer."
+        )
+      );
+
     axios
       .get(
+        // Récupère les informations qui concerne les conseils et les astuces d'un produit renseignées par le commerçant
         `${import.meta.env.VITE_BACKEND_URL}retailer/${
           user.user_id
         }/stock/${id}`,
@@ -44,11 +66,16 @@ function ProductsDetails() {
       )
       .then((res) => {
         setRetailerInfo(res.data);
-      });
+      })
+      .catch(() =>
+        toast.warning(
+          "Un problème est survenue lors du chargement de vos données, veuillez réessayer."
+        )
+      );
   }, []);
 
   if (!productInfo || !supplierInfo || !retailerInfo) {
-    return <p>Wait a bit here</p>;
+    return "";
   }
 
   return (
@@ -97,10 +124,14 @@ function ProductsDetails() {
             website={supplierInfo.website}
           />
 
-          <ProductsDetailsRetailer
-            tips={retailerInfo[0].tips}
-            recipeIdea={retailerInfo[0].recipe_idea}
-          />
+          {user.company_group_id === 1 ? (
+            <ProductsDetailsRetailer
+              tips={retailerInfo[0].tips}
+              recipeIdea={retailerInfo[0].recipe_idea}
+            />
+          ) : (
+            ""
+          )}
         </section>
       </div>
     </main>
